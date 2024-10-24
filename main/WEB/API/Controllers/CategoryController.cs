@@ -12,7 +12,7 @@ namespace API.Controllers
         public IActionResult GetCategories()
         {
 
-            return Ok(new { message = "Đây là danh sách loại, bạn đã được xác thực!" });
+            return Ok(new { message = "Đây là danh sách loại, bạn đã được xác thực! ahihihihihihihihhihihihhihihi" });
         }
     }
 }
