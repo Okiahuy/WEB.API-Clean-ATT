@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\APPCORE\APPLICATIONCORE\APPLICATIONCORE.csproj" />
-    <ProjectReference Include="..\..\..\mian\INFRAS\INFRASTRUCTURE\INFRASTRUCTURE.csproj" />
+    <ProjectReference Include="..\..\INFRASTRUC\INFRASTRUCTURE\INFRASTRUCTURE.csproj" />
   </ItemGroup>
 
 </Project>

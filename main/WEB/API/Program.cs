@@ -7,10 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using APPLICATIONCORE.Interface.Product;
 using INFRASTRUCTURE.Services.Product;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
-// C?u hình JWT Authentication
+// Cau hình JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -29,13 +27,10 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyHuyThailendthichcodedaoyeucuocsong12345")) // ??t khóa b?o m?t bí m?t
     };
 });
-
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
-
 // Thêm các d?ch v? vào container
 builder.Services.AddScoped<IProductService, ProductService>();
-
 // Thêm d?ch v? CORS cho phép t?t c? các url truy c?p vào
 builder.Services.AddCors(options =>
 {
@@ -47,7 +42,6 @@ builder.Services.AddCors(options =>
                    .AllowAnyHeader();
         });
 });
-
 // Thêm d?ch v? CORS cho ch? cho phép url ???c thi?t l?p truy c?p
 //builder.Services.AddCors(options =>
 //{
@@ -59,8 +53,6 @@ builder.Services.AddCors(options =>
 //                   .AllowAnyHeader();
 //        });
 //});
-
-
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("MyDB");
@@ -80,23 +72,22 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Sau khi ?ã thêm xong các d?ch v?, g?i Build()
+// Sau khi dã thêm xong các dich vu, gui Build()
 var app = builder.Build();
-// C?u hình ?? ph?c v? các t?p t?nh
+// Cau hình 
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
     RequestPath = "/uploads"
 });
-// Seeding d? li?u
+// Seeding du lieu
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var dbContext = services.GetRequiredService<MyDbContext>();
     SeedData.SeedDingData(dbContext);
 }
-
-// C?u hình pipeline HTTP request
+// Cau hình pipeline HTTP request
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -105,13 +96,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// S? d?ng CORS
+// Su dung CORS
 app.UseCors("AllowAll");
 
 app.UseSession();
 
-app.UseAuthentication(); // Kích ho?t Authentication Middleware
-app.UseAuthorization(); // Kích ho?t Authorization Middleware
+app.UseAuthentication(); // Kích hoat Authentication Middleware
+app.UseAuthorization(); // Kích hoat Authorization Middleware
 
 app.MapControllers();
 
