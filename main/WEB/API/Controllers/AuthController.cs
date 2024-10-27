@@ -1,4 +1,5 @@
-﻿using APPLICATIONCORE.Models.ViewModel;
+﻿using APPLICATIONCORE.Interface.AuthLogin;
+using APPLICATIONCORE.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,21 +14,35 @@ namespace API.Controllers
     {
         private readonly IConfiguration _configuration;
 
-        public AuthController(IConfiguration configuration)
+        private readonly IAuthService _authService;
+
+        public AuthController(IConfiguration configuration, IAuthService authService)
         {
             _configuration = configuration;
+            _authService = authService;
         }
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginViewModel model)
         {
-            if (model.Username == "admin" && model.Password == "123") // Kiểm tra thông tin đăng nhập
+            // Sử dụng service để xác thực người dùng
+            var account = _authService.Authenticate(model.Username, model.Password);
+
+            if (account == null)
             {
-                var token = GenerateJwtToken(model.Username);
-                return Ok(new { token });
+                return Unauthorized("Tên đăng nhập hoặc mật khẩu không đúng.");
             }
 
-            return Unauthorized();
+            // Tạo token JWT
+            var token = GenerateJwtToken(model.Username);
+            // Trả về thông tin người dùng cùng với token
+            return Ok(new
+            {
+                FullName = account.FullName,
+                roleID = account.roleID,
+                Email = account.Email,
+                Token = token
+            });
         }
 
         private string GenerateJwtToken(string username)

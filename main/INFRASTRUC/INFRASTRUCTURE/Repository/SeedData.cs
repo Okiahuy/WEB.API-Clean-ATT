@@ -26,7 +26,8 @@ namespace INFRASTRUCTURE.Repository
                 // Tạo dữ liệu cho bảng admin
                 context.Accounts.AddRange(
 
-                    new AccountModel { FullName = "Oppa Web Bán Hoa", UserName = "admin", roleID = 1, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "huydzaa12@gmail.com", Phone = "0337899123" }
+                    new AccountModel { FullName = "Oppa Web Bán Hoa", UserName = "admin", roleID = 1, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "huydzaa12@gmail.com", Phone = "0337899123" },
+                    new AccountModel { FullName = "Nguyễn Văn A", UserName = "nguyenvana", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "nguyenvana@gmail.com", Phone = "0337899123" }
 
                 );
                 context.SaveChanges();

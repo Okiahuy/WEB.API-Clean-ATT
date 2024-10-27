@@ -1,14 +1,13 @@
-using Microsoft.Extensions.FileProviders;
+ï»¿using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using INFRASTRUCTURE.Repository;
 using Microsoft.EntityFrameworkCore;
-using APPLICATIONCORE.Interface.Product;
-using INFRASTRUCTURE.Services.Product;
+using INFRASTRUCTURE.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-// Cau hình JWT Authentication
+// Cau hÃ¬nh JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -24,14 +23,16 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = "Domainmasuphilami.com", // ??t Issuer 
         ValidAudience = "Domainmasuphilami.com", // ??t Audience 
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyHuyThailendthichcodedaoyeucuocsong12345")) // ??t khóa b?o m?t bí m?t
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyHuyThailendthichcodedaoyeucuocsong12345")) // ??t khÃ³a b?o m?t bÃ­ m?t
     };
 });
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
-// Thêm các d?ch v? vào container
-builder.Services.AddScoped<IProductService, ProductService>();
-// Thêm d?ch v? CORS cho phép t?t c? các url truy c?p vào
+
+// ÄÄƒng kÃ½ cÃ¡c dá»‹ch vá»¥
+builder.Services.AddApplicationServices();
+
+//them dich vu Cross origin request sharing vÃ o táº¥t cáº£ cÃ¡c url
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -42,7 +43,8 @@ builder.Services.AddCors(options =>
                    .AllowAnyHeader();
         });
 });
-// Thêm d?ch v? CORS cho ch? cho phép url ???c thi?t l?p truy c?p
+
+// them dich vu CORS cho chá»‰ cho phÃ©p url duy nháº¥t truy cÃ¢p
 //builder.Services.AddCors(options =>
 //{
 //    options.AddPolicy("AllowSpecificOrigin",
@@ -53,6 +55,7 @@ builder.Services.AddCors(options =>
 //                   .AllowAnyHeader();
 //        });
 //});
+
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("MyDB");
@@ -72,9 +75,9 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Sau khi dã thêm xong các dich vu, gui Build()
+// Sau khi dÃ£ thÃªm xong cÃ¡c dich vu, gui Build()
 var app = builder.Build();
-// Cau hình 
+// Cau hÃ¬nh cÃ¡c tá»‡p tÄ©nh 
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
@@ -87,7 +90,7 @@ using (var scope = app.Services.CreateScope())
     var dbContext = services.GetRequiredService<MyDbContext>();
     SeedData.SeedDingData(dbContext);
 }
-// Cau hình pipeline HTTP request
+// Cau hÃ¬nh pipeline HTTP request
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -101,8 +104,8 @@ app.UseCors("AllowAll");
 
 app.UseSession();
 
-app.UseAuthentication(); // Kích hoat Authentication Middleware
-app.UseAuthorization(); // Kích hoat Authorization Middleware
+app.UseAuthentication(); // KÃ­ch hoat Authentication Middleware
+app.UseAuthorization(); // KÃ­ch hoat Authorization Middleware
 
 app.MapControllers();
 
