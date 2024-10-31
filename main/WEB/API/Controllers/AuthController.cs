@@ -1,5 +1,6 @@
 ﻿using APPLICATIONCORE.Interface.AuthLogin;
 using APPLICATIONCORE.Models.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -34,7 +35,7 @@ namespace API.Controllers
             }
 
             // Tạo token JWT
-            var token = GenerateJwtToken(model.Username);
+            var token = GenerateJwtToken(model.Username, Convert.ToInt32(account.roleID));
             // Trả về thông tin người dùng cùng với token
             return Ok(new
             {
@@ -45,13 +46,14 @@ namespace API.Controllers
             });
         }
 
-        private string GenerateJwtToken(string username)
+        private string GenerateJwtToken(string username, int roleID)
         {
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, username),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+                    new Claim(JwtRegisteredClaimNames.Sub, username),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim("roleID", roleID.ToString()) //xác thực quyền truy cập vào endpoint
+                 };
 
             var key = _configuration.GetValue<string>("Jwt:Key");
             if (string.IsNullOrEmpty(key))
@@ -63,10 +65,10 @@ namespace API.Controllers
             var creds = new SigningCredentials(symmetricKey, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],  // Lấy Issuer từ appsettings.json
-                audience: _configuration["Jwt:Audience"],  // Lấy Audience từ appsettings.json
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:ExpireMinutes"])), // Thời gian hết hạn từ appsettings.json
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["Jwt:ExpireMinutes"])),
                 signingCredentials: creds
             );
 

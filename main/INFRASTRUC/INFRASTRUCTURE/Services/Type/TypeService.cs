@@ -3,6 +3,7 @@ using APPLICATIONCORE.Interface.Supplier;
 using APPLICATIONCORE.Interface.Type;
 using APPLICATIONCORE.Models;
 using INFRASTRUCTURE.Repository;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,8 @@ namespace INFRASTRUCTURE.Services.Type
             _context.Types.Remove(type);
             await _context.SaveChangesAsync();
         }
+
+
         public async Task<IEnumerable<TypeModel>> SearchTypes(string name)
         {
             return await _context.Types
@@ -76,6 +79,13 @@ namespace INFRASTRUCTURE.Services.Type
         {
             return await _context.Types
                 .Where(p => p.Id.ToString().Contains(id.ToString()))
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<ProductModel>> FindProductById(int id)
+        {
+            // Direct equality comparison for accurate results
+            return await _context.Products
+                .Where(p => p.TypeId == id)
                 .ToListAsync();
         }
     }

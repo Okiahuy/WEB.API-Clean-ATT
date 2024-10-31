@@ -77,5 +77,12 @@ namespace INFRASTRUCTURE.Services.Category
                 .Where(p => p.Id.ToString().Contains(id.ToString()))
                 .ToListAsync();
         }
+        public async Task<IEnumerable<ProductModel>> FindProductById(int id)
+        {
+            // Direct equality comparison for accurate results
+            return await _context.Products
+                .Where(p => p.CategoryId == id)
+                .ToListAsync();
+        }
     }
 }

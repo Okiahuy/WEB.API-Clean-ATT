@@ -1,5 +1,6 @@
 ﻿using APPLICATIONCORE.Interface.Supplier;
 using APPLICATIONCORE.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> GetAllSuppliers()
         {
             var suppliers = await _supplierService.GetAllSuppliers();
@@ -24,6 +26,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> GetSupplierById(int id)
         {
             var supplier = await _supplierService.GetSupplierById(id);
@@ -35,9 +38,9 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> AddSupplier([FromBody] SupplierModel supplier)
         {
-            
             try
             {
                 await _supplierService.AddSupplier(supplier);
@@ -55,6 +58,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> UpdateSupplier(int id, [FromBody] SupplierModel supplier)
         {
             try
@@ -69,10 +73,22 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> DeleteSupplier(int id)
         {
             try
             {
+                var supplier = await _supplierService.FindById(id);
+                if (supplier == null || supplier.Count() == 0)
+                {
+                    return NotFound(new { message = "Không tìm thấy nhà cung cấp nào" });
+                }
+
+                var hasProducts = await _supplierService.FindProductById(id);
+                if (hasProducts.Any())
+                {
+                    return BadRequest(new { message = "Không thể xóa nhà cung cấp vì vẫn còn sản phẩm thuộc nhà cung cấp này." });
+                }            
                 await _supplierService.DeleteSupplier(id);
                 return Ok(new { message = "Xóa nhà cung cấp thành công" });
             }

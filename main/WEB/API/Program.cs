@@ -19,18 +19,25 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = true,
+        ValidateLifetime = true, //kiểm tra token đã hết hạng hay chưa
         ValidateIssuerSigningKey = true,
         ValidIssuer = "Domainmasuphilami.com", // ??t Issuer 
         ValidAudience = "Domainmasuphilami.com", // ??t Audience 
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyHuyThailendthichcodedaoyeucuocsong12345")) // ??t khóa b?o m?t bí m?t
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyHuyThailendthichcodedaoyeucuocsong12345")),
     };
 });
-builder.Services.AddAuthorization();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy =>
+        policy.RequireClaim("roleID", "1")); // Yêu cầu roleID là 1
+});
 builder.Services.AddControllers();
 
 // Đăng ký các dịch vụ
 builder.Services.AddApplicationServices();
+
+builder.Services.AddHttpContextAccessor();
 
 //them dich vu Cross origin request sharing vào tất cả các url
 builder.Services.AddCors(options =>

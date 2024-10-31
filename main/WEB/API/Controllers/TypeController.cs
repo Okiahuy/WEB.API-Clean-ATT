@@ -1,5 +1,6 @@
 ﻿using APPLICATIONCORE.Interface.Type;
 using APPLICATIONCORE.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ namespace API.Controllers
         }
 
         [HttpGet] //lấy tất cả loại
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> GetAllTypes()
         {
             var types = await _typeService.GetAllTypes();
@@ -72,6 +74,18 @@ namespace API.Controllers
         {
             try
             {
+                var type = await _typeService.FindById(id);
+                if (type == null)
+                    return NotFound(new { message = "Không tìm thấy loại để xóa" });
+
+                var hasProducts = await _typeService.FindProductById(id);
+                if (hasProducts.Any())
+                {
+                    return BadRequest(new { message = "Không thể xóa loại vì vẫn còn sản phẩm thuộc loại này." });
+                }
+                   
+
+
                 await _typeService.DeleteType(id);
                 return Ok(new { message = "Xóa loại thành công => lụm" });
             }

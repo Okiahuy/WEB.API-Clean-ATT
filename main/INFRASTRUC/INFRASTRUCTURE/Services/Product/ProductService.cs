@@ -1,5 +1,6 @@
 ﻿using APPLICATIONCORE.Interface.Product;
 using APPLICATIONCORE.Models;
+using APPLICATIONCORE.History;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using INFRASTRUCTURE.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace INFRASTRUCTURE.Services.Product
 {
@@ -14,9 +16,12 @@ namespace INFRASTRUCTURE.Services.Product
     {
         private readonly MyDbContext _context;
 
-        public ProductService(MyDbContext context)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public ProductService(MyDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IEnumerable<ProductModel>> GetAllProducts()
@@ -40,10 +45,10 @@ namespace INFRASTRUCTURE.Services.Product
                 }
                 product.ImageUrl = $"/uploads/{fileName}"; // Gán đường dẫn vào ImageUrl
             }
-            else
-            {
-                throw new InvalidOperationException("Ảnh về hoa là bắt buộc");
-            }
+           
+            // Lấy roleID từ token của người dùng
+            var roleIDClaim = _httpContextAccessor.HttpContext?.User.FindFirst("roleID")?.Value;
+            product.CreatedByRoleID = Convert.ToInt32(roleIDClaim);
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
         }
@@ -58,6 +63,7 @@ namespace INFRASTRUCTURE.Services.Product
             {
                 File.Delete(filePath);
             }
+            
         }
         //hàm cập nhật sản phẩm
         public async Task<ProductModel> UpdateProductAsync(int id, ProductModel product)
@@ -66,11 +72,12 @@ namespace INFRASTRUCTURE.Services.Product
             var existingProduct = await _context.Products.FindAsync(id);
             if (existingProduct == null)
             {
-                throw new KeyNotFoundException("Product not found");
+                throw new KeyNotFoundException("Không tìm thấy sản phẩm để sửa!");
             }
             // Lấy đường dẫn của ảnh cũ
             var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", Path.GetFileName(existingProduct.ImageUrl));
-
+            // Lấy roleID của admin hiện tại từ token
+            var roleIDClaim = _httpContextAccessor.HttpContext?.User.FindFirst("roleID")?.Value;
             // Xóa ảnh cũ (nếu có)
             DeleteOldFile(oldImagePath);
             // Kiểm tra nếu có ảnh mới được tải lên
@@ -92,12 +99,14 @@ namespace INFRASTRUCTURE.Services.Product
 
             // Cập nhật các thuộc tính khác
             existingProduct.Name = product.Name;
+            existingProduct.Quantity = product.Quantity;
             existingProduct.Description = product.Description;
             existingProduct.Price = product.Price;
             existingProduct.CategoryId = product.CategoryId;
             existingProduct.SupplierId = product.SupplierId;
             existingProduct.TypeId = product.TypeId;
             existingProduct.DisPrice = product.DisPrice;
+            existingProduct.UpdatedByRoleID = Convert.ToInt32(roleIDClaim);
 
             // Lưu thay đổi vào cơ sở dữ liệu
             await _context.SaveChangesAsync();
@@ -108,6 +117,9 @@ namespace INFRASTRUCTURE.Services.Product
         public async Task DeleteProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
+            // Lấy roleID của admin hiện tại từ token
+            var roleIDClaim = _httpContextAccessor.HttpContext?.User.FindFirst("roleID")?.Value;
+
             if (product == null) throw new KeyNotFoundException("Không tìm thấy sản phẩm để xóa");
 
             var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", Path.GetFileName(product.ImageUrl));
@@ -115,7 +127,19 @@ namespace INFRASTRUCTURE.Services.Product
             // Xóa ảnh cũ (nếu có)
             DeleteOldFile(oldImagePath);
 
+            // Lưu thông tin vào ProductHistory trước khi xóa
+            var productHistory = new ProductHistory
+            {
+                ProductID = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                Quantity = Convert.ToInt32(product.Quantity),
+                DeletedAt = DateTime.UtcNow,
+                DeletedByRoleID = Convert.ToInt32(roleIDClaim)
+            };
 
+            _context.ProductHistory.Add(productHistory); // Thêm vào bảng ProductHistory
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
         }

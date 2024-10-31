@@ -16,5 +16,7 @@ namespace APPLICATIONCORE.Interface.Category
         Task DeleteCategory(int id);
         Task<IEnumerable<CategoryModel>> SearchCategories(string keyword);
         Task<IEnumerable<CategoryModel>> FindById(int id);
+
+        Task<IEnumerable<ProductModel>> FindProductById(int id);
     }
 }

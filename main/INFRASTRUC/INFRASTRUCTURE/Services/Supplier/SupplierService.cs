@@ -58,10 +58,10 @@ namespace INFRASTRUCTURE.Services.Supplier
 
         public async Task DeleteSupplier(int id)
         {
-            var Supplier = await _context.Categories.FindAsync(id);
+            var Supplier = await _context.Suppliers.FindAsync(id);
             if (Supplier == null) throw new KeyNotFoundException("Không tìm thấy nhà cung cấp để xóa");
 
-            _context.Categories.Remove(Supplier);
+            _context.Suppliers.Remove(Supplier);
             await _context.SaveChangesAsync();
         }
         public async Task<IEnumerable<SupplierModel>> SearchSuppliers(string name)
@@ -74,6 +74,14 @@ namespace INFRASTRUCTURE.Services.Supplier
         {
             return await _context.Suppliers
                 .Where(p => p.Id.ToString().Contains(id.ToString()))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ProductModel>> FindProductById(int id)
+        {
+            // Direct equality comparison for accurate results
+            return await _context.Products
+                .Where(p => p.SupplierId == id)
                 .ToListAsync();
         }
     }

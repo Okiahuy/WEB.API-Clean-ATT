@@ -3,7 +3,8 @@ using APPLICATIONCORE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using APPLICATIONCORE.Models.Validation;
+using System;
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -18,14 +19,53 @@ namespace API.Controllers
         }
         // Lấy tất cả sản phẩm
         [HttpGet]
-        [Authorize] // Bảo vệ route này bằng JWT
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> GetProducts()
         {
-            var products = await _productService.GetAllProducts();
-            return Ok(new { message = "Lấy sản phẩm thành công", data = products });
+            try
+            {
+                var products = await _productService.GetAllProducts();
+                return Ok(new { message = "Lấy sản phẩm thành công", data = products });
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Unauthorized(new { message = "Bạn không có quyền truy cập." });
+            }
+            catch (ForbiddenAccessException)
+            {
+                return StatusCode(403, new { message = "Bạn không có quyền thực hiện hành động này." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Có lỗi xảy ra khi lấy sản phẩm.", error = ex.Message });
+            }
+        }
+
+        [HttpGet("getAllProductForUser")]
+        public async Task<IActionResult> GetProductsForUser()
+        {
+            try
+            {
+                var products = await _productService.GetAllProducts();
+                return Ok(new { message = "Lấy sản phẩm thành công", data = products });
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return Unauthorized(new { message = "Bạn không có quyền truy cập." });
+            }
+            catch (ForbiddenAccessException)
+            {
+
+                return StatusCode(403, new { message = "Bạn không có quyền thực hiện hành động này." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Có lỗi xảy ra khi lấy sản phẩm.", error = ex.Message });
+            }
         }
         // Thêm sản phẩm mới
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> AddProduct([FromForm] ProductModel product)
         {
             try
@@ -46,6 +86,7 @@ namespace API.Controllers
         }
         // Sửa sản phẩm
         [HttpPut("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> UpdateProduct(int id, [FromForm] ProductModel product)
         {
             try
@@ -65,7 +106,8 @@ namespace API.Controllers
         }
 
         // Xóa sản phẩm
-        [HttpDelete("search/{id}")]
+        [HttpDelete("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             try

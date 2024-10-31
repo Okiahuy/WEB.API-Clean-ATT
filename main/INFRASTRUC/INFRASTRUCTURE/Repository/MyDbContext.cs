@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using APPLICATIONCORE.History;
 using APPLICATIONCORE.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +15,8 @@ namespace INFRASTRUCTURE.Repository
         {
         }
 
-        public DbSet<ProductModel> Products { get; set; } // cây chi tiết2
+        public DbSet<ProductModel> Products { get; set; } // cây
+        public DbSet<ProductHistory> ProductHistory { get; set; } // cây lịch sử
         public DbSet<CategoryModel> Categories { get; set; } // loại cây3
         public DbSet<CartModel> Carts { get; set; } // giỏ hàng4
         public DbSet<OrderModel> Orders { get; set; } // đơn hàng5

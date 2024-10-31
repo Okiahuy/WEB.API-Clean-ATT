@@ -44,16 +44,18 @@ namespace APPLICATIONCORE.Models
         [ForeignKey("TypeId")]
         public TypeModel? type { get; set; }
 
+
         public string? ImageUrl { get; set; }
 
         [NotMapped] // Để không lưu trường này vào cơ sở dữ liệu
-        [Required(ErrorMessage = "Ảnh về hoa là bắt buộc")]
         [FileExtension] //  kiểm tra loại file
         public IFormFile? ImageUpload { get; set; }
 
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedAt { get; set; } // Thời gian cập nhật sản phẩm
 
-
-
+        public int? CreatedByRoleID { get; set; } // RoleID của người tạo sản phẩm
+        public int? UpdatedByRoleID { get; set; } // RoleID của người sửa sản phẩm
 
     }
 }

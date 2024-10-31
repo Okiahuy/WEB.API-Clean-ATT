@@ -17,5 +17,6 @@ namespace APPLICATIONCORE.Interface.Type
         Task<IEnumerable<TypeModel>> SearchTypes(string name);
 
         Task<IEnumerable<TypeModel>> FindById(int id);
+        Task<IEnumerable<ProductModel>> FindProductById(int id);
     }
 }

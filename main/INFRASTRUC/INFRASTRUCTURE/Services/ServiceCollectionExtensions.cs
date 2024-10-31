@@ -39,6 +39,7 @@ namespace INFRASTRUCTURE.Services
             services.AddScoped<ITypeService, TypeService>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IAnswerService, AnswerService>();
+
             return services;
         }
     }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fcb9nrMFnbk=",
+  "dgSpecHash": "SRxCUJXW0+A=",
   "success": true,
   "projectFilePath": "D:\\TAILIEU\\CSharp\\ASP.NET CORE WEB API\\SLSFLOWER\\main\\INFRASTRUC\\INFRASTRUCTURE\\INFRASTRUCTURE.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,8 @@
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\microsoft.aspnetcore.mvc.abstractions\\2.2.0\\microsoft.aspnetcore.mvc.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\microsoft.aspnetcore.routing.abstractions\\2.2.0\\microsoft.aspnetcore.routing.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",

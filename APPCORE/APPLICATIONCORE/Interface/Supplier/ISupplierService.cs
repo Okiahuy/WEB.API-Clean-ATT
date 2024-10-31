@@ -16,5 +16,7 @@ namespace APPLICATIONCORE.Interface.Supplier
         Task DeleteSupplier(int id);
         Task<IEnumerable<SupplierModel>> SearchSuppliers(string name);
         Task<IEnumerable<SupplierModel>> FindById(int id);
+
+        Task<IEnumerable<ProductModel>> FindProductById(int id);
     }
 }

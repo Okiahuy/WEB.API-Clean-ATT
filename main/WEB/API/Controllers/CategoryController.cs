@@ -19,7 +19,7 @@ namespace API.Controllers
 
         // Lấy tất cả danh mục 
         [HttpGet]
-        ///[Authorize] // Bảo vệ route này bằng JWT
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> GetCategories()
         {
             var products = await _categoryService.GetAllCategories();
@@ -27,6 +27,7 @@ namespace API.Controllers
         }
         // Thêm sản phẩm mới
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> AddCategory([FromBody] CategoryModel product)
         {
             try
@@ -47,6 +48,7 @@ namespace API.Controllers
         }
         // Sửa sản phẩm
         [HttpPut("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryModel category)
         {
             try
@@ -70,20 +72,27 @@ namespace API.Controllers
             }
         }
 
-        // Xóa sản phẩm
         [HttpDelete("{id}")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             try
             {
+                // Check if the category exists
                 var categories = await _categoryService.FindById(id);
-                if (categories == null || categories.Count() == 0)
+                if (categories == null || !categories.Any())
                 {
                     return NotFound(new { message = "Không tìm thấy danh mục nào" });
                 }
 
+                var hasProducts = await _categoryService.FindProductById(id);
+                if (hasProducts.Any())
+                {
+                    return BadRequest(new { message = "Không thể xóa danh mục vì vẫn còn sản phẩm thuộc danh mục này." });
+                }
+
                 await _categoryService.DeleteCategory(id);
-                return Ok(new { message = "Xóa sản danh mục công" });
+                return Ok(new { message = "Xóa danh mục thành công" });
             }
             catch (KeyNotFoundException ex)
             {
