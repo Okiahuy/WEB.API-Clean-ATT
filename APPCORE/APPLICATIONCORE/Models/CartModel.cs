@@ -21,6 +21,6 @@ namespace APPLICATIONCORE.Models
 
         public decimal TotalPrice { get; set; }
 
-        public int Status_cart { get; set; } // 0 chư thanh toán, 1 đã thanh toán 
+        public int Status_cart { get; set; } = 0; // 0 chư thanh toán, 1 đã thanh toán 
     }
 }

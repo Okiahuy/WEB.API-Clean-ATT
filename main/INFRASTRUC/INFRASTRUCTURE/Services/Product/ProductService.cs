@@ -28,11 +28,28 @@ namespace INFRASTRUCTURE.Services.Product
         {
             return await _context.Products.Include(p => p.Category).Include(p => p.supplier).Include(p => p.type).ToListAsync();
         }
+        //lấy tất cả sp
         public async Task<ProductModel> GetProductById(int id)
         {
             return await _context.Products.FindAsync(id);
         }
-        public async Task AddProduct(ProductModel product)
+        //lấy sp theo danh mục id
+		public async Task<List<ProductModel>> GetProductsByCategoryID(int categoryId)
+		{
+			return await _context.Products
+								 .Where(p => p.CategoryId == categoryId)
+								 .ToListAsync();
+		}
+        //lấy sp theo danh mục type
+		public async Task<List<ProductModel>> GetProductsByType(int typeProduct)
+		{
+			return await _context.Products
+								 .Where(p => p.typeProduct == typeProduct)
+								 .ToListAsync();
+		}
+
+
+		public async Task AddProduct(ProductModel product)
         {
             if (product.ImageUpload != null)
             {
@@ -45,9 +62,11 @@ namespace INFRASTRUCTURE.Services.Product
                 }
                 product.ImageUrl = $"/uploads/{fileName}"; // Gán đường dẫn vào ImageUrl
             }
+
+
+			// Lấy roleID từ token của người dùng
+			var roleIDClaim = _httpContextAccessor.HttpContext?.User.FindFirst("roleID")?.Value;
            
-            // Lấy roleID từ token của người dùng
-            var roleIDClaim = _httpContextAccessor.HttpContext?.User.FindFirst("roleID")?.Value;
             product.CreatedByRoleID = Convert.ToInt32(roleIDClaim);
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
@@ -106,7 +125,8 @@ namespace INFRASTRUCTURE.Services.Product
             existingProduct.SupplierId = product.SupplierId;
             existingProduct.TypeId = product.TypeId;
             existingProduct.DisPrice = product.DisPrice;
-            existingProduct.UpdatedByRoleID = Convert.ToInt32(roleIDClaim);
+			existingProduct.typeProduct = product.typeProduct;
+			existingProduct.UpdatedByRoleID = Convert.ToInt32(roleIDClaim);
 
             // Lưu thay đổi vào cơ sở dữ liệu
             await _context.SaveChangesAsync();

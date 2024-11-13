@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using APPLICATIONCORE.Models.Validation;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 //bảng danh mục
 namespace APPLICATIONCORE.Models
@@ -14,8 +17,17 @@ namespace APPLICATIONCORE.Models
 
         [Required(ErrorMessage = "Mô tả là bắt buộc")]
         [MinLength(5, ErrorMessage = "Mô tả phải lớn hơn 5 ký tự")]
+
+      
         public string? Description { get; set; }
-        [JsonIgnore]
+		public string? ImageUrl { get; set; }
+
+		[NotMapped] // Để không lưu trường này vào cơ sở dữ liệu
+		[FileExtension] //  kiểm tra loại file
+		public IFormFile? ImageUpload { get; set; }
+
+
+		[JsonIgnore]
         public ICollection<ProductModel>? Products { get; set; }
     }
 }

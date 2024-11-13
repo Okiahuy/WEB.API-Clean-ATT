@@ -233,6 +233,9 @@ namespace INFRASTRUCTURE.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -362,6 +365,9 @@ namespace INFRASTRUCTURE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("PaymentID")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status_order")
                         .HasColumnType("int");
 
@@ -437,6 +443,9 @@ namespace INFRASTRUCTURE.Migrations
 
                     b.Property<long?>("likecount")
                         .HasColumnType("bigint");
+
+                    b.Property<int?>("typeProduct")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

@@ -19,7 +19,6 @@ namespace API.Controllers
 
         // Lấy tất cả danh mục 
         [HttpGet]
-        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> GetCategories()
         {
             var products = await _categoryService.GetAllCategories();
@@ -114,6 +113,7 @@ namespace API.Controllers
 
         // Tìm kiếm sản phẩm theo id
         [HttpGet("{id}")]
+
         public async Task<IActionResult> findCategoryById(int id)
         {
             var categories = await _categoryService.FindById(id);

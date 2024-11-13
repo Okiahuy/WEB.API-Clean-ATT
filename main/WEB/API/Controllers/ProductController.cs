@@ -41,7 +41,32 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("getAllProductForUser")]
+
+		// Lấy sản phẩm theo type
+		[HttpGet("GetProductByType/{typeProduct}")]
+		public async Task<IActionResult> GetProductByType(int typeProduct)
+		{
+			var products = await _productService.GetProductsByType(typeProduct);
+			if (products == null || products.Count == 0)
+			{
+				return NotFound(new { message = "Không tìm thấy sản phẩm nào theo type" });
+			}
+			return Ok(new { message = "Tìm thấy sản phẩm theo type =>", data = products });
+		}
+
+		// Lấy sản phẩm theo type
+		[HttpGet("getProductByCategoryID/{categoryId}")]
+		public async Task<IActionResult> getProductByCategoryID(int categoryId)
+		{
+			var products = await _productService.GetProductsByCategoryID(categoryId);
+			if (products == null || products.Count == 0)
+			{
+				return NotFound(new { message = "Không tìm thấy sản phẩm nào theo danh mục" });
+			}
+			return Ok(new { message = "Tìm thấy sản phẩm theo danh mục =>", data = products });
+		}
+
+		[HttpGet("getAllProductForUser")]
         public async Task<IActionResult> GetProductsForUser()
         {
             try
@@ -144,6 +169,8 @@ namespace API.Controllers
             }
             return Ok(new { message = "Tìm thấy sản phẩm =>", data = products });
         }
-    }
+
+		
+	}
 }
 

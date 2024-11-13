@@ -10,11 +10,8 @@
     <Folder Include="Domain\" />
     <Folder Include="Interface\Customer\" />
     <Folder Include="Interface\Admin\" />
-    <Folder Include="Interface\Favorite\" />
-    <Folder Include="Interface\Cart\" />
     <Folder Include="Interface\Rating\" />
     <Folder Include="Interface\OrderDetail\" />
-    <Folder Include="Interface\Order\" />
     <Folder Include="Interface\Newpaper\" />
   </ItemGroup>
 

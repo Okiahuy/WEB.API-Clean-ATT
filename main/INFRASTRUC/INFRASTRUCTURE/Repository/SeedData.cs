@@ -33,14 +33,16 @@ namespace INFRASTRUCTURE.Repository
                 context.SaveChanges();
 
                 context.Categories.AddRange(
-                    new CategoryModel { Name = "Hoa Chúc Mừng", Description = "Mô tả cho Hoa Chúc Mừng" },
-                    new CategoryModel { Name = "Hoa Tình Yêu", Description = "Mô tả cho Hoa Tình Yêu" },
-                    new CategoryModel { Name = "Hoa Chia Buồn", Description = "Mô tả cho Hoa Chia Buồn" },
-                    new CategoryModel { Name = "Hoa Mừng Tuổi", Description = "Mô tả cho Hoa Mừng Tuổi" },
-                    new CategoryModel { Name = "Hoa Tình Bạn", Description = "Mô tả cho Hoa Tình Bạn" },
-                    new CategoryModel { Name = "Hoa Kiểng", Description = "Mô tả cho Hoa Tình Bạn" }
-
-                );
+                    new CategoryModel { Name = "Hoa Chúc Mừng", Description = "Mô tả cho Hoa Chúc Mừng" ,ImageUrl = "/uploads/type1.png" },
+                    new CategoryModel { Name = "Hoa Tình Yêu", Description = "Mô tả cho Hoa Tình Yêu",ImageUrl = "/uploads/type2.png" },
+                    new CategoryModel { Name = "Hoa Chia Buồn", Description = "Mô tả cho Hoa Chia Buồn",ImageUrl = "/uploads/type3.png" },
+                    new CategoryModel { Name = "Hoa Mừng Tuổi", Description = "Mô tả cho Hoa Mừng Tuổi",ImageUrl = "/uploads/type4.png" },
+                    new CategoryModel { Name = "Hoa Tình Bạn", Description = "Mô tả cho Hoa Tình Bạn",ImageUrl = "/uploads/type5.png" },
+                    new CategoryModel { Name = "Hoa Kiểng", Description = "Mô tả cho Hoa Kiểng",ImageUrl = "/uploads/type7.png" },
+					new CategoryModel { Name = "Xẻng", Description = "Dụng cụ xẻng dùng để đào và cuốc đất", ImageUrl = "/uploads/type8.png" },
+					new CategoryModel { Name = "Kéo cắt cành", Description = "Dụng cụ kéo dùng để cắt hoặc tỉa cành", ImageUrl = "/uploads/type10.png" },
+					new CategoryModel { Name = "Chậu trồng cây", Description = "Dụng cụ chậu dùng để trồng cây", ImageUrl = "/uploads/type9.png" }
+				);
                 // Lưu thay đổi vào cơ sở dữ liệu
                 context.SaveChanges();
 
@@ -59,7 +61,6 @@ namespace INFRASTRUCTURE.Repository
                     new TypeModel { Name = "Hoa Sáp", Description = "Mô tả cho hoa" },
                     new TypeModel { Name = "Hoa Nhựa", Description = "Mô tả cho hoa" },
                     new TypeModel { Name = "Hoa Thân Gỗ", Description = "Mô tả cho hoa" }
-
                 );
                 // Lưu thay đổi vào cơ sở dữ liệu
                 context.SaveChanges();
@@ -101,7 +102,8 @@ namespace INFRASTRUCTURE.Repository
                         DisPrice = i % 5 + 1,
                         CreatedByRoleID = 1,
                         Quantity = 100 - i, 
-                        ImageUrl = img
+                        ImageUrl = img,
+                        typeProduct = 1
                     });
                 }
 

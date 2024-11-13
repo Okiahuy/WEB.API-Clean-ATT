@@ -51,7 +51,9 @@ namespace APPLICATIONCORE.Models
         [FileExtension] //  kiểm tra loại file
         public IFormFile? ImageUpload { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+		public int? typeProduct { get; set; } //loại hoa hoặc dụng cụ
+
+		public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; } // Thời gian cập nhật sản phẩm
 
         public int? CreatedByRoleID { get; set; } // RoleID của người tạo sản phẩm

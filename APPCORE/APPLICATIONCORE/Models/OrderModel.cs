@@ -22,5 +22,7 @@ namespace APPLICATIONCORE.Models
         public List<OrderDetailModel>? OrderDetails { get; set; } // Danh sách các chi tiết đơn hàng
 
         public int Status_order { get; set; }// 0 mới , 1 đang xử lý, 2 đang giao, 3 đã nhận 
+
+        public int PaymentID { get; set; }
     }
 }

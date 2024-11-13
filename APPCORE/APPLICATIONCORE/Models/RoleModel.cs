@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-//bảng quyền
+//quyền
 namespace APPLICATIONCORE.Models
 {
     public class RoleModel

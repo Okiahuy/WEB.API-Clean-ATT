@@ -11,7 +11,9 @@ namespace APPLICATIONCORE.Interface.Product
     {
         Task<IEnumerable<ProductModel>> GetAllProducts();
         Task<ProductModel> GetProductById(int id);
-        Task AddProduct(ProductModel product);
+		Task<List<ProductModel>> GetProductsByCategoryID(int categoryId);
+		Task<List<ProductModel>> GetProductsByType(int typeProduct);
+		Task AddProduct(ProductModel product);
         Task<ProductModel> UpdateProductAsync(int id, ProductModel product);
         Task DeleteProduct(int id);
         Task<IEnumerable<ProductModel>> SearchProducts(string name);
