@@ -1,18 +1,43 @@
-﻿using Microsoft.Extensions.FileProviders;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
+///
+using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using INFRASTRUCTURE.Repository;
 using Microsoft.EntityFrameworkCore;
 using INFRASTRUCTURE.Services;
+using API.HealthCheck;
+using Serilog;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using System.Text.Json;
+using Serilog.Sinks.MSSqlServer;
+using INFRASTRUCTURE.Middleware;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(options =>
+{
+	options.DefaultScheme = "Cookies";
+	options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+})
+.AddCookie("Cookies") 
+.AddGoogle(options =>
+{
+	options.ClientId = "477903384113-7fk5jd7r3uesfu8a4ndrtuo0kjfk4cn3.apps.googleusercontent.com"; 
+	options.ClientSecret = "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";
+	options.Scope.Add("email");
+	options.SaveTokens = true;  
+});
 // Cau hình JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
+
 .AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
@@ -32,6 +57,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy =>
         policy.RequireClaim("roleID", "1")); // Yêu cầu roleID là 1
 });
+
 builder.Services.AddControllers();
 
 // Đăng ký các dịch vụ
@@ -69,6 +95,36 @@ builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseSqlServer(connectionString, sqlOptions => sqlOptions.CommandTimeout(180));
 });
 
+builder.Services.AddHttpClient<ApiHealthCheck>();
+builder.Services.AddHealthChecks()
+.AddCheck("SQL Database", new SqlConnectionHealthCheck(
+		builder.Configuration.GetConnectionString("MyDB")
+		?? throw new InvalidOperationException("Connection string 'MyDB' is not configured.")
+	))
+.AddCheck<ApiHealthCheck>(nameof(ApiHealthCheck))
+.AddDbContextCheck<MyDbContext>()
+.AddCheck<SystemHealthCheck>("CPU Use");
+
+
+builder.Host.UseSerilog((context, config) =>
+{
+	config.MinimumLevel.Information()
+	.MinimumLevel.Override("Microsoft.AspNetCore", Serilog.Events.LogEventLevel.Warning)
+	.MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
+	.WriteTo.Console()
+	.WriteTo.Debug()
+	.WriteTo.File("Logs\\log-.txt",
+	rollingInterval: RollingInterval.Day,
+	rollOnFileSizeLimit: true,
+	buffered: false,
+	restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
+	.WriteTo.MSSqlServer(
+	connectionString: builder.Configuration.GetConnectionString("MyDB"),
+	sinkOptions: new MSSqlServerSinkOptions { TableName = "Logs", AutoCreateSqlTable = true },
+	restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning);
+});
+builder.Host.UseSerilog((context, config) => config.ReadFrom.Configuration(context.Configuration));
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
@@ -82,23 +138,52 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Sau khi dã thêm xong các dich vu, gui Build()
-var app = builder.Build();
-// Cau hình các tệp tĩnh 
-app.UseStaticFiles(new StaticFileOptions
+
+var app = builder.Build();  // Sau khi dã thêm xong các dich vu, gui Build()
+app.MapHealthChecks("/health", new HealthCheckOptions   
+{
+	ResponseWriter = async (context, report) =>
+	{
+		context.Response.ContentType = "application/json";
+		var result = JsonSerializer.Serialize(new
+		{
+			status = report.Status.ToString(),
+			checks = report.Entries.Select(entry => new
+			{
+				name = entry.Key,
+				status = entry.Value.Status.ToString(),
+
+				exception = entry.Value.Exception?.Message,
+
+				duration = entry.Value.Duration.ToString()
+
+			})
+
+		});
+
+		await context.Response.WriteAsync(result);
+
+	}
+
+});
+
+app.UseStaticFiles(new StaticFileOptions  // Cau hình các tệp tĩnh 
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
     RequestPath = "/uploads"
 });
-// Seeding du lieu
-using (var scope = app.Services.CreateScope())
+
+
+app.UseMiddleware<ApiLoggingMiddleware>(); //Middleware ghi log khi API được truy cập.
+
+using (var scope = app.Services.CreateScope()) // Seeding du lieu
 {
     var services = scope.ServiceProvider;
     var dbContext = services.GetRequiredService<MyDbContext>();
     SeedData.SeedDingData(dbContext);
 }
-// Cau hình pipeline HTTP request
-if (app.Environment.IsDevelopment())
+
+if (app.Environment.IsDevelopment()) // Cau hình pipeline HTTP request
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -106,15 +191,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Su dung CORS
-app.UseCors("AllowAll");
+
+app.UseCors("AllowAll"); // Su dung CORS
 
 app.UseSession();
-
+app.UseSerilogRequestLogging();//serilog
 app.UseAuthentication(); // Kích hoat Authentication Middleware
 app.UseAuthorization(); // Kích hoat Authorization Middleware
 
 app.MapControllers();
+
 
 app.Run();
 

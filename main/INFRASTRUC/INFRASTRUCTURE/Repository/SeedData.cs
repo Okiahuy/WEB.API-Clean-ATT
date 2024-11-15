@@ -20,7 +20,6 @@ namespace INFRASTRUCTURE.Repository
                 context.Roles.AddRange(
                        new RoleModel { RoleName = "Quản Chị" },
                        new RoleModel { RoleName = "Khách Hàng" }
-
                  );
                 context.SaveChanges();
                 // Tạo dữ liệu cho bảng admin
@@ -60,12 +59,28 @@ namespace INFRASTRUCTURE.Repository
                     new TypeModel { Name = "Hoa Giấy", Description = "Mô tả cho hoa" },
                     new TypeModel { Name = "Hoa Sáp", Description = "Mô tả cho hoa" },
                     new TypeModel { Name = "Hoa Nhựa", Description = "Mô tả cho hoa" },
-                    new TypeModel { Name = "Hoa Thân Gỗ", Description = "Mô tả cho hoa" }
-                );
+                    new TypeModel { Name = "Hoa Thân Gỗ", Description = "Mô tả cho hoa" },
+				    new TypeModel { Name = "Dụng cụ", Description = "Dụng cụ cho hoa" }
+				);
                 // Lưu thay đổi vào cơ sở dữ liệu
                 context.SaveChanges();
 
-                string[] names = {
+				string[] toolNames = {
+	                "Kéo Cắt Hoa", "Chậu Cây", "Cây Giảm Căng Thẳng",
+					"Bình Xịt Nước", "Giỏ Đựng Hoa",
+	                "Đũa Cắt Hoa", "Khay Đựng Hoa", "Thùng Đựng Cây"
+                };
+
+				string[] toolDescriptions = {
+	                "Dụng cụ cắt hoa sắc bén và dễ sử dụng.", "Chậu cây đẹp, chất liệu bền và sang trọng.",
+	                "Găng tay làm vườn bảo vệ tay khỏi gai và đất.", "Bình xịt nước giúp tưới cây hiệu quả.", "Cây bút cảnh trang trí đẹp cho không gian.",
+	                "Giỏ đựng hoa giúp bảo quản hoa tươi lâu.",
+	                "Cây thước cảnh trang trí thêm sinh động cho không gian.", "Bình đựng hoa tươi để trang trí bàn.",
+	                "Đũa cắt hoa giúp cắt chính xác và an toàn.", "Khay đựng hoa giúp giữ hoa tươi lâu.",
+	                "Thùng đựng cây vườn tiện lợi và dễ sử dụng.", "Bình xịt hương giúp tạo không gian thư giãn."
+                };
+
+				string[] names = {
                     "Hoa Tình Yêu Đôi Lứa", "Hoa Hồng Đỏ Rực", "Hoa Mẫu Đơn Kiêu Sa", "Hoa Sen Tinh Khiết",
                     "Hoa Cẩm Chướng Đầy Sắc", "Hoa Tulip Dịu Dàng", "Hoa Bách Hợp Trắng", "Hoa Ly Hồng Phấn",
                     "Hoa Baby Ngọt Ngào", "Hoa Lan Hồ Điệp Tinh Tế", "Hoa Hướng Dương Rạng Rỡ",
@@ -106,8 +121,27 @@ namespace INFRASTRUCTURE.Repository
                         typeProduct = 1
                     });
                 }
+				// Dữ liệu dụng cụ
+				for (int i = 0; i <= 6; i++)
+				{
+					string img = $"/uploads/{i + 1}dungcu.png";
+					products.Add(new ProductModel
+					{
+						Name = toolNames[i],
+						Description = toolDescriptions[i],
+						SupplierId = 2,  
+						TypeId = 6,     
+						CategoryId = 7,  
+						Price = 50000 + (i * 5000),  
+						DisPrice = i % 5 + 1, 
+						CreatedByRoleID = 1,
+						Quantity = 50 - i,
+						ImageUrl = img,
+						typeProduct = 2  
+					});
+				}
 
-                context.Products.AddRange(products);
+				context.Products.AddRange(products);
                 context.SaveChanges();
 
             }

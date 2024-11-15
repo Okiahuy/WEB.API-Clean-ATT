@@ -183,6 +183,34 @@ namespace INFRASTRUCTURE.Migrations
                     b.ToTable("Answers");
                 });
 
+            modelBuilder.Entity("APPLICATIONCORE.Models.ApiUsageLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApiName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("CpuUsage")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("RequestCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RequestTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApiUsageLogs");
+                });
+
             modelBuilder.Entity("APPLICATIONCORE.Models.CartModel", b =>
                 {
                     b.Property<int>("cartID")

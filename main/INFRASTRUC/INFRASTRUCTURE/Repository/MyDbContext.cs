@@ -11,7 +11,7 @@ namespace INFRASTRUCTURE.Repository
 {
     public class MyDbContext : DbContext
     {
-        public MyDbContext(DbContextOptions options) : base(options)
+        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
         }
 
@@ -32,7 +32,7 @@ namespace INFRASTRUCTURE.Repository
         public DbSet<AnswerModel> Answers { get; set; } // trả lời 16
         public DbSet<TypeModel> Types { get; set; } // Loại hoa 17
 
+		public DbSet<ApiUsageLog> ApiUsageLogs { get; set; }
 
-
-    }
+	}
 }

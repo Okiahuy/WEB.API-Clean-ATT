@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using APPLICATIONCORE.Models.Validation;
 using System;
+using Serilog;
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -25,7 +26,8 @@ namespace API.Controllers
             try
             {
                 var products = await _productService.GetAllProducts();
-                return Ok(new { message = "Lấy sản phẩm thành công", data = products });
+				Log.Logger.Information("{@products}");
+				return Ok(new { message = "Lấy sản phẩm thành công", data = products });
             }
             catch (UnauthorizedAccessException)
             {
@@ -44,6 +46,7 @@ namespace API.Controllers
 
 		// Lấy sản phẩm theo type
 		[HttpGet("GetProductByType/{typeProduct}")]
+		[Authorize(Policy = "Admin")]
 		public async Task<IActionResult> GetProductByType(int typeProduct)
 		{
 			var products = await _productService.GetProductsByType(typeProduct);
@@ -51,11 +54,13 @@ namespace API.Controllers
 			{
 				return NotFound(new { message = "Không tìm thấy sản phẩm nào theo type" });
 			}
+			Log.Logger.Information("{@products}");
 			return Ok(new { message = "Tìm thấy sản phẩm theo type =>", data = products });
 		}
 
 		// Lấy sản phẩm theo type
 		[HttpGet("getProductByCategoryID/{categoryId}")]
+
 		public async Task<IActionResult> getProductByCategoryID(int categoryId)
 		{
 			var products = await _productService.GetProductsByCategoryID(categoryId);
@@ -63,7 +68,21 @@ namespace API.Controllers
 			{
 				return NotFound(new { message = "Không tìm thấy sản phẩm nào theo danh mục" });
 			}
+			Log.Logger.Information("{@products}");
 			return Ok(new { message = "Tìm thấy sản phẩm theo danh mục =>", data = products });
+		}
+
+		// Lấy sản phẩm theo type
+		[HttpGet("GetProductByTypeForUser/{typeProduct}")]
+		public async Task<IActionResult> GetProductByTypeForUser(int typeProduct)
+		{
+			var products = await _productService.GetProductsByType(typeProduct);
+			if (products == null || products.Count == 0)
+			{
+				return NotFound(new { message = "Không tìm thấy sản phẩm nào theo type" });
+			}
+			Log.Logger.Information("{@products}");
+			return Ok(new { message = "Tìm thấy sản phẩm theo type =>", data = products });
 		}
 
 		[HttpGet("getAllProductForUser")]
@@ -97,7 +116,8 @@ namespace API.Controllers
             {
                 // Code thêm sản phẩm ở đây
                 await _productService.AddProduct(product);
-                return Ok(new { message = "Thêm sản phẩm thành công", data = product });
+				Log.Logger.Information("{@products}");
+				return Ok(new { message = "Thêm sản phẩm thành công", data = product });
             }
             catch (DbUpdateException dbEx)
             {

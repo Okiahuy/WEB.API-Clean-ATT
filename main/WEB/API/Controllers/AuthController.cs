@@ -1,11 +1,15 @@
 ﻿using APPLICATIONCORE.Interface.AuthLogin;
 using APPLICATIONCORE.Models.ViewModel;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Serilog;
+
 
 namespace API.Controllers
 {
@@ -31,13 +35,15 @@ namespace API.Controllers
 
             if (account == null)
             {
+                Log.Logger.Information("{@account}");
                 return Unauthorized("Tên đăng nhập hoặc mật khẩu không đúng.");
             }
 
             // Tạo token JWT
             var token = GenerateJwtToken(model.Username, Convert.ToInt32(account.roleID));
-            // Trả về thông tin người dùng cùng với token
-            return Ok(new
+			// Trả về thông tin người dùng cùng với token
+			Log.Logger.Information("{@account}");
+			return Ok(new
             {
                 FullName = account.FullName,
                 roleID = account.roleID,
@@ -74,5 +80,35 @@ namespace API.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-    }
+
+		//Đăng nhập qua Google
+		[HttpGet]
+		[Route("signin-google")]
+		public IActionResult GoogleLogin()
+		{
+			var redirectUrl = Url.Action("GoogleResponse");  // Tạo URL quay lại (redirect) sau khi xác thực thành công
+			var properties = new AuthenticationProperties { RedirectUri = redirectUrl };  // Cấu hình redirectUri
+			return Challenge(properties, GoogleDefaults.AuthenticationScheme);  // Thực hiện thử thách OAuth (yêu cầu xác thực người dùng qua Google)
+		}
+
+
+		//Xử lý phản hồi từ Google
+		[HttpGet]
+		[Route("google-response")]
+		public async Task<IActionResult> GoogleResponse()
+		{
+			var authenticateResult = await HttpContext.AuthenticateAsync();  // Lấy thông tin xác thực người dùng
+
+			if (!authenticateResult.Succeeded)
+			{
+				return Unauthorized("Không thể đăng nhập bằng google ngay lúc này!.");
+			}
+			// Lấy thông tin người dùng từ Google
+			var email = authenticateResult.Principal?.FindFirst("email")?.Value;  // Lấy email người dùng
+			var name = authenticateResult.Principal?.FindFirst("name")?.Value;    // Lấy tên người dùng
+
+			// Xử lý thông tin người dùng, tạo tài khoản
+			return Ok(new { email, name });
+		}
+	}
 }
