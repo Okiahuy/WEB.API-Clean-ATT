@@ -9,6 +9,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Serilog;
+using APPLICATIONCORE.Models;
+using APPLICATIONCORE.History;
+using Microsoft.EntityFrameworkCore;
+using INFRASTRUCTURE.Repository;
 
 
 namespace API.Controllers
@@ -21,10 +25,13 @@ namespace API.Controllers
 
         private readonly IAuthService _authService;
 
-        public AuthController(IConfiguration configuration, IAuthService authService)
+        private readonly MyDbContext _context;
+
+        public AuthController(IConfiguration configuration, IAuthService authService, MyDbContext context)
         {
             _configuration = configuration;
             _authService = authService;
+            _context = context;
         }
 
         [HttpPost("login")]
@@ -48,7 +55,8 @@ namespace API.Controllers
                 FullName = account.FullName,
                 roleID = account.roleID,
                 Email = account.Email,
-                Token = token
+                Token = token,
+                accountID = account.accountID
             });
         }
 
@@ -91,24 +99,93 @@ namespace API.Controllers
 			return Challenge(properties, GoogleDefaults.AuthenticationScheme);  // Thực hiện thử thách OAuth (yêu cầu xác thực người dùng qua Google)
 		}
 
+        [HttpPost]
+        [Route("google-response")]
+        public async Task<IActionResult> GoogleResponse([FromBody] GoogleTokenRequest request)
+        {
+            if (string.IsNullOrEmpty(request.Token))
+            {
+                return BadRequest(new { message = "Token không hợp lệ" });
+            }
 
-		//Xử lý phản hồi từ Google
-		[HttpGet]
-		[Route("google-response")]
-		public async Task<IActionResult> GoogleResponse()
-		{
-			var authenticateResult = await HttpContext.AuthenticateAsync();  // Lấy thông tin xác thực người dùng
+            try
+            {
+                // Xác thực token với Google API
+                var client = new HttpClient();
+                var googleEndpoint = $"https://oauth2.googleapis.com/tokeninfo?id_token={request.Token}";
+                var response = await client.GetAsync(googleEndpoint);
 
-			if (!authenticateResult.Succeeded)
-			{
-				return Unauthorized("Không thể đăng nhập bằng google ngay lúc này!.");
-			}
-			// Lấy thông tin người dùng từ Google
-			var email = authenticateResult.Principal?.FindFirst("email")?.Value;  // Lấy email người dùng
-			var name = authenticateResult.Principal?.FindFirst("name")?.Value;    // Lấy tên người dùng
+                if (!response.IsSuccessStatusCode)
+                {
+                    return Unauthorized(new { message = "Xác thực Google không thành công." });
+                }
 
-			// Xử lý thông tin người dùng, tạo tài khoản
-			return Ok(new { email, name });
-		}
-	}
+                var userInfo = await response.Content.ReadFromJsonAsync<GoogleUserInfo>();
+
+                if (userInfo == null || string.IsNullOrEmpty(userInfo.Email))
+                {
+                    return BadRequest(new { message = "Không thể đọc thông tin người dùng từ token." });
+                }
+
+                var email = userInfo.Email;
+                var name = userInfo.Name ?? "IsGoogle";
+                var fullname = userInfo.FullName ?? "IsGoogle";
+
+                // Kiểm tra xem người dùng đã tồn tại
+                var existingUser = _context.Accounts.FirstOrDefault(a => a.Email == email);
+
+                if (existingUser != null)
+                {
+                    var token = GenerateJwtToken(existingUser.UserName, 2);
+                    return Ok(new
+                    {
+                        accountID = existingUser.accountID,
+                        message = "Người dùng đã tồn tại",
+                        FullName = existingUser.UserName,
+                        existingUser.Email,
+                        roleID = 2,
+                        Token = token,
+                       
+                    });
+                }
+
+                // Thêm mới người dùng
+                var acc = new AccountModel
+                {
+                    FullName = fullname,
+                    UserName = name,
+                    Email = email,
+                    roleID = 2,
+                    Password = "IsGoogle",
+                    Password2 = "IsGoogle",
+                };
+
+                _context.Accounts.Add(acc);
+                await _context.SaveChangesAsync();
+
+                var newToken = GenerateJwtToken(name, 2);
+
+                return Ok(new
+                {
+                    accountID = acc.accountID,
+                    FullName = name,
+                    roleID = 2,
+                    Email = email,
+                    token = newToken,
+                   
+                });
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error("Lỗi khi xử lý GoogleResponse: {ErrorMessage}", ex.Message);
+                return StatusCode(500, new { message = "Đã xảy ra lỗi trong quá trình xử lý" });
+            }
+        }
+
+
+
+
+
+
+    }
 }

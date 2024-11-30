@@ -44,22 +44,35 @@ namespace API.Controllers
         }
 
 
-		// Lấy sản phẩm theo type
-		[HttpGet("GetProductByType/{typeProduct}")]
-		[Authorize(Policy = "Admin")]
-		public async Task<IActionResult> GetProductByType(int typeProduct)
-		{
-			var products = await _productService.GetProductsByType(typeProduct);
-			if (products == null || products.Count == 0)
-			{
-				return NotFound(new { message = "Không tìm thấy sản phẩm nào theo type" });
-			}
-			Log.Logger.Information("{@products}");
-			return Ok(new { message = "Tìm thấy sản phẩm theo type =>", data = products });
-		}
+        // Lấy sản phẩm theo type
+        [HttpGet("GetProductsByType")]
+        [Authorize(Policy = "Admin")]
+        public async Task<IActionResult> GetProductsByType(int typeProduct, int page = 1, int pageSize = 5)
+        {
+            if (page <= 0 || pageSize <= 0)
+            {
+                return BadRequest(new { message = "Page và PageSize phải lớn hơn 0." });
+            }
 
-		// Lấy sản phẩm theo type
-		[HttpGet("getProductByCategoryID/{categoryId}")]
+            var products = await _productService.GetProductsByTypeAsync(typeProduct, page, pageSize);
+            if (products == null || products.Count == 0)
+            {
+                return NotFound(new { message = "Không tìm thấy sản phẩm nào theo type." });
+            }
+
+            Log.Logger.Information("{@products}", products);
+            return Ok(new
+            {
+                message = "Tìm thấy sản phẩm theo type.",
+                data = products,
+                currentPage = page,
+                pageSize
+            });
+        }
+
+
+        // Lấy sản phẩm theo type
+        [HttpGet("getProductByCategoryID/{categoryId}")]
 
 		public async Task<IActionResult> getProductByCategoryID(int categoryId)
 		{
@@ -72,11 +85,11 @@ namespace API.Controllers
 			return Ok(new { message = "Tìm thấy sản phẩm theo danh mục =>", data = products });
 		}
 
-		// Lấy sản phẩm theo type
-		[HttpGet("GetProductByTypeForUser/{typeProduct}")]
-		public async Task<IActionResult> GetProductByTypeForUser(int typeProduct)
+		// Lấy sản phẩm theo loai hoa hoac dung cu
+		[HttpGet("GetProductByTypeForUser/{typeProduct}&{sl}")]
+		public async Task<IActionResult> GetProductByTypeForUser(int typeProduct, int sl)
 		{
-			var products = await _productService.GetProductsByType(typeProduct);
+			var products = await _productService.GetProductsByType(typeProduct, sl);
 			if (products == null || products.Count == 0)
 			{
 				return NotFound(new { message = "Không tìm thấy sản phẩm nào theo type" });

@@ -1,0 +1,458 @@
+2024-11-28 08:25:16.588 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'ProductHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 08:25:16.622 +07:00 [WRN] No store type was specified for the decimal property 'level_cus' on entity type 'AccountModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 08:25:16.625 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'CartModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 08:25:16.627 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'CartModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 08:25:16.628 +07:00 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'InvoiceModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 08:25:16.630 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'OrderDetailModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 08:25:16.631 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'OrderModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 08:25:16.633 +07:00 [WRN] No store type was specified for the decimal property 'DisPrice' on entity type 'ProductModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 08:25:16.635 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'ProductModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:01:50.918 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'ProductHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:01:50.962 +07:00 [WRN] No store type was specified for the decimal property 'level_cus' on entity type 'AccountModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:01:50.964 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'CartModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:01:50.967 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'CartModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:01:50.970 +07:00 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'InvoiceModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:01:50.971 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'OrderDetailModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:01:50.973 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'OrderModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:01:50.975 +07:00 [WRN] No store type was specified for the decimal property 'DisPrice' on entity type 'ProductModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:01:50.977 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'ProductModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:03:24.250 +07:00 [WRN] Failed to determine the https port for redirect.
+2024-11-28 09:03:26.357 +07:00 [INF] {@products}
+2024-11-28 09:03:26.429 +07:00 [INF] HTTP GET /api/product/GetProductByTypeForUser/1 responded 200 in 2164.8312 ms
+2024-11-28 09:03:26.467 +07:00 [INF] {@products}
+2024-11-28 09:03:26.476 +07:00 [INF] HTTP GET /api/product/GetProductByTypeForUser/1 responded 200 in 19.4470 ms
+2024-11-28 09:04:24.819 +07:00 [INF] {@products}
+2024-11-28 09:04:24.822 +07:00 [INF] HTTP GET /api/product/GetProductByTypeForUser/1 responded 200 in 25.8516 ms
+2024-11-28 09:04:48.772 +07:00 [INF] {@products}
+2024-11-28 09:04:48.775 +07:00 [INF] HTTP GET /api/product/GetProductByTypeForUser/1 responded 200 in 6.2453 ms
+2024-11-28 09:10:24.306 +07:00 [ERR] An exception occurred in the database while saving changes for context type 'INFRASTRUCTURE.Repository.MyDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FullName', table 'DB_FLOWER_WEB_API.dbo.Accounts'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:bf315280-5c63-410b-879f-22dc44ffabf2
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FullName', table 'DB_FLOWER_WEB_API.dbo.Accounts'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:bf315280-5c63-410b-879f-22dc44ffabf2
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2024-11-28 09:10:24.384 +07:00 [ERR] HTTP POST /api/auth/google-response responded 500 in 654.8210 ms
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FullName', table 'DB_FLOWER_WEB_API.dbo.Accounts'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:bf315280-5c63-410b-879f-22dc44ffabf2
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at API.Controllers.AuthController.GoogleResponse(GoogleTokenRequest request) in D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\Controllers\AuthController.cs:line 154
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2024-11-28 09:10:24.501 +07:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FullName', table 'DB_FLOWER_WEB_API.dbo.Accounts'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:bf315280-5c63-410b-879f-22dc44ffabf2
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at API.Controllers.AuthController.GoogleResponse(GoogleTokenRequest request) in D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\Controllers\AuthController.cs:line 154
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at INFRASTRUCTURE.Middleware.ApiLoggingMiddleware.InvokeAsync(HttpContext context) in D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\INFRASTRUC\INFRASTRUCTURE\Middleware\ApiLoggingMiddleware.cs:line 40
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-11-28 09:12:36.712 +07:00 [ERR] An exception occurred in the database while saving changes for context type 'INFRASTRUCTURE.Repository.MyDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FullName', table 'DB_FLOWER_WEB_API.dbo.Accounts'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:bf315280-5c63-410b-879f-22dc44ffabf2
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FullName', table 'DB_FLOWER_WEB_API.dbo.Accounts'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:bf315280-5c63-410b-879f-22dc44ffabf2
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2024-11-28 09:12:36.743 +07:00 [ERR] HTTP POST /api/auth/google-response responded 500 in 10125.0115 ms
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FullName', table 'DB_FLOWER_WEB_API.dbo.Accounts'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:bf315280-5c63-410b-879f-22dc44ffabf2
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at API.Controllers.AuthController.GoogleResponse(GoogleTokenRequest request) in D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\Controllers\AuthController.cs:line 154
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2024-11-28 09:12:36.824 +07:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'FullName', table 'DB_FLOWER_WEB_API.dbo.Accounts'; column does not allow nulls. INSERT fails.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, SqlCommand command, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryHasMoreRows(Boolean& moreRows)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryReadInternal(Boolean setTimeout, Boolean& more)
+   at Microsoft.Data.SqlClient.SqlDataReader.ReadAsyncExecute(Task task, Object state)
+   at Microsoft.Data.SqlClient.SqlDataReader.InvokeAsyncCall[T](SqlDataReaderBaseAsyncCallContext`1 context)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+ClientConnectionId:bf315280-5c63-410b-879f-22dc44ffabf2
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeResultSetAsync(Int32 startCommandIndex, RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.AffectedCountModificationCommandBatch.ConsumeAsync(RelationalDataReader reader, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Update.Internal.SqlServerModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at API.Controllers.AuthController.GoogleResponse(GoogleTokenRequest request) in D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\Controllers\AuthController.cs:line 154
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at INFRASTRUCTURE.Middleware.ApiLoggingMiddleware.InvokeAsync(HttpContext context) in D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\INFRASTRUC\INFRASTRUCTURE\Middleware\ApiLoggingMiddleware.cs:line 40
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-11-28 09:18:50.298 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'ProductHistory'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:18:50.332 +07:00 [WRN] No store type was specified for the decimal property 'level_cus' on entity type 'AccountModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:18:50.334 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'CartModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:18:50.335 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'CartModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:18:50.337 +07:00 [WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'InvoiceModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:18:50.338 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'OrderDetailModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:18:50.340 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'OrderModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:18:50.341 +07:00 [WRN] No store type was specified for the decimal property 'DisPrice' on entity type 'ProductModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:18:50.343 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'ProductModel'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-11-28 09:19:43.517 +07:00 [WRN] Failed to determine the https port for redirect.
+2024-11-28 09:19:44.777 +07:00 [INF] HTTP POST /api/auth/google-response responded 200 in 1231.3984 ms
+2024-11-28 09:20:58.079 +07:00 [INF] HTTP POST /api/auth/google-response responded 200 in 324.1788 ms
+2024-11-28 09:22:58.200 +07:00 [INF] {@account}
+2024-11-28 09:22:58.204 +07:00 [INF] HTTP POST /api/auth/login responded 401 in 21.8228 ms
+2024-11-28 09:23:15.620 +07:00 [INF] {@account}
+2024-11-28 09:23:15.629 +07:00 [INF] HTTP POST /api/auth/login responded 200 in 13.5181 ms
+2024-11-28 09:23:42.301 +07:00 [INF] HTTP GET /api/category responded 200 in 73.4013 ms
+2024-11-28 09:23:52.236 +07:00 [INF] HTTP GET /api/category responded 200 in 989.4666 ms
+2024-11-28 09:23:52.290 +07:00 [INF] HTTP GET /api/category responded 200 in 4.3817 ms
+2024-11-28 09:23:52.349 +07:00 [INF] {@products}
+2024-11-28 09:23:52.373 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 87.9224 ms
+2024-11-28 09:23:52.451 +07:00 [INF] {@products}
+2024-11-28 09:23:52.464 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 26.7983 ms
+2024-11-28 09:23:54.101 +07:00 [INF] HTTP GET /api/category responded 200 in 1664.1567 ms
+2024-11-28 09:23:57.413 +07:00 [INF] HTTP GET /api/category responded 200 in 5.5967 ms
+2024-11-28 09:23:57.426 +07:00 [INF] HTTP GET /api/category responded 200 in 2.8989 ms
+2024-11-28 09:23:57.444 +07:00 [INF] HTTP GET /api/category responded 200 in 3.1367 ms
+2024-11-28 09:23:57.458 +07:00 [INF] HTTP GET /api/category responded 200 in 2.7571 ms
+2024-11-28 09:23:57.474 +07:00 [INF] HTTP GET /api/supplier responded 200 in 30.8843 ms
+2024-11-28 09:23:57.486 +07:00 [INF] HTTP GET /api/supplier responded 200 in 3.5520 ms
+2024-11-28 09:23:57.512 +07:00 [INF] HTTP GET /api/type responded 200 in 15.5664 ms
+2024-11-28 09:23:57.527 +07:00 [INF] HTTP GET /api/type responded 200 in 3.5583 ms
+2024-11-28 09:23:59.704 +07:00 [INF] HTTP GET /api/category responded 200 in 3.1180 ms
+2024-11-28 09:23:59.714 +07:00 [INF] HTTP GET /api/category responded 200 in 1.8399 ms
+2024-11-28 09:24:14.255 +07:00 [INF] {@products}
+2024-11-28 09:24:14.257 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 7.1258 ms
+2024-11-28 09:24:14.297 +07:00 [INF] {@products}
+2024-11-28 09:24:14.300 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 5.4133 ms
+2024-11-28 09:24:14.332 +07:00 [INF] HTTP GET /api/category responded 200 in 3.8704 ms
+2024-11-28 09:24:14.345 +07:00 [INF] HTTP GET /api/category responded 200 in 2.9397 ms
+2024-11-28 09:24:14.359 +07:00 [INF] HTTP GET /api/category responded 200 in 3.3451 ms
+2024-11-28 09:24:14.384 +07:00 [INF] HTTP GET /api/category responded 200 in 18.0380 ms
+2024-11-28 09:24:14.511 +07:00 [INF] HTTP GET /api/supplier responded 200 in 83.9935 ms
+2024-11-28 09:24:14.530 +07:00 [INF] HTTP GET /api/supplier responded 200 in 4.3354 ms
+2024-11-28 09:24:14.601 +07:00 [INF] HTTP GET /api/type responded 200 in 51.5227 ms
+2024-11-28 09:24:14.617 +07:00 [INF] HTTP GET /api/type responded 200 in 4.0722 ms
+2024-11-28 09:24:17.981 +07:00 [INF] {@products}
+2024-11-28 09:24:17.984 +07:00 [INF] HTTP GET /api/product/GetProductByType/2 responded 200 in 3372.1606 ms
+2024-11-28 09:24:18.036 +07:00 [INF] HTTP GET /api/category responded 200 in 8.7091 ms
+2024-11-28 09:24:18.123 +07:00 [INF] {@products}
+2024-11-28 09:24:18.134 +07:00 [INF] HTTP GET /api/product/GetProductByType/2 responded 200 in 95.7965 ms
+2024-11-28 09:24:18.134 +07:00 [INF] HTTP GET /api/category responded 200 in 71.2000 ms
+2024-11-28 09:24:18.229 +07:00 [INF] HTTP GET /api/supplier responded 200 in 80.7453 ms
+2024-11-28 09:24:18.263 +07:00 [INF] HTTP GET /api/type responded 200 in 4.5116 ms
+2024-11-28 09:24:20.280 +07:00 [INF] HTTP GET /api/supplier responded 200 in 3.7041 ms
+2024-11-28 09:24:20.291 +07:00 [INF] HTTP GET /api/category responded 200 in 5.3204 ms
+2024-11-28 09:24:20.302 +07:00 [INF] HTTP GET /api/category responded 200 in 2.9812 ms
+2024-11-28 09:24:20.302 +07:00 [INF] HTTP GET /api/type responded 200 in 3.1207 ms
+2024-11-28 09:24:29.673 +07:00 [INF] HTTP GET /api/category responded 200 in 6.3017 ms
+2024-11-28 09:24:29.686 +07:00 [INF] HTTP GET /api/category responded 200 in 1.8112 ms
+2024-11-28 09:24:31.222 +07:00 [INF] HTTP GET /api/category responded 200 in 3.7406 ms
+2024-11-28 09:24:31.236 +07:00 [INF] HTTP GET /api/category responded 200 in 1.7896 ms
+2024-11-28 09:24:34.747 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/Product
+2024-11-28 09:24:34.754 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/Product
+2024-11-28 09:24:34.770 +07:00 [INF] HTTP GET /api/Product responded 401 in 5.5729 ms
+2024-11-28 09:24:34.777 +07:00 [INF] Received HTTP response headers after 19.2317ms - 401
+2024-11-28 09:24:34.782 +07:00 [INF] End processing HTTP request after 37.9631ms - 401
+2024-11-28 09:24:34.786 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/login
+2024-11-28 09:24:34.789 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/login
+2024-11-28 09:24:34.798 +07:00 [INF] HTTP GET /api/login responded 404 in 0.1359 ms
+2024-11-28 09:24:34.802 +07:00 [INF] Received HTTP response headers after 11.0826ms - 404
+2024-11-28 09:24:34.804 +07:00 [INF] End processing HTTP request after 17.8844ms - 404
+2024-11-28 09:24:34.812 +07:00 [WRN] Health check ApiHealthCheck with status "Degraded" completed after 65.2251ms with message 'Some endpoints are degraded'
+2024-11-28 09:24:35.265 +07:00 [INF] HTTP GET /health responded 200 in 691.1219 ms
+2024-11-28 09:24:35.265 +07:00 [INF] HTTP GET /api/category responded 200 in 3.0534 ms
+2024-11-28 09:24:35.280 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/Product
+2024-11-28 09:24:35.280 +07:00 [INF] HTTP GET /api/category responded 200 in 2.5757 ms
+2024-11-28 09:24:35.282 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/Product
+2024-11-28 09:24:35.291 +07:00 [INF] HTTP GET /api/Product responded 401 in 0.2139 ms
+2024-11-28 09:24:35.297 +07:00 [INF] Received HTTP response headers after 10.0734ms - 401
+2024-11-28 09:24:35.299 +07:00 [INF] End processing HTTP request after 19.7547ms - 401
+2024-11-28 09:24:35.302 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/login
+2024-11-28 09:24:35.304 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/login
+2024-11-28 09:24:35.315 +07:00 [INF] HTTP GET /api/login responded 404 in 0.1433 ms
+2024-11-28 09:24:35.319 +07:00 [INF] Received HTTP response headers after 11.9977ms - 404
+2024-11-28 09:24:35.325 +07:00 [INF] End processing HTTP request after 22.872ms - 404
+2024-11-28 09:24:35.330 +07:00 [WRN] Health check ApiHealthCheck with status "Degraded" completed after 50.7071ms with message 'Some endpoints are degraded'
+2024-11-28 09:24:35.786 +07:00 [INF] HTTP GET /health responded 200 in 508.6492 ms
+2024-11-28 09:24:36.936 +07:00 [INF] HTTP GET /api/category responded 200 in 1.8936 ms
+2024-11-28 09:24:36.948 +07:00 [INF] HTTP GET /api/category responded 200 in 3.5211 ms
+2024-11-28 09:24:39.152 +07:00 [INF] HTTP GET /api/Supplier responded 200 in 1.9471 ms
+2024-11-28 09:24:39.165 +07:00 [INF] HTTP GET /api/Supplier responded 200 in 3.1221 ms
+2024-11-28 09:24:43.294 +07:00 [INF] HTTP GET /api/category responded 200 in 2.8659 ms
+2024-11-28 09:24:43.310 +07:00 [INF] HTTP GET /api/category responded 200 in 3.5719 ms
+2024-11-28 09:24:49.175 +07:00 [INF] {@products}
+2024-11-28 09:24:49.205 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 33.0863 ms
+2024-11-28 09:24:49.218 +07:00 [INF] {@products}
+2024-11-28 09:24:49.221 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 6.7563 ms
+2024-11-28 09:24:49.261 +07:00 [INF] HTTP GET /api/category responded 200 in 2.1265 ms
+2024-11-28 09:24:49.278 +07:00 [INF] HTTP GET /api/category responded 200 in 7.9096 ms
+2024-11-28 09:24:49.321 +07:00 [INF] HTTP GET /api/supplier responded 200 in 2.1640 ms
+2024-11-28 09:24:49.331 +07:00 [INF] HTTP GET /api/supplier responded 200 in 4.3357 ms
+2024-11-28 09:24:49.346 +07:00 [INF] HTTP GET /api/type responded 200 in 2.5060 ms
+2024-11-28 09:24:49.356 +07:00 [INF] HTTP GET /api/type responded 200 in 2.4034 ms
+2024-11-28 09:24:49.850 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/Product
+2024-11-28 09:24:49.853 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/Product
+2024-11-28 09:24:49.861 +07:00 [INF] HTTP GET /api/Product responded 401 in 0.2194 ms
+2024-11-28 09:24:49.865 +07:00 [INF] Received HTTP response headers after 8.3684ms - 401
+2024-11-28 09:24:49.867 +07:00 [INF] End processing HTTP request after 16.4036ms - 401
+2024-11-28 09:24:49.871 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/login
+2024-11-28 09:24:49.874 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/login
+2024-11-28 09:24:49.884 +07:00 [INF] HTTP GET /api/login responded 404 in 0.1120 ms
+2024-11-28 09:24:49.888 +07:00 [INF] Received HTTP response headers after 11.1048ms - 404
+2024-11-28 09:24:49.892 +07:00 [INF] End processing HTTP request after 21.2036ms - 404
+2024-11-28 09:24:49.894 +07:00 [WRN] Health check ApiHealthCheck with status "Degraded" completed after 44.1416ms with message 'Some endpoints are degraded'
+2024-11-28 09:24:50.355 +07:00 [INF] HTTP GET /health responded 200 in 506.4540 ms
+2024-11-28 09:24:50.366 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/Product
+2024-11-28 09:24:50.369 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/Product
+2024-11-28 09:24:50.378 +07:00 [INF] HTTP GET /api/Product responded 401 in 0.2073 ms
+2024-11-28 09:24:50.380 +07:00 [INF] Received HTTP response headers after 7.8214ms - 401
+2024-11-28 09:24:50.383 +07:00 [INF] End processing HTTP request after 17.3015ms - 401
+2024-11-28 09:24:50.386 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/login
+2024-11-28 09:24:50.389 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/login
+2024-11-28 09:24:50.396 +07:00 [INF] HTTP GET /api/login responded 404 in 0.0866 ms
+2024-11-28 09:24:50.400 +07:00 [INF] Received HTTP response headers after 6.9547ms - 404
+2024-11-28 09:24:50.401 +07:00 [INF] End processing HTTP request after 15.0864ms - 404
+2024-11-28 09:24:50.404 +07:00 [WRN] Health check ApiHealthCheck with status "Degraded" completed after 39.1541ms with message 'Some endpoints are degraded'
+2024-11-28 09:24:50.868 +07:00 [INF] HTTP GET /health responded 200 in 503.4600 ms
+2024-11-28 09:24:51.570 +07:00 [INF] {@products}
+2024-11-28 09:24:51.573 +07:00 [INF] HTTP GET /api/product/GetProductByType/2 responded 200 in 5.1020 ms
+2024-11-28 09:24:51.581 +07:00 [INF] {@products}
+2024-11-28 09:24:51.586 +07:00 [INF] HTTP GET /api/product/GetProductByType/2 responded 200 in 7.6152 ms
+2024-11-28 09:24:51.623 +07:00 [INF] HTTP GET /api/category responded 200 in 4.5865 ms
+2024-11-28 09:24:51.636 +07:00 [INF] HTTP GET /api/category responded 200 in 3.9519 ms
+2024-11-28 09:24:51.662 +07:00 [INF] HTTP GET /api/supplier responded 200 in 4.0432 ms
+2024-11-28 09:24:51.675 +07:00 [INF] HTTP GET /api/supplier responded 200 in 2.6189 ms
+2024-11-28 09:24:51.693 +07:00 [INF] HTTP GET /api/type responded 200 in 4.3009 ms
+2024-11-28 09:24:51.706 +07:00 [INF] HTTP GET /api/type responded 200 in 2.2227 ms
+2024-11-28 09:24:52.075 +07:00 [INF] HTTP GET /api/category responded 200 in 1.8718 ms
+2024-11-28 09:24:52.084 +07:00 [INF] HTTP GET /api/category responded 200 in 1.8418 ms
+2024-11-28 09:27:35.790 +07:00 [INF] HTTP POST /api/auth/google-response responded 200 in 212.2911 ms

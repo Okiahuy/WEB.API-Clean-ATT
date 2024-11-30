@@ -95,13 +95,35 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API.Controllers.AuthController",
-    "Method": "GoogleResponse",
-    "RelativePath": "api/Auth/google-response",
+    "ContainingType": "API.Controllers.ApiStatsController",
+    "Method": "GetApiStats",
+    "RelativePath": "api/ApiStats/{apiName}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "apiName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AuthController",
+    "Method": "GoogleResponse",
+    "RelativePath": "api/Auth/google-response",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "APPLICATIONCORE.Models.GoogleTokenRequest",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -139,6 +161,22 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "request",
+        "Type": "APPLICATIONCORE.Models.ViewModel.AddToCartRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.CartController",
+    "Method": "RemoveToCart",
+    "RelativePath": "api/Cart/RemoveToCart",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
         "Name": "accountID",
         "Type": "System.Int32",
         "IsRequired": false
@@ -152,6 +190,22 @@
         "Name": "quantity",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.CartController",
+    "Method": "UpdateToCart",
+    "RelativePath": "api/Cart/UpdateToCart",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "APPLICATIONCORE.Models.ViewModel.UpdateCartRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -726,14 +780,19 @@
   },
   {
     "ContainingType": "API.Controllers.ProductController",
-    "Method": "GetProductByType",
-    "RelativePath": "api/Product/GetProductByType/{typeProduct}",
+    "Method": "GetProductByTypeForUser",
+    "RelativePath": "api/Product/GetProductByTypeForUser/{typeProduct}\u0026{sl}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "typeProduct",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sl",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -742,8 +801,8 @@
   },
   {
     "ContainingType": "API.Controllers.ProductController",
-    "Method": "GetProductByTypeForUser",
-    "RelativePath": "api/Product/GetProductByTypeForUser/{typeProduct}",
+    "Method": "GetProductsByType",
+    "RelativePath": "api/Product/GetProductsByType",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -751,7 +810,17 @@
       {
         "Name": "typeProduct",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

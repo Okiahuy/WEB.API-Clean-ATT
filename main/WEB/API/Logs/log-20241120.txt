@@ -1,0 +1,80 @@
+2024-11-20 00:00:10.013 +07:00 [INF] {@account}
+2024-11-20 00:00:10.036 +07:00 [INF] HTTP POST /api/auth/login responded 200 in 334.3352 ms
+2024-11-20 00:01:59.189 +07:00 [INF] {@products}
+2024-11-20 00:01:59.211 +07:00 [INF] HTTP GET /api/product/GetProductByTypeForUser/1 responded 200 in 45.2454 ms
+2024-11-20 00:01:59.257 +07:00 [INF] {@products}
+2024-11-20 00:01:59.264 +07:00 [INF] HTTP GET /api/product/GetProductByTypeForUser/1 responded 200 in 10.6631 ms
+2024-11-20 00:02:09.877 +07:00 [INF] {@products}
+2024-11-20 00:02:09.883 +07:00 [INF] HTTP GET /api/product/GetProductByTypeForUser/1 responded 200 in 14.5222 ms
+2024-11-20 00:02:09.905 +07:00 [INF] {@products}
+2024-11-20 00:02:09.910 +07:00 [INF] HTTP GET /api/product/GetProductByTypeForUser/1 responded 200 in 6.4252 ms
+2024-11-20 00:02:18.548 +07:00 [INF] {@account}
+2024-11-20 00:02:18.554 +07:00 [INF] HTTP POST /api/auth/login responded 200 in 54.2324 ms
+2024-11-20 00:04:07.516 +07:00 [INF] {@products}
+2024-11-20 00:04:07.523 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 136.0817 ms
+2024-11-20 00:04:07.556 +07:00 [INF] {@products}
+2024-11-20 00:04:07.561 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 16.0682 ms
+2024-11-20 00:04:07.740 +07:00 [INF] HTTP GET /api/category responded 200 in 74.8272 ms
+2024-11-20 00:04:07.762 +07:00 [INF] HTTP GET /api/category responded 200 in 4.1742 ms
+2024-11-20 00:04:07.803 +07:00 [INF] HTTP GET /api/supplier responded 200 in 25.8058 ms
+2024-11-20 00:04:07.824 +07:00 [INF] HTTP GET /api/supplier responded 200 in 7.8853 ms
+2024-11-20 00:04:07.865 +07:00 [INF] HTTP GET /api/type responded 200 in 25.8744 ms
+2024-11-20 00:04:07.885 +07:00 [INF] HTTP GET /api/type responded 200 in 5.0504 ms
+2024-11-20 00:04:12.159 +07:00 [INF] {@products}
+2024-11-20 00:04:12.164 +07:00 [INF] HTTP GET /api/product/GetProductByType/2 responded 200 in 8.7649 ms
+2024-11-20 00:04:12.174 +07:00 [INF] {@products}
+2024-11-20 00:04:12.178 +07:00 [INF] HTTP GET /api/product/GetProductByType/2 responded 200 in 5.9865 ms
+2024-11-20 00:04:12.268 +07:00 [INF] HTTP GET /api/category responded 200 in 22.5081 ms
+2024-11-20 00:04:12.281 +07:00 [INF] HTTP GET /api/category responded 200 in 3.5722 ms
+2024-11-20 00:04:12.297 +07:00 [INF] HTTP GET /api/supplier responded 200 in 3.4628 ms
+2024-11-20 00:04:12.306 +07:00 [INF] HTTP GET /api/supplier responded 200 in 2.2709 ms
+2024-11-20 00:04:12.338 +07:00 [INF] HTTP GET /api/type responded 200 in 28.9479 ms
+2024-11-20 00:04:12.346 +07:00 [INF] HTTP GET /api/type responded 200 in 1.5390 ms
+2024-11-20 00:04:14.640 +07:00 [INF] HTTP GET /api/category responded 200 in 5.1298 ms
+2024-11-20 00:04:14.650 +07:00 [INF] HTTP GET /api/category responded 200 in 1.6385 ms
+2024-11-20 00:04:16.134 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/Product
+2024-11-20 00:04:16.140 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/Product
+2024-11-20 00:04:16.168 +07:00 [INF] HTTP GET /api/Product responded 401 in 5.0654 ms
+2024-11-20 00:04:16.175 +07:00 [INF] Received HTTP response headers after 29.9762ms - 401
+2024-11-20 00:04:16.178 +07:00 [INF] End processing HTTP request after 47.5936ms - 401
+2024-11-20 00:04:16.184 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/login
+2024-11-20 00:04:16.186 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/login
+2024-11-20 00:04:16.192 +07:00 [INF] HTTP GET /api/login responded 404 in 0.1505 ms
+2024-11-20 00:04:16.196 +07:00 [INF] Received HTTP response headers after 8.4549ms - 404
+2024-11-20 00:04:16.198 +07:00 [INF] End processing HTTP request after 14.4629ms - 404
+2024-11-20 00:04:16.205 +07:00 [WRN] Health check ApiHealthCheck with status "Degraded" completed after 72.8997ms with message 'Some endpoints are degraded'
+2024-11-20 00:04:16.641 +07:00 [INF] HTTP GET /health responded 200 in 880.4727 ms
+2024-11-20 00:04:16.649 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/Product
+2024-11-20 00:04:16.651 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/Product
+2024-11-20 00:04:16.662 +07:00 [INF] HTTP GET /api/Product responded 401 in 1.4989 ms
+2024-11-20 00:04:16.665 +07:00 [INF] Received HTTP response headers after 10.1254ms - 401
+2024-11-20 00:04:16.668 +07:00 [INF] End processing HTTP request after 18.7962ms - 401
+2024-11-20 00:04:16.671 +07:00 [INF] Start processing HTTP request GET http://localhost:5031/api/login
+2024-11-20 00:04:16.672 +07:00 [INF] Sending HTTP request GET http://localhost:5031/api/login
+2024-11-20 00:04:16.679 +07:00 [INF] HTTP GET /api/login responded 404 in 0.0795 ms
+2024-11-20 00:04:16.682 +07:00 [INF] Received HTTP response headers after 7.846ms - 404
+2024-11-20 00:04:16.685 +07:00 [INF] End processing HTTP request after 14.0173ms - 404
+2024-11-20 00:04:16.686 +07:00 [WRN] Health check ApiHealthCheck with status "Degraded" completed after 37.3771ms with message 'Some endpoints are degraded'
+2024-11-20 00:04:17.153 +07:00 [INF] HTTP GET /health responded 200 in 505.5757 ms
+2024-11-20 00:04:17.940 +07:00 [INF] {@products}
+2024-11-20 00:04:17.942 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 6.3601 ms
+2024-11-20 00:04:17.951 +07:00 [INF] {@products}
+2024-11-20 00:04:17.955 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 5.4621 ms
+2024-11-20 00:04:17.985 +07:00 [INF] HTTP GET /api/category responded 200 in 2.0848 ms
+2024-11-20 00:04:17.994 +07:00 [INF] HTTP GET /api/category responded 200 in 2.0869 ms
+2024-11-20 00:04:18.019 +07:00 [INF] HTTP GET /api/supplier responded 200 in 1.9037 ms
+2024-11-20 00:04:18.033 +07:00 [INF] HTTP GET /api/supplier responded 200 in 5.5079 ms
+2024-11-20 00:04:18.052 +07:00 [INF] HTTP GET /api/type responded 200 in 3.5223 ms
+2024-11-20 00:04:18.060 +07:00 [INF] HTTP GET /api/type responded 200 in 1.6230 ms
+2024-11-20 00:09:42.140 +07:00 [INF] HTTP GET /api/Supplier responded 200 in 9.3619 ms
+2024-11-20 00:09:42.149 +07:00 [INF] HTTP GET /api/Supplier responded 200 in 1.4871 ms
+2024-11-20 00:09:44.071 +07:00 [INF] {@products}
+2024-11-20 00:09:44.075 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 11.6272 ms
+2024-11-20 00:09:44.083 +07:00 [INF] {@products}
+2024-11-20 00:09:44.086 +07:00 [INF] HTTP GET /api/product/GetProductByType/1 responded 200 in 5.0064 ms
+2024-11-20 00:09:44.133 +07:00 [INF] HTTP GET /api/category responded 200 in 4.3544 ms
+2024-11-20 00:09:44.143 +07:00 [INF] HTTP GET /api/category responded 200 in 1.4841 ms
+2024-11-20 00:09:44.160 +07:00 [INF] HTTP GET /api/supplier responded 200 in 1.4227 ms
+2024-11-20 00:09:44.170 +07:00 [INF] HTTP GET /api/supplier responded 200 in 2.4467 ms
+2024-11-20 00:09:44.203 +07:00 [INF] HTTP GET /api/type responded 200 in 2.9105 ms
+2024-11-20 00:09:44.211 +07:00 [INF] HTTP GET /api/type responded 200 in 1.5657 ms

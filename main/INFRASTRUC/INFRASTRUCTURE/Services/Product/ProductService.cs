@@ -41,15 +41,25 @@ namespace INFRASTRUCTURE.Services.Product
 								 .ToListAsync();
 		}
         //lấy sp theo danh mục type
-		public async Task<List<ProductModel>> GetProductsByType(int typeProduct)
+		public async Task<List<ProductModel>> GetProductsByType(int typeProduct, int sl)
 		{
 			return await _context.Products
 								 .Where(p => p.typeProduct == typeProduct)
-								 .ToListAsync();
+                                 .Take(sl)
+                                 .ToListAsync();
 		}
+        //lấy sản phẩm theo typeProduct và phân trang
+        public async Task<List<ProductModel>> GetProductsByTypeAsync(int typeProduct, int page, int pageSize = 5)
+        {
+            return await _context.Products
+                                 .Where(p => p.typeProduct == typeProduct)
+                                 .Skip((page - 1) * pageSize) // Bỏ qua số lượng sản phẩm trước đó
+                                 .Take(pageSize)
+                                 .ToListAsync();
+        }
 
 
-		public async Task AddProduct(ProductModel product)
+        public async Task AddProduct(ProductModel product)
         {
             if (product.ImageUpload != null)
             {

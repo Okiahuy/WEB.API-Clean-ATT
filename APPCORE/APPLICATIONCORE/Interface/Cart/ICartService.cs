@@ -1,4 +1,5 @@
-﻿using System;
+﻿using APPLICATIONCORE.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,8 @@ namespace APPLICATIONCORE.Interface.Cart
     public interface ICartService
     {
         Task AddToCartAsync(int accountID, int productID, int quantity);
+        Task UpdateCartItemQuantityAsync(int accountID, int productID, int newQuantity);
+        Task RemoveFromCartAsync(int accountID, int productID);
+        Task<List<CartModel>> GetCartByAccountIDAsync(int accountID);
     }
 }
