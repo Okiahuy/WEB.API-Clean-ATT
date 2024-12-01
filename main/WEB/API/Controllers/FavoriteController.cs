@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class FavoriteController : Controller
     {
         private readonly IFavoriteService _favoriteService;
@@ -13,24 +15,24 @@ namespace API.Controllers
         }
 
         [HttpPost("toggle")]
-        public async Task<IActionResult> ToggleFavorite([FromQuery] int userID, [FromQuery] int productID)
+        public async Task<IActionResult> ToggleFavorite([FromQuery] int accountID, [FromQuery] int productID)
         {
             try
             {
-                await _favoriteService.ToggleFavoriteAsync(userID, productID);
+                await _favoriteService.ToggleFavoriteAsync(accountID, productID);
                 return Ok(new { message = "Yêu thích đã được cập nhật", success = true });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Lỗi khi cập nhật yêu thích", success = false });
+                return StatusCode(500, new { message = $"Lỗi khi cập nhật yêu thích: {ex.Message}", success = false });
             }
         }
         [HttpGet("isFavorite")]
-        public async Task<IActionResult> IsFavorite([FromQuery] int userID, [FromQuery] int productID)
+        public async Task<IActionResult> IsFavorite([FromQuery] int accountID, [FromQuery] int productID)
         {
             try
             {
-                var favorite = await _favoriteService.GetFavoriteProductAsync(userID, productID);
+                var favorite = await _favoriteService.GetFavoriteProductAsync(accountID, productID);
 
                 if (favorite != null && favorite.Product != null)
                 {
@@ -48,12 +50,13 @@ namespace API.Controllers
                             productQuantity = favorite.Product.Quantity,
 
                         },
+                        isFavorite=true,
                         success = true
                     });
                 }
                 else
                 {
-                    return Ok(new { message = "Sản phẩm chưa được yêu thích", data = (object)null, success = true });
+                    return Ok(new { message = "Sản phẩm chưa được yêu thích", data = (object)null, isFavorite=false, success = true });
                 }
             }
             catch (Exception)
@@ -63,22 +66,22 @@ namespace API.Controllers
         }
 
         [HttpGet("favorites")]
-        public async Task<IActionResult> GetFavoritesByUser([FromQuery] int userID)
+        public async Task<IActionResult> GetFavoritesByUser([FromQuery] int accountID)
         {
             try
             {
-                var favorites = await _favoriteService.GetFavoritesByUserAsync(userID);
+                var favorites = await _favoriteService.GetFavoritesByUserAsync(accountID);
 
                 var favoriteProducts = favorites.Select(f => new
                 {
-                    productID = f.Product.Id,
-                    productName = f.Product.Name,
-                    productDescription = f.Product.Description,
-                    productCount = f.Product.likecount,
-                    productPrice = f.Product.Price,
-                    productDisPrice = f.Product.DisPrice,
-                    productQuantity = f.Product.Quantity,
-
+                    Id = f.Product.Id,
+                    Name = f.Product.Name,
+                    Description = f.Product.Description,
+                    likecount = f.Product.likecount,
+                    Price = f.Product.Price,
+                    DisPrice = f.Product.DisPrice,
+                    Quantity = f.Product.Quantity,
+                    ImageUrl = f.Product.ImageUrl
                 }).ToList();
 
                 return Ok(new

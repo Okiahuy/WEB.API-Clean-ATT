@@ -9,11 +9,11 @@ namespace APPLICATIONCORE.Interface.Favorite
 {
     public interface IFavoriteService
     {
-        Task ToggleFavoriteAsync(int userID, int productID);
-        Task<bool> IsFavoriteAsync(int userID, int productID);
+        Task ToggleFavoriteAsync(int accountID, int productID);
+        Task<bool> IsFavoriteAsync(int accountID, int productID);
 
-        Task<FavouriteModel> GetFavoriteProductAsync(int userID, int productID);
+        Task<FavouriteModel> GetFavoriteProductAsync(int accountID, int productID);
 
-        Task<List<FavouriteModel>> GetFavoritesByUserAsync(int userID);
+        Task<List<FavouriteModel>> GetFavoritesByUserAsync(int accountID);
     }
 }

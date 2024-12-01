@@ -170,24 +170,35 @@
   },
   {
     "ContainingType": "API.Controllers.CartController",
-    "Method": "RemoveToCart",
-    "RelativePath": "api/Cart/RemoveToCart",
-    "HttpMethod": "POST",
+    "Method": "GetCartByID",
+    "RelativePath": "api/Cart/getCartbyID/{accountID}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "accountID",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.CartController",
+    "Method": "RemoveToCart",
+    "RelativePath": "api/Cart/RemoveToCart",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Name": "productID",
+        "Name": "cartID",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "quantity",
+        "Name": "accountID",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -327,6 +338,64 @@
         "Name": "name",
         "Type": "System.String",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.FavoriteController",
+    "Method": "GetFavoritesByUser",
+    "RelativePath": "api/Favorite/favorites",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.FavoriteController",
+    "Method": "IsFavorite",
+    "RelativePath": "api/Favorite/isFavorite",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "productID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.FavoriteController",
+    "Method": "ToggleFavorite",
+    "RelativePath": "api/Favorite/toggle",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "productID",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -764,6 +833,22 @@
   },
   {
     "ContainingType": "API.Controllers.ProductController",
+    "Method": "GetImage",
+    "RelativePath": "api/Product/getImage/{productID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.ProductController",
     "Method": "getProductByCategoryID",
     "RelativePath": "api/Product/getProductByCategoryID/{categoryId}",
     "HttpMethod": "GET",
@@ -1026,64 +1111,6 @@
       {
         "Name": "name",
         "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.FavoriteController",
-    "Method": "GetFavoritesByUser",
-    "RelativePath": "favorites",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userID",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.FavoriteController",
-    "Method": "IsFavorite",
-    "RelativePath": "isFavorite",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userID",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "productID",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.FavoriteController",
-    "Method": "ToggleFavorite",
-    "RelativePath": "toggle",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userID",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "productID",
-        "Type": "System.Int32",
         "IsRequired": false
       }
     ],

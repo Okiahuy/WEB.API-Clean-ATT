@@ -97,10 +97,10 @@ namespace INFRASTRUCTURE.Services.Cart
             await _context.SaveChangesAsync();
         }
         //Phương thức xóa sản phẩm khỏi giỏ hàng
-        public async Task RemoveFromCartAsync(int accountID, int productID)
+        public async Task RemoveFromCartAsync(int cartID)
         {
             var cartItem = await _context.Carts
-                .FirstOrDefaultAsync(c => c.accountID == accountID && c.productID == productID && c.Status_cart == 0);
+                .FirstOrDefaultAsync(c => c.cartID == cartID);
 
             if (cartItem == null)
             {
@@ -118,11 +118,6 @@ namespace INFRASTRUCTURE.Services.Cart
             var cartItems = await _context.Carts
                 .Where(c => c.accountID == accountID)
                 .ToListAsync();
-
-            if (!cartItems.Any())
-            {
-                throw new Exception("Giỏ hàng hiện đang trống.");
-            }
 
             return cartItems;
         }

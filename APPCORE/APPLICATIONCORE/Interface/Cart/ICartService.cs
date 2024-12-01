@@ -11,7 +11,7 @@ namespace APPLICATIONCORE.Interface.Cart
     {
         Task AddToCartAsync(int accountID, int productID, int quantity);
         Task UpdateCartItemQuantityAsync(int accountID, int productID, int newQuantity);
-        Task RemoveFromCartAsync(int accountID, int productID);
+        Task RemoveFromCartAsync(int cartID);
         Task<List<CartModel>> GetCartByAccountIDAsync(int accountID);
     }
 }

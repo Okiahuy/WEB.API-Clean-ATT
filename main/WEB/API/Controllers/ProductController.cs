@@ -97,8 +97,29 @@ namespace API.Controllers
 			Log.Logger.Information("{@products}");
 			return Ok(new { message = "Tìm thấy sản phẩm theo type =>", data = products });
 		}
+        [HttpGet("getImage/{productID}")]
+        public async Task<IActionResult> GetImage(int productID)
+        {
+            try
+            {
+                // Giả sử bạn lấy thông tin sản phẩm từ cơ sở dữ liệu
+                var product = await _productService.GetProductById(productID);
 
-		[HttpGet("getAllProductForUser")]
+                if (product == null)
+                {
+                    return NotFound(new { message = "Sản phẩm không tồn tại" });
+                }
+
+                // Trả về hình ảnh từ URL của sản phẩm
+                return Ok(new { imageURL = "http://localhost:5031" + product.ImageUrl });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = $"Lỗi khi lấy hình ảnh: {ex.Message}" });
+            }
+        }
+
+        [HttpGet("getAllProductForUser")]
         public async Task<IActionResult> GetProductsForUser()
         {
             try

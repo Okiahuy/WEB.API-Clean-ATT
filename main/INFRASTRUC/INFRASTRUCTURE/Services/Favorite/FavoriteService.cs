@@ -19,14 +19,18 @@ namespace INFRASTRUCTURE.Services.Favorite
             _context = context;
         }
 
-        public async Task ToggleFavoriteAsync(int userID, int productID)
+        public async Task ToggleFavoriteAsync(int accountID, int productID)
         {
             var favorite = await _context.Favourites
-                .FirstOrDefaultAsync(f => f.accountID == userID && f.productID == productID);
+                .FirstOrDefaultAsync(f => f.accountID == accountID && f.productID == productID);
 
             var product = await _context.Products
-                .FirstOrDefaultAsync(p => p.Id == productID) ?? throw new Exception("Không tìm thấy sản phẩm!");
+                .FirstOrDefaultAsync(p => p.Id == productID);
 
+            if (product == null)
+            {
+                throw new Exception("Sản phẩm không tồn tại");
+            }
             if (favorite != null)
             {
                 _context.Favourites.Remove(favorite);
@@ -34,7 +38,7 @@ namespace INFRASTRUCTURE.Services.Favorite
             }
             else
             {
-                var newFavorite = new FavouriteModel { accountID = userID, productID = productID, count = 1 };
+                var newFavorite = new FavouriteModel { accountID = accountID, productID = productID, count = 1 };
                 product.likecount += 1;
                 await _context.Favourites.AddAsync(newFavorite);
             }
@@ -42,23 +46,23 @@ namespace INFRASTRUCTURE.Services.Favorite
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> IsFavoriteAsync(int userID, int productID)
+        public async Task<bool> IsFavoriteAsync(int accountID, int productID)
         {
             return await _context.Favourites
-                .AnyAsync(f => f.accountID == userID && f.productID == productID);
+                .AnyAsync(f => f.accountID == accountID && f.productID == productID);
         }
 
-        public async Task<FavouriteModel> GetFavoriteProductAsync(int userID, int productID)
+        public async Task<FavouriteModel> GetFavoriteProductAsync(int accountID, int productID)
         {
             return await _context.Favourites
                 .Include(f => f.Product) // Giả sử bảng Product có mối quan hệ với Favorite
-                .FirstOrDefaultAsync(f => f.accountID == userID && f.productID == productID);
+                .FirstOrDefaultAsync(f => f.accountID == accountID && f.productID == productID);
         }
 
-        public async Task<List<FavouriteModel>> GetFavoritesByUserAsync(int userID)
+        public async Task<List<FavouriteModel>> GetFavoritesByUserAsync(int accountID)
         {
             return await _context.Favourites
-                .Where(f => f.accountID == userID)
+                .Where(f => f.accountID == accountID)
                 .Include(f => f.Product) // Giả sử có quan hệ giữa Favorite và Product
                 .ToListAsync();
         }
