@@ -1,7 +1,12 @@
 ﻿using APPLICATIONCORE.Interface.Email;
 using APPLICATIONCORE.Interface.Order;
+using APPLICATIONCORE.Models.Validation;
 using APPLICATIONCORE.Models.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace API.Controllers
 {
@@ -19,23 +24,69 @@ namespace API.Controllers
         }
 
         [HttpPost("buy")]
-        public async Task<IActionResult> AddCart([FromBody] OrderViewModel orderRequest)
+        public async Task<IActionResult> CreateOrder([FromBody] OrderViewModel orderRequest)
+        {
+
+            try
+            {
+                if (orderRequest == null || orderRequest.orderItemRequests == null || !orderRequest.orderItemRequests.Any())
+                {
+                    return BadRequest(new { message = "Danh sách sản phẩm không hợp lệ hoặc trống." });
+                }
+
+                string resultMessage = await _orderService.CreateOrderAsync(orderRequest);
+                return Ok(new { message = "Đặt hàng thành công!" , data = resultMessage });
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Information(ex, "Lỗi khi tạo đơn hàng.");
+                return StatusCode(500, new { message = "Có lỗi xảy ra khi Đặt hàng.", error = ex.Message });
+            }
+        }
+        //lấy tất cả đơn hàng
+        [HttpGet]
+        [Authorize(Policy = "Admin")]
+        public async Task<IActionResult> GetOrders()
         {
             try
             {
-                string resultMessage = await _orderService.CreateOrderAsync(orderRequest);
-                return Ok(resultMessage);
+                var orders = await _orderService.GetAllOrders();
+                Log.Logger.Information("{@orders}");
+                return Ok(new { message = "Lấy đơn hàng thành công", data = orders });
             }
-            catch (ArgumentException ex)
+            catch (UnauthorizedAccessException)
             {
-                return BadRequest(new { message = ex.Message });
+                return Unauthorized(new { message = "Bạn không có quyền truy cập." });
             }
-            catch (Exception)
+            catch (ForbiddenAccessException)
             {
-                return StatusCode(500, "Đã xảy ra lỗi khi đặt hàng.");
+                return StatusCode(403, new { message = "Bạn không có quyền thực hiện hành động này." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Có lỗi xảy ra khi lấy đơn hàng.", error = ex.Message });
             }
         }
 
+        // Lấy đơn hàng nào theo người dùng
+        [HttpGet("GetOrdersByAccountID")]
+        [Authorize(Policy = "User")]
+        public async Task<IActionResult> GetOrdersByAccountID(int accountID)
+        {
+            var order = await _orderService.GetOrdersByAccountID(accountID);
+            if (order == null || order.Count == 0)
+            {
+                return NotFound(new { message = "Không tìm thấy đơn hàng nào theo người dùng." });
+            }
+
+            Log.Logger.Information("{@order}");
+            return Ok(new
+            {
+                message = "Tìm thấy đơn hàng nào theo người dùng.",
+                data = order,
+            });
+        }
+        //gửi mail
         [HttpPost("send-confirmation")]
         public async Task<IActionResult> SendConfirmationEmail(string to, string subject, string body)
         {
@@ -51,6 +102,7 @@ namespace API.Controllers
             //    "\"_________♥___♥_________\\n\" +\r\n                        " +
             //    "\"___________♥___________\\n\";";
             await _emailService.SendEmailAsync(to, subject, body);
+            Log.Logger.Information("{@email}");
             return Ok("Email đã được gửi thành công.");
         }
 

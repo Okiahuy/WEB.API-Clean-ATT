@@ -9,8 +9,8 @@ namespace APPLICATIONCORE.Models.ViewModel
 {
     public class OrderItemRequest
     {
-        public int ProductID { get; set; } // Đảm bảo thuộc tính này là public
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
+        public int productID { get; set; } // Đảm bảo thuộc tính này là public
+        public int quantity { get; set; }
+        public decimal price { get; set; }
     }
 }

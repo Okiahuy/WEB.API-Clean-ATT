@@ -402,7 +402,17 @@
   },
   {
     "ContainingType": "API.Controllers.OrdersController",
-    "Method": "AddCart",
+    "Method": "GetOrders",
+    "RelativePath": "api/Orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.OrdersController",
+    "Method": "CreateOrder",
     "RelativePath": "api/Orders/buy",
     "HttpMethod": "POST",
     "IsController": true,
@@ -412,6 +422,22 @@
         "Name": "orderRequest",
         "Type": "APPLICATIONCORE.Models.ViewModel.OrderViewModel",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.OrdersController",
+    "Method": "GetOrdersByAccountID",
+    "RelativePath": "api/Orders/GetOrdersByAccountID",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountID",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

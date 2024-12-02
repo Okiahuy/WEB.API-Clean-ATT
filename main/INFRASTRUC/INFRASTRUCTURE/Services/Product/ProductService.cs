@@ -23,12 +23,12 @@ namespace INFRASTRUCTURE.Services.Product
             _context = context;
             _httpContextAccessor = httpContextAccessor;
         }
-
+        //lấy tất cả sp
         public async Task<IEnumerable<ProductModel>> GetAllProducts()
         {
             return await _context.Products.Include(p => p.Category).Include(p => p.supplier).Include(p => p.type).ToListAsync();
         }
-        //lấy tất cả sp
+        //lấy sp theo id
         public async Task<ProductModel> GetProductById(int id)
         {
             return await _context.Products.FindAsync(id);

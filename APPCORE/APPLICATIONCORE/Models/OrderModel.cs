@@ -14,7 +14,7 @@ namespace APPLICATIONCORE.Models
 
         public DateTime? order_date { get; set; } = DateTime.Now;
 
-        public int? accountID { get; set; } // Khóa ngoại để liên kết với Khách hàng
+        public int accountID { get; set; } // Khóa ngoại để liên kết với Khách hàng
         public AccountModel? Account { get; set; }
 
         public decimal TotalPrice { get; set; } // Tổng giá trị của từng mục trong đơn hàng

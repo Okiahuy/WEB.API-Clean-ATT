@@ -2061,6 +2061,7 @@
           "Microsoft.EntityFrameworkCore": "8.0.10",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.10",
           "MimeKit": "4.8.0",
+          "Serilog": "4.1.0",
           "System.Diagnostics.PerformanceCounter": "9.0.0"
         },
         "compile": {

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xYdAY2tLXBU=",
+  "dgSpecHash": "NOhyw7+GT3U=",
   "success": true,
   "projectFilePath": "D:\\TAILIEU\\CSharp\\ASP.NET CORE WEB API\\SLSFLOWER\\main\\INFRASTRUC\\INFRASTRUCTURE\\INFRASTRUCTURE.csproj",
   "expectedPackageFiles": [
@@ -56,6 +56,7 @@
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\mimekit\\4.8.0\\mimekit.4.8.0.nupkg.sha512",
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\serilog\\4.1.0\\serilog.4.1.0.nupkg.sha512",
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\PC.LAPTOP-BHH5M3R8\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",

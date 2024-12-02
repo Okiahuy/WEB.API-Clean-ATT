@@ -27,7 +27,7 @@ namespace INFRASTRUCTURE.Services.Email
             try
             {
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("HOA TƯƠI CỤC CƯNG CỦA KEM", _emailSender));
+                message.From.Add(new MailboxAddress("SHOP HOA CỤC CƯNG CỦA KEM", _emailSender));
                 message.To.Add(new MailboxAddress("", to));
                 message.Subject = subject;
                 message.Body = new TextPart("html") { Text = body };

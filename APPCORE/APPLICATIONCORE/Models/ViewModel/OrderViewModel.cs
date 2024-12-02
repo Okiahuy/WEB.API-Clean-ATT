@@ -9,15 +9,11 @@ namespace APPLICATIONCORE.Models.ViewModel
 {
     public class OrderViewModel
     {
-        public int? accountID;
-        public int? paymentID;
-        public int? productID;
-        public decimal? TotalPrice;
-        public int? Quantity;
-        public double? Price;
+        public int accountID { get; set; }
+        public int paymentID { get; set; }
+        public decimal totalPrice { get; set; }
+        public string email { get; set; } // Email của người dùng
 
-        public string? Email; // Email của người dùng
-
-        public List<OrderItemRequest> items;
+        public List<OrderItemRequest> orderItemRequests { get; set; }
     }
 }
