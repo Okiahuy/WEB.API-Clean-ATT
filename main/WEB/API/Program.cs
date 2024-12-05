@@ -14,7 +14,8 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using System.Text.Json;
 using Serilog.Sinks.MSSqlServer;
 using INFRASTRUCTURE.Middleware;
-
+using APPLICATIONCORE.Domain.Momo;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,11 @@ builder.Services.AddAuthentication(options =>
 	options.Scope.Add("email");
 	options.SaveTokens = true;  
 });
+builder.Services.AddHttpClient();
+builder.Services.Configure<MoMoSettings>(builder.Configuration.GetSection("MoMoSettings"));
+builder.Services.AddSingleton(resolver =>
+    resolver.GetRequiredService<IOptions<MoMoSettings>>().Value);
+
 // Cau hình JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
@@ -77,18 +83,6 @@ builder.Services.AddCors(options =>
         });
 });
 
-// them dich vu CORS cho chỉ cho phép url duy nhất truy câp
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowSpecificOrigin",
-//        builder =>
-//        {
-//            builder.WithOrigins("http://localhost:3000")
-//                   .AllowAnyMethod()
-//                   .AllowAnyHeader();
-//        });
-//});
-
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("MyDB");
@@ -104,7 +98,6 @@ builder.Services.AddHealthChecks()
 .AddCheck<ApiHealthCheck>(nameof(ApiHealthCheck))
 .AddDbContextCheck<MyDbContext>()
 .AddCheck<SystemHealthCheck>("CPU Use");
-
 
 builder.Host.UseSerilog((context, config) =>
 {
@@ -129,14 +122,13 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDistributedMemoryCache();
-
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(1000);
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Thời gian timeout của Session
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddDistributedMemoryCache();
 
 
 var app = builder.Build();  // Sau khi dã thêm xong các dich vu, gui Build()
@@ -181,7 +173,9 @@ using (var scope = app.Services.CreateScope()) // Seeding du lieu
     var services = scope.ServiceProvider;
     var dbContext = services.GetRequiredService<MyDbContext>();
     SeedData.SeedDingData(dbContext);
+
 }
+app.UseSession();
 
 if (app.Environment.IsDevelopment()) // Cau hình pipeline HTTP request
 {
@@ -194,7 +188,8 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowAll"); // Su dung CORS
 
-app.UseSession();
+
+
 app.UseSerilogRequestLogging();//serilog
 app.UseAuthentication(); // Kích hoat Authentication Middleware
 app.UseAuthorization(); // Kích hoat Authorization Middleware

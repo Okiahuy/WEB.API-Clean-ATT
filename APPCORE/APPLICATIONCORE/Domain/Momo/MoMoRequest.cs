@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APPLICATIONCORE.Models.ViewModel
+namespace APPLICATIONCORE.Domain.Momo
 {
     public class MoMoRequest
     {

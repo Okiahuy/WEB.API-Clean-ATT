@@ -14,7 +14,6 @@ D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\obj\Debug\net8.0\A
 D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\obj\Debug\net8.0\API.AssemblyInfoInputs.cache
 D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\obj\Debug\net8.0\API.AssemblyInfo.cs
 D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\obj\Debug\net8.0\API.csproj.CoreCompileInputs.cache
-D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cs
 D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\obj\Debug\net8.0\API.MvcApplicationPartsAssemblyInfo.cache
 D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\obj\Debug\net8.0\staticwebassets.build.json
 D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\obj\Debug\net8.0\staticwebassets.development.json
@@ -176,3 +175,4 @@ D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\bin\Debug\net8.0\r
 D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\bin\Debug\net8.0\System.Diagnostics.PerformanceCounter.dll
 D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
 D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.PerformanceCounter.dll
+D:\TAILIEU\CSharp\ASP.NET CORE WEB API\SLSFLOWER\main\WEB\API\bin\Debug\net8.0\Newtonsoft.Json.dll

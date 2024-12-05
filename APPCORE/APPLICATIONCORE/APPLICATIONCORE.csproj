@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\" />
     <Folder Include="Interface\Customer\" />
     <Folder Include="Interface\Admin\" />
     <Folder Include="Interface\Rating\" />

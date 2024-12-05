@@ -444,6 +444,64 @@
   },
   {
     "ContainingType": "API.Controllers.OrdersController",
+    "Method": "CreatePayment",
+    "RelativePath": "api/Orders/payment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderViewModel",
+        "Type": "APPLICATIONCORE.Models.ViewModel.OrderViewModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.OrdersController",
+    "Method": "PaymentNotify",
+    "RelativePath": "api/Orders/payment-notify",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notifyResponse",
+        "Type": "APPLICATIONCORE.Domain.Momo.MoMoNotifyResponse",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.OrdersController",
+    "Method": "PaymentSuccess",
+    "RelativePath": "api/Orders/payment-success",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "resultCode",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "message",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.OrdersController",
     "Method": "SendConfirmationEmail",
     "RelativePath": "api/Orders/send-confirmation",
     "HttpMethod": "POST",
