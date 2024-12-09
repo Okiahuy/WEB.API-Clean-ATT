@@ -13,6 +13,10 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Text.Json;
+using MailKit.Search;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace API.Controllers
 {
@@ -79,7 +83,7 @@ namespace API.Controllers
         }
 
         [HttpPost("payment")]
-        public async Task<IActionResult> CreatePayment([FromBody] OrderViewModel orderViewModel)
+        public async Task<IActionResult> CreatePaymentMomo([FromBody] OrderViewModel orderViewModel)
         {
             if (orderViewModel == null || orderViewModel.orderItemRequests == null || orderViewModel.orderItemRequests.Count == 0)
             {
@@ -99,12 +103,8 @@ namespace API.Controllers
                 requestId = Guid.NewGuid().ToString(),
                 extraData = ""
             };
-            // Lưu OrderViewModel vào Session
-            var orderJson = JsonConvert.SerializeObject(orderViewModel); // Serialize đối tượng thành JSON
-            HttpContext.Session.SetString(momoRequest.orderId, orderJson); // Lưu JSON vào session
-            Console.WriteLine($"Saved Order to Session: Key = {momoRequest.orderId}, Value = {orderJson}");
 
-
+            string resultMessage = await _orderService.CreatePaymentMomoAsync(orderViewModel, momoRequest.orderId);
 
             // Tạo rawData và signature
             string rawData = $"accessKey={momoRequest.accessKey}&amount={momoRequest.amount}&extraData={momoRequest.extraData}&ipnUrl={momoRequest.ipnUrl}&orderId={momoRequest.orderId}&orderInfo={momoRequest.orderInfo}&partnerCode={momoRequest.partnerCode}&redirectUrl={momoRequest.redirectUrl}&requestId={momoRequest.requestId}&requestType={momoRequest.requestType}";
@@ -141,7 +141,7 @@ namespace API.Controllers
                 {
                     var payUrl = momoResponse["payUrl"];
                     var qrCodeUrl = momoResponse["qrCodeUrl"];
-                    return Ok(new { payUrl, qrCodeUrl });
+                    return Ok(new { payUrl, qrCodeUrl, momoRequest.orderId });
                 }
                 return BadRequest("Không nhận được URL thanh toán từ MoMo.");
             }
@@ -159,23 +159,40 @@ namespace API.Controllers
                 try
                 {
                     // Truy xuất OrderViewModel từ Session
-                    var orderRequestJson = HttpContext.Session.GetString(orderId);
-                    if (orderRequestJson == null)
+                    var orderMomo = await _orderService.GetMomoBycode_orderId(orderId);
+                    var orderMomoDetail = await _orderService.GetMomoDetailBycode_order(orderId);
+
+                    if (orderMomo == null && orderMomoDetail == null)
                     {
-                        return BadRequest(new { message = $"Không tìm thấy dữ liệu đơn hàng id: {orderId} trong Session: {orderRequestJson}" });
+                        return BadRequest(new { message = $"Không tìm thấy dữ liệu đơn hàng id: {orderId} trong Cơ sở dữ liệu: {orderMomo}" });
                     }
 
-                    // Deserialize lại OrderViewModel
-                    var orderRequest = JsonConvert.DeserializeObject<OrderViewModel>(orderRequestJson);
+                    // Tạo đối tượng OrderViewModel từ dữ liệu truy vấn
+                    var orderRequest = new OrderViewModel
+                    {
+                        accountID = orderMomo.accountID,
+                        paymentID = orderMomo.PaymentID,
+                        totalPrice = orderMomo.TotalPrice,
+                        email = orderMomo.email,
+                        orderItemRequests = orderMomoDetail.Select(detail => new OrderItemRequest
+                        {
+                            productID = Convert.ToInt32(detail.ProductID), // ID sản phẩm
+                            quantity = detail.Quantity,                   // Số lượng
+                            price = detail.Price                          // Giá sản phẩm
+                        }).ToList() // Tạo danh sách OrderItemRequest từ dữ liệu
+                    };
 
+                    // Kiểm tra dữ liệu hợp lệ
                     if (orderRequest == null || orderRequest.orderItemRequests == null || !orderRequest.orderItemRequests.Any())
                     {
                         return BadRequest(new { message = "Dữ liệu đơn hàng không hợp lệ." });
                     }
+
+                    // Lưu đơn hàng vào bảng đích
                     string resultMessage = await _orderService.CreateOrderAsync(orderRequest);
-                    // Xoá session sau khi hoàn tất
-                    HttpContext.Session.Remove(orderId);
-                    return Ok(new { message = "Đặt hàng thành công!", data = resultMessage });
+                    var orderDetailsUrl = $"http://localhost:3000/order"; // URL trang đơn hàng cho frontend
+
+                    return Redirect(orderDetailsUrl);
                 }
                 catch (Exception ex)
                 {
@@ -186,7 +203,8 @@ namespace API.Controllers
             else
             {
                 // Thanh toán thất bại
-                return Ok(new { message = $"Thanh toán đơn hàng #{orderId} thất bại: {message}", resultCode });
+                var orderDetailsUrl = $"http://localhost:3000/order"; // URL trang đơn hàng cho frontend
+                return Redirect(orderDetailsUrl);
             }
         }
         // Thêm API callback để xử lý kết quả thanh toán

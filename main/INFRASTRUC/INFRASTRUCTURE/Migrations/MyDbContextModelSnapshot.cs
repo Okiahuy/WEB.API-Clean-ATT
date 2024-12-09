@@ -22,6 +22,74 @@ namespace INFRASTRUCTURE.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("APPLICATIONCORE.Domain.Momo.MomoDtos.MomoDTO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PaymentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("accountID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("code_order")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("order_date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Momos");
+                });
+
+            modelBuilder.Entity("APPLICATIONCORE.Domain.Momo.MomoDtos.MomodetailDTO", b =>
+                {
+                    b.Property<int>("momodetailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("momodetailID"));
+
+                    b.Property<int?>("MomoDTOId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("code_order")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("orderID")
+                        .HasColumnType("int");
+
+                    b.HasKey("momodetailID");
+
+                    b.HasIndex("MomoDTOId");
+
+                    b.ToTable("MomoDetails");
+                });
+
             modelBuilder.Entity("APPLICATIONCORE.History.ProductHistory", b =>
                 {
                     b.Property<int>("Id")
@@ -342,6 +410,7 @@ namespace INFRASTRUCTURE.Migrations
 
                     b.Property<string>("Mota")
                         .IsRequired()
+                        .HasMaxLength(10000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NewpaperTitle")
@@ -351,6 +420,31 @@ namespace INFRASTRUCTURE.Migrations
                     b.HasKey("newpaperID");
 
                     b.ToTable("Newpapers");
+                });
+
+            modelBuilder.Entity("APPLICATIONCORE.Models.Notification", b =>
+                {
+                    b.Property<int>("notiID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("notiID"));
+
+                    b.Property<DateTime?>("Create")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("accountID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("notiID");
+
+                    b.HasIndex("accountID");
+
+                    b.ToTable("Notis");
                 });
 
             modelBuilder.Entity("APPLICATIONCORE.Models.OrderDetailModel", b =>
@@ -402,7 +496,7 @@ namespace INFRASTRUCTURE.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("accountID")
+                    b.Property<int>("accountID")
                         .HasColumnType("int");
 
                     b.Property<string>("code_order")
@@ -580,6 +674,13 @@ namespace INFRASTRUCTURE.Migrations
                     b.ToTable("Types");
                 });
 
+            modelBuilder.Entity("APPLICATIONCORE.Domain.Momo.MomoDtos.MomodetailDTO", b =>
+                {
+                    b.HasOne("APPLICATIONCORE.Domain.Momo.MomoDtos.MomoDTO", null)
+                        .WithMany("MomoDetails")
+                        .HasForeignKey("MomoDTOId");
+                });
+
             modelBuilder.Entity("APPLICATIONCORE.Models.AccountModel", b =>
                 {
                     b.HasOne("APPLICATIONCORE.Models.RoleModel", "Role")
@@ -652,6 +753,15 @@ namespace INFRASTRUCTURE.Migrations
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("APPLICATIONCORE.Models.Notification", b =>
+                {
+                    b.HasOne("APPLICATIONCORE.Models.AccountModel", "Account")
+                        .WithMany()
+                        .HasForeignKey("accountID");
+
+                    b.Navigation("Account");
+                });
+
             modelBuilder.Entity("APPLICATIONCORE.Models.OrderDetailModel", b =>
                 {
                     b.HasOne("APPLICATIONCORE.Models.ProductModel", "Product")
@@ -673,7 +783,9 @@ namespace INFRASTRUCTURE.Migrations
                 {
                     b.HasOne("APPLICATIONCORE.Models.AccountModel", "Account")
                         .WithMany()
-                        .HasForeignKey("accountID");
+                        .HasForeignKey("accountID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Account");
                 });
@@ -718,6 +830,11 @@ namespace INFRASTRUCTURE.Migrations
                     b.Navigation("Account");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("APPLICATIONCORE.Domain.Momo.MomoDtos.MomoDTO", b =>
+                {
+                    b.Navigation("MomoDetails");
                 });
 
             modelBuilder.Entity("APPLICATIONCORE.Models.CategoryModel", b =>

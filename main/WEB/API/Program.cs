@@ -65,7 +65,17 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddControllers();
-
+builder.Services.AddDbContext<MyDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("MyDB");
+    options.UseSqlServer(connectionString, sqlOptions => sqlOptions.CommandTimeout(180));
+});
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Thời gian timeout của Session
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 // Đăng ký các dịch vụ
 builder.Services.AddApplicationServices();
 
@@ -81,12 +91,6 @@ builder.Services.AddCors(options =>
                    .AllowAnyMethod()
                    .AllowAnyHeader();
         });
-});
-
-builder.Services.AddDbContext<MyDbContext>(options =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("MyDB");
-    options.UseSqlServer(connectionString, sqlOptions => sqlOptions.CommandTimeout(180));
 });
 
 builder.Services.AddHttpClient<ApiHealthCheck>();
@@ -122,12 +126,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Thời gian timeout của Session
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
+
 builder.Services.AddDistributedMemoryCache();
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -15,5 +16,7 @@ namespace APPLICATIONCORE.Models.ViewModel
         public string email { get; set; } // Email của người dùng
 
         public List<OrderItemRequest> orderItemRequests { get; set; }
+
+
     }
 }

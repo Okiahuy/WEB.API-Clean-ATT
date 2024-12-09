@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using APPLICATIONCORE.Domain.Momo.MomoDtos;
 using APPLICATIONCORE.History;
 using APPLICATIONCORE.Models;
 using Microsoft.EntityFrameworkCore;
@@ -31,8 +32,9 @@ namespace INFRASTRUCTURE.Repository
         public DbSet<RoleModel> Roles { get; set; } //phân quyền 15
         public DbSet<AnswerModel> Answers { get; set; } // trả lời 16
         public DbSet<TypeModel> Types { get; set; } // Loại hoa 17
-
-		public DbSet<ApiUsageLog> ApiUsageLogs { get; set; }
-
-	}
+        public DbSet<Notification> Notis { get; set; } // Thông báo 18
+        public DbSet<ApiUsageLog> ApiUsageLogs { get; set; }
+        public DbSet<MomoDTO> Momos { get; set; } 
+        public DbSet<MomodetailDTO> MomoDetails { get; set; }
+    }
 }

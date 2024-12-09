@@ -20,7 +20,7 @@ namespace INFRASTRUCTURE.Services.Category
         }
         public async Task<IEnumerable<CategoryModel>> GetAllCategories()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Categories.Distinct().ToListAsync();
         }
         public async Task<CategoryModel> GetCategoryById(int id)
         {

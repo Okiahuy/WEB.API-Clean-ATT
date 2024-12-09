@@ -11,8 +11,9 @@ namespace APPLICATIONCORE.Interface.Product
     {
         Task<IEnumerable<ProductModel>> GetAllProducts();
         Task<ProductModel> GetProductById(int id);
-		Task<List<ProductModel>> GetProductsByCategoryID(int categoryId);
-		Task<List<ProductModel>> GetProductsByType(int typeProduct, int sl);
+		Task<List<ProductModel>> GetProductsByCategoryID(int categoryId); 
+        Task<List<ProductModel>> GetProductsByCategoryIDandQuantity(int categoryId, int sl);
+        Task<List<ProductModel>> GetProductsByType(int typeProduct, int sl);
 
         Task<List<ProductModel>> GetProductsByTypeAsync(int typeProduct, int page, int pageSize);
 
@@ -21,5 +22,9 @@ namespace APPLICATIONCORE.Interface.Product
         Task DeleteProduct(int id);
         Task<IEnumerable<ProductModel>> SearchProducts(string name);
         Task<IEnumerable<ProductModel>> FindById(int id);
+
+        Task<List<ProductModel>> GetProductsByCategoryAndPriceRange(int categoryId, decimal minPrice, decimal maxPrice, string sortBy);
+
+        Task<IEnumerable<ProductModel>> GetProductsByCategoryAndPriceRange(int categoryId, decimal minPrice, decimal maxPrice);
     }
 }

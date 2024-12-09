@@ -18,12 +18,19 @@ namespace API.Controllers
         }
 
         // Lấy tất cả danh mục 
-        [HttpGet]
+        [HttpGet("GetCategories")]
         public async Task<IActionResult> GetCategories()
         {
-            var products = await _categoryService.GetAllCategories();
-            return Ok(new { message = "Lấy danh mục thành công", data = products });
+            var categories = await _categoryService.GetAllCategories();  
+
+            if (categories == null)  // Check the count of the list
+            {
+                return NotFound(new { message = "Không tìm thấy danh mục!" });
+            }
+
+            return Ok(new { message = "Lấy danh mục thành công", data = categories });
         }
+
         // Thêm sản phẩm mới
         [HttpPost]
         [Authorize(Policy = "Admin")]

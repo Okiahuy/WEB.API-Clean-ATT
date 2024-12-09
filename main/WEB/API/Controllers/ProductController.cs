@@ -69,14 +69,44 @@ namespace API.Controllers
                 pageSize
             });
         }
+        // Lấy sản phẩm theo danh mục
+        [HttpGet("getProductByCategoryID/{categoryId}")]
+        public async Task<IActionResult> getProductByCategoryID(int categoryId)
+        {
+            var products = await _productService.GetProductsByCategoryID(categoryId);
+            if (products == null || products.Count == 0)
+            {
+                return NotFound(new { message = "Không tìm thấy sản phẩm nào theo danh mục" });
+            }
+            Log.Logger.Information("{@products}");
+            return Ok(new { message = "Tìm thấy sản phẩm theo danh mục =>", data = products });
+        }
 
+        // Lấy sản phẩm theo danh mục và lấy theo giá
+        [HttpGet("getProductByCategoryAndPrice")]
+        public async Task<IActionResult> GetProductByCategoryAndPrice(int categoryId, decimal minPrice, decimal maxPrice)
+        {
+            // Validate the parameters
+            if (minPrice <= 0 || maxPrice <= 0 || minPrice > maxPrice)
+            {
+                return BadRequest(new { message = "Khoảng giá không hợp lệ." });
+            }
+
+            var products = await _productService.GetProductsByCategoryAndPriceRange(categoryId, minPrice, maxPrice);
+            if (products == null || !products.Any())
+            {
+                return NotFound(new { message = "Không tìm thấy sản phẩm nào theo danh mục và khoảng giá" });
+            }
+
+            Log.Logger.Information("Found {@productCount} products in category {@categoryId} with price range from {@minPrice} to {@maxPrice}.", products.Count(), categoryId, minPrice, maxPrice);
+            return Ok(new { message = "Tìm thấy sản phẩm theo danh mục và khoảng giá =>", data = products });
+        }
 
         // Lấy sản phẩm theo type
-        [HttpGet("getProductByCategoryID/{categoryId}")]
-
-		public async Task<IActionResult> getProductByCategoryID(int categoryId)
+        [HttpGet("getProductByCategoryIDandQuantity/{categoryId}&{sl}")]
+		public async Task<IActionResult> getProductsByCategoryIDandQuantity(int categoryId, int sl)
 		{
-			var products = await _productService.GetProductsByCategoryID(categoryId);
+			var products = await _productService.GetProductsByCategoryIDandQuantity(categoryId, sl);
 			if (products == null || products.Count == 0)
 			{
 				return NotFound(new { message = "Không tìm thấy sản phẩm nào theo danh mục" });
@@ -85,8 +115,22 @@ namespace API.Controllers
 			return Ok(new { message = "Tìm thấy sản phẩm theo danh mục =>", data = products });
 		}
 
-		// Lấy sản phẩm theo loai hoa hoac dung cu
-		[HttpGet("GetProductByTypeForUser/{typeProduct}&{sl}")]
+        //lấy sản phẩm và lọc
+        [HttpGet("getProductsByCategoryAndSort")]
+        public async Task<IActionResult> GetProductsByCategoryAndSort(int categoryId, decimal minPrice, decimal maxPrice, string sortBy)
+        {
+            var products = await _productService.GetProductsByCategoryAndPriceRange(categoryId, minPrice, maxPrice, sortBy);
+
+            if (products == null || !products.Any())
+            {
+                return NotFound(new { message = "Không tìm thấy sản phẩm nào theo danh mục và khoảng giá" });
+            }
+
+            return Ok(new { message = "Tìm thấy sản phẩm theo danh mục và khoảng giá", data = products });
+        }
+
+        // Lấy sản phẩm theo loai hoa hoac dung cu
+        [HttpGet("GetProductByTypeForUser/{typeProduct}&{sl}")]
 		public async Task<IActionResult> GetProductByTypeForUser(int typeProduct, int sl)
 		{
 			var products = await _productService.GetProductsByType(typeProduct, sl);

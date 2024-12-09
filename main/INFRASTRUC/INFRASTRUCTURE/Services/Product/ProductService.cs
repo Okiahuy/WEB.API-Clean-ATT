@@ -33,15 +33,73 @@ namespace INFRASTRUCTURE.Services.Product
         {
             return await _context.Products.FindAsync(id);
         }
+
+        //lấy sp theo giá
+        public async Task<IEnumerable<ProductModel>> GetProductsByPriceRange(decimal minPrice, decimal maxPrice)
+        {
+            return await _context.Products
+                .Where(p => p.Price >= minPrice && p.Price <= maxPrice)
+                .Distinct()
+                .ToListAsync();
+        }
+        //lấy sp theo giá và theo danh mục
+        public async Task<IEnumerable<ProductModel>> GetProductsByCategoryAndPriceRange(int categoryId, decimal minPrice, decimal maxPrice)
+        {
+            return await _context.Products
+                .Where(p => p.CategoryId == categoryId && p.Price >= minPrice && p.Price <= maxPrice)
+                .Distinct()
+                .ToListAsync();
+
+        }
         //lấy sp theo danh mục id
-		public async Task<List<ProductModel>> GetProductsByCategoryID(int categoryId)
+        public async Task<List<ProductModel>> GetProductsByCategoryID(int categoryId)
 		{
 			return await _context.Products
 								 .Where(p => p.CategoryId == categoryId)
-								 .ToListAsync();
+                                 .ToListAsync();
 		}
+        //lấy sp theo danh mục id và số lượng
+        public async Task<List<ProductModel>> GetProductsByCategoryIDandQuantity(int categoryId, int sl)
+        {
+            return await _context.Products
+                          .Where(p => p.CategoryId == categoryId)
+                          .Take(sl)
+                          .Distinct()
+                          .OrderBy(p => p.Id)
+                          .ToListAsync();
+        }
+        //lấy sp theo danh mục và sắp xếp
+        public async Task<List<ProductModel>> GetProductsByCategoryAndPriceRange(int categoryId, decimal minPrice, decimal maxPrice, string sortBy)
+        {
+            var query = _context.Products
+                .Where(p => p.CategoryId == categoryId && p.Price >= minPrice && p.Price <= maxPrice); // Lọc theo danh mục và giá
+
+            // Áp dụng sắp xếp dựa trên tham số sortBy
+            switch (sortBy)
+            {
+                case "name-asc":
+                    query = query.OrderBy(p => p.Name);
+                    break;
+                case "name-desc":
+                    query = query.OrderByDescending(p => p.Name);
+                    break;
+                case "price-asc":
+                    query = query.OrderBy(p => p.Price);
+                    break;
+                case "price-desc":
+                    query = query.OrderByDescending(p => p.Price);
+                    break;
+                default:
+                    break;
+            }
+
+            // Trả về danh sách sản phẩm đã được lọc và sắp xếp
+            return await query.ToListAsync();
+        }
+
+
         //lấy sp theo danh mục type
-		public async Task<List<ProductModel>> GetProductsByType(int typeProduct, int sl)
+        public async Task<List<ProductModel>> GetProductsByType(int typeProduct, int sl)
 		{
 			return await _context.Products
 								 .Where(p => p.typeProduct == typeProduct)
@@ -57,8 +115,6 @@ namespace INFRASTRUCTURE.Services.Product
                                  .Take(pageSize)
                                  .ToListAsync();
         }
-
-
         public async Task AddProduct(ProductModel product)
         {
             if (product.ImageUpload != null)

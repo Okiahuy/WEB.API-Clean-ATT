@@ -223,16 +223,6 @@
   },
   {
     "ContainingType": "API.Controllers.CategoryController",
-    "Method": "GetCategories",
-    "RelativePath": "api/Category",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.CategoryController",
     "Method": "AddCategory",
     "RelativePath": "api/Category",
     "HttpMethod": "POST",
@@ -298,6 +288,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.CategoryController",
+    "Method": "GetCategories",
+    "RelativePath": "api/Category/GetCategories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -444,7 +444,7 @@
   },
   {
     "ContainingType": "API.Controllers.OrdersController",
-    "Method": "CreatePayment",
+    "Method": "CreatePaymentMomo",
     "RelativePath": "api/Orders/payment",
     "HttpMethod": "POST",
     "IsController": true,
@@ -933,6 +933,32 @@
   },
   {
     "ContainingType": "API.Controllers.ProductController",
+    "Method": "GetProductByCategoryAndPrice",
+    "RelativePath": "api/Product/getProductByCategoryAndPrice",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minPrice",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "maxPrice",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.ProductController",
     "Method": "getProductByCategoryID",
     "RelativePath": "api/Product/getProductByCategoryID/{categoryId}",
     "HttpMethod": "GET",
@@ -941,6 +967,27 @@
     "Parameters": [
       {
         "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.ProductController",
+    "Method": "getProductsByCategoryIDandQuantity",
+    "RelativePath": "api/Product/getProductByCategoryIDandQuantity/{categoryId}\u0026{sl}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sl",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -964,6 +1011,37 @@
         "Name": "sl",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.ProductController",
+    "Method": "GetProductsByCategoryAndSort",
+    "RelativePath": "api/Product/getProductsByCategoryAndSort",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "minPrice",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "maxPrice",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "sortBy",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
