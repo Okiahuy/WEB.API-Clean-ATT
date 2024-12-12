@@ -50,13 +50,18 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "addressID",
         "Type": "System.Int32",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "address",
         "Type": "APPLICATIONCORE.Models.AddressModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
         "IsRequired": true
       }
     ],
@@ -72,6 +77,22 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AddressController",
+    "Method": "GetAddressByID",
+    "RelativePath": "api/Address/getAddressbyID/{accountID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountID",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -219,6 +240,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.CategoryController",
+    "Method": "GetCategoriesAdmin",
+    "RelativePath": "api/Category",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -412,6 +443,48 @@
   },
   {
     "ContainingType": "API.Controllers.OrdersController",
+    "Method": "UpdateOrderStatus",
+    "RelativePath": "api/Orders/{orderID}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "APPLICATIONCORE.Models.ViewModel.UpdateOrderStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.OrdersController",
+    "Method": "UpdateAddress",
+    "RelativePath": "api/Orders/{orderID}/update-address",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "APPLICATIONCORE.Models.ViewModel.UpdateAddressRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.OrdersController",
     "Method": "CreateOrder",
     "RelativePath": "api/Orders/buy",
     "HttpMethod": "POST",
@@ -428,8 +501,40 @@
   },
   {
     "ContainingType": "API.Controllers.OrdersController",
+    "Method": "GetOrderDetails",
+    "RelativePath": "api/Orders/getOrderDetailPrint/{orderID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.OrdersController",
+    "Method": "GetOrderDetailsByOrderID",
+    "RelativePath": "api/Orders/GetOrderDetailsByOrderID/{Id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.OrdersController",
     "Method": "GetOrdersByAccountID",
-    "RelativePath": "api/Orders/GetOrdersByAccountID",
+    "RelativePath": "api/Orders/GetOrdersByAccountID/{accountID}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -437,7 +542,7 @@
       {
         "Name": "accountID",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

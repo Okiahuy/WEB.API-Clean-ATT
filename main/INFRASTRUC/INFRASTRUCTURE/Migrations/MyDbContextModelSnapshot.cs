@@ -42,6 +42,9 @@ namespace INFRASTRUCTURE.Migrations
                     b.Property<int>("accountID")
                         .HasColumnType("int");
 
+                    b.Property<int>("addressID")
+                        .HasColumnType("int");
+
                     b.Property<string>("code_order")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -499,6 +502,9 @@ namespace INFRASTRUCTURE.Migrations
                     b.Property<int>("accountID")
                         .HasColumnType("int");
 
+                    b.Property<int>("addressID")
+                        .HasColumnType("int");
+
                     b.Property<string>("code_order")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -509,6 +515,8 @@ namespace INFRASTRUCTURE.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("accountID");
+
+                    b.HasIndex("addressID");
 
                     b.ToTable("Orders");
                 });
@@ -787,7 +795,15 @@ namespace INFRASTRUCTURE.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("APPLICATIONCORE.Models.AddressModel", "Address")
+                        .WithMany()
+                        .HasForeignKey("addressID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Account");
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("APPLICATIONCORE.Models.ProductModel", b =>

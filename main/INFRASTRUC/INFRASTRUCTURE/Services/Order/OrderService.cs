@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using APPLICATIONCORE.Domain.Momo.MomoDtos;
 using MailKit.Search;
+using Microsoft.Identity.Client;
 
 namespace INFRASTRUCTURE.Services.Order
 {
@@ -25,7 +26,7 @@ namespace INFRASTRUCTURE.Services.Order
             _context = context;
             _emailService = emailService;
         }
-
+        //tạo đơn hàng 
         public async Task<string> CreateOrderAsync(OrderViewModel orderRequest)
         {
             try
@@ -49,7 +50,8 @@ namespace INFRASTRUCTURE.Services.Order
                     accountID = orderRequest.accountID, // Use the provided account ID
                     PaymentID = orderRequest.paymentID,
                     Status_order = 1, // New order status
-                    TotalPrice = orderRequest.totalPrice
+                    TotalPrice = orderRequest.totalPrice,
+                    addressID = orderRequest.addressID,
                 };
 
                 // Save order to the database
@@ -108,13 +110,13 @@ namespace INFRASTRUCTURE.Services.Order
             catch (DbUpdateException ex)
             {
                 // Log detailed error message
-                Log.Logger.Information(ex, "Database update exception occurred while creating order.");
+                //Log.Logger.Information(ex, "Database update exception occurred while creating order.");
                 throw new Exception("Có lỗi xảy ra khi Đặt hàng. Chi tiết: " + ex.InnerException?.Message);
             }
             catch (Exception ex)
             {
                 // Log the error message
-                Log.Logger.Information(ex, "General error occurred while creating order.");
+                //Log.Logger.Information(ex, "General error occurred while creating order.");
                 throw new Exception("Có lỗi xảy ra khi Đặt hàng.");
             }
         }
@@ -143,6 +145,7 @@ namespace INFRASTRUCTURE.Services.Order
                     PaymentName = "MOMO", 
                     TotalPrice = orderRequest.totalPrice,
                     email = orderRequest.email,
+                    addressID = orderRequest.addressID,
                 };
 
                 // Save order to the database
@@ -197,10 +200,86 @@ namespace INFRASTRUCTURE.Services.Order
             }
         }
         //lấy tất cả don hang
-        public async Task<IEnumerable<OrderModel>> GetAllOrders()
+        public async Task<IEnumerable<object>> GetAllOrders()
         {
-            return await _context.Orders.Include(p => p.Account).ToListAsync();
+            return await _context.Orders
+                .Include(o => o.Account) // Bao gồm thông tin tài khoản
+                .Include(o => o.Address) // Bao gồm thông tin địa chỉ
+                .Select(o => new
+                {
+                    o.Id,
+                    o.code_order,
+                    o.order_date,
+                    o.TotalPrice,
+                    o.Status_order,
+                    o.PaymentID,
+                    AccountName = o.Account != null ? o.Account.UserName : "N/A", // Kiểm tra tránh null
+                    AddressName = o.Address != null ? o.Address.addressName : "N/A" // Kiểm tra tránh null
+                })
+                .ToListAsync();
         }
+
+        public async Task<object> GetOrderDetailsByOrderIDPrintInvoice(int orderID)
+        {
+            var order = await (from o in _context.Orders
+                               join a in _context.Accounts on o.accountID equals a.accountID into account
+                               from acc in account.DefaultIfEmpty()
+                               join ad in _context.Addresss on o.addressID equals ad.addressID into address
+                               from addr in address.DefaultIfEmpty()
+                               where o.Id == orderID
+                               select new
+                               {
+                                   o.Id,
+                                   o.code_order,
+                                   o.order_date,
+                                   o.TotalPrice,
+                                   o.Status_order,
+                                   PaymentMethod = o.PaymentID == 1 ? "Thanh toán khi nhận hàng" :
+                                                   o.PaymentID == 2 ? "MoMo" : "VNPay",
+                                   CustomerName = acc.UserName ?? "N/A",
+                                   CustomerPhone = acc.Phone ?? "N/A",
+                                   CustomerAddress = "Địa chỉ " + addr.addressName + " Thành phố " + addr.city + " Mã bưu điện " + addr.zipCode ?? "N/A",
+                                   OrderDetails = (from od in o.OrderDetails
+                                                   join p in _context.Products on od.ProductID equals p.Id
+                                                   join c in _context.Categories on p.CategoryId equals c.Id
+                                                   join t in _context.Types on p.TypeId equals t.Id
+                                                   join s in _context.Suppliers on p.SupplierId equals s.Id
+                                                   select new
+                                                   {
+                                                       p.Name,
+                                                       p.Description,
+                                                       Category = c.Name,
+                                                       Type = t.Name,
+                                                       Supplier = s.Name,
+                                                       Img = p.ImageUrl
+                                                   }).ToList()
+                               }).FirstOrDefaultAsync();
+
+            if (order == null)
+            {
+                throw new KeyNotFoundException("Không tìm thấy đơn hàng.");
+            }
+
+            return new
+            {
+                OrderInfo = new
+                {
+                    order.Id,
+                    order.code_order,
+                    order.order_date,
+                    order.TotalPrice,
+                    order.Status_order,
+                    order.PaymentMethod,
+                    order.CustomerName,
+                    order.CustomerPhone,
+                    order.CustomerAddress
+                },
+                OrderDetails = order.OrderDetails
+            };
+        }
+
+
+
         //lấy sp theo id
         public async Task<OrderModel> GetOrderById(int Id)
         {
@@ -218,11 +297,21 @@ namespace INFRASTRUCTURE.Services.Order
                         .Where(detail => detail.code_order == code_order)
                         .ToListAsync();
         }
-        //lấy sp theo danh mục id
+        //lấy đơn hàng theo id người dùng
         public async Task<List<OrderModel>> GetOrdersByAccountID(int accountID)
         {
             return await _context.Orders
                                  .Where(p => p.accountID == accountID)
+                                 .Include(detail => detail.Address)
+                                 .ToListAsync();
+        }
+
+        //lấy đơn hàng chi tiết theo orderID
+        public async Task<List<OrderDetailModel>> GetOrderDetailsByOrderID(int Id)
+        {
+            return await _context.OrderDetails
+                                 .Where(p => p.orderID == Id)
+                                 .Include(detail => detail.Product) // Join để lấy thông tin sản phẩm
                                  .ToListAsync();
         }
         private string GenerateRandomCode(int length)
@@ -232,5 +321,48 @@ namespace INFRASTRUCTURE.Services.Order
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        public async Task<Result> UpdateOrderAddressAsync(int orderID, int accountID, int addressID)
+        {
+            try
+            {
+                // Kiểm tra xem đơn hàng có tồn tại không
+                var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderID && o.accountID == accountID);
+                if (order == null)
+                {
+                    return new Result { Success = false, Message = "Đơn hàng không tồn tại hoặc không thuộc người dùng." };
+                }
+
+                // Cập nhật địa chỉ cho đơn hàng
+                order.addressID = addressID;
+                await _context.SaveChangesAsync();
+
+                // Trả về kết quả thành công với dữ liệu đơn hàng đã cập nhật
+                return new Result
+                {
+                    Success = true,
+                    Message = "Cập nhật địa chỉ thành công.",
+                    Data = order // Trả về đơn hàng đã được cập nhật
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Result { Success = false, Message = "Lỗi hệ thống: " + ex.Message };
+            }
+        }
+
+        public async Task UpdateOrderStatusAsync(int orderID, int status_order)
+        {
+            // Kiểm tra xem đơn hàng có tồn tại không
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderID);
+            if (order == null)
+            {
+                throw new Exception("Đơn hàng không tồn tại");
+            }
+            // Cập nhật địa chỉ cho đơn hàng
+            order.Status_order = status_order;
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

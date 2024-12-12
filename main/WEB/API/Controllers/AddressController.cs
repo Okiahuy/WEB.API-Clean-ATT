@@ -35,6 +35,36 @@ namespace API.Controllers
             return Ok(new { message = "Lấy địa chỉ thành công", data = address });
         }
 
+        [HttpGet("getAddressbyID/{accountID}")]
+        public async Task<IActionResult> GetAddressByID(int accountID)
+        {
+            try
+            {
+                // Truyền trực tiếp object request vào service
+                var addr = await _addressService.GetAddressByAccountIDAsync(accountID);
+
+                if (addr == null || !addr.Any())
+                {
+                    return NotFound(new
+                    {
+                        success = true,
+                        message = "Không tìm thấy địa chỉ nào",
+                    });
+                }
+
+                return Ok(new
+                {
+                    success = true,
+                    message = "Tìm thấy địa chỉ =>",
+                    data = addr
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = $"Lỗi khi lấy địa chỉ: {ex.Message}", success = false });
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddAddress([FromBody] AddressModel address)
         {
@@ -56,11 +86,11 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAddress(int id, [FromBody] AddressModel address)
+        public async Task<IActionResult> UpdateAddress(int addressID, [FromBody] AddressModel address)
         {
             try
             {
-                var updatedAddress = await _addressService.UpdateAddressAsync(id, address);
+                var updatedAddress = await _addressService.UpdateAddressAsync(addressID, address);
                 return Ok(new { message = "Cập nhật địa chỉ thành công", data = updatedAddress });
             }
             catch (KeyNotFoundException)

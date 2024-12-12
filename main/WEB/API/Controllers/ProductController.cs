@@ -78,7 +78,6 @@ namespace API.Controllers
             {
                 return NotFound(new { message = "Không tìm thấy sản phẩm nào theo danh mục" });
             }
-            Log.Logger.Information("{@products}");
             return Ok(new { message = "Tìm thấy sản phẩm theo danh mục =>", data = products });
         }
 
@@ -98,7 +97,7 @@ namespace API.Controllers
                 return NotFound(new { message = "Không tìm thấy sản phẩm nào theo danh mục và khoảng giá" });
             }
 
-            Log.Logger.Information("Found {@productCount} products in category {@categoryId} with price range from {@minPrice} to {@maxPrice}.", products.Count(), categoryId, minPrice, maxPrice);
+            //Log.Logger.Information("Found {@productCount} products in category {@categoryId} with price range from {@minPrice} to {@maxPrice}.", products.Count(), categoryId, minPrice, maxPrice);
             return Ok(new { message = "Tìm thấy sản phẩm theo danh mục và khoảng giá =>", data = products });
         }
 
@@ -111,7 +110,7 @@ namespace API.Controllers
 			{
 				return NotFound(new { message = "Không tìm thấy sản phẩm nào theo danh mục" });
 			}
-			Log.Logger.Information("{@products}");
+			//Log.Logger.Information("{@products}");
 			return Ok(new { message = "Tìm thấy sản phẩm theo danh mục =>", data = products });
 		}
 
@@ -138,7 +137,7 @@ namespace API.Controllers
 			{
 				return NotFound(new { message = "Không tìm thấy sản phẩm nào theo type" });
 			}
-			Log.Logger.Information("{@products}");
+			//Log.Logger.Information("{@products}");
 			return Ok(new { message = "Tìm thấy sản phẩm theo type =>", data = products });
 		}
         [HttpGet("getImage/{productID}")]

@@ -30,6 +30,19 @@ namespace API.Controllers
 
             return Ok(new { message = "Lấy danh mục thành công", data = categories });
         }
+        [HttpGet]
+        [Authorize(Policy = "Admin")]
+        public async Task<IActionResult> GetCategoriesAdmin()
+        {
+            var categories = await _categoryService.GetAllCategories();
+
+            if (categories == null)  // Check the count of the list
+            {
+                return NotFound(new { message = "Không tìm thấy danh mục!" });
+            }
+
+            return Ok(new { message = "Lấy danh mục thành công", data = categories });
+        }
 
         // Thêm sản phẩm mới
         [HttpPost]

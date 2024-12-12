@@ -16,7 +16,7 @@ namespace INFRASTRUCTURE.Repository
             context.Database.Migrate();
             if (!context.Roles.Any() || !context.Accounts.Any() || !context.Categories.Any() ||
                 !context.Suppliers.Any() || !context.Types.Any() || !context.Products.Any() ||
-                !context.Newpapers.Any() || !context.Notis.Any())
+                !context.Newpapers.Any() || !context.Notis.Any() || !context.Addresss.Any() )
             {
                 context.Roles.AddRange(
                        new RoleModel { RoleName = "Quản Trị" },
@@ -33,6 +33,13 @@ namespace INFRASTRUCTURE.Repository
                     new AccountModel { FullName = "Trần Duy Đăng", UserName = "dangtran", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "tranduydang@gmail.com", Phone = "0337899128" },
                     new AccountModel { FullName = "Nguyễn Cẩm Châu", UserName = "camchau", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "camchau@gmail.com", Phone = "0337899129" },
                     new AccountModel { FullName = "Trần Công Dinh", UserName = "dinhtran", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "dinhtran@gmail.com", Phone = "0337899120" }
+                );
+                context.SaveChanges();
+                //bảng địa chỉ
+                context.Addresss.AddRange(
+                      new AddressModel { addressName = "A1000 Phạm Hữu Lầu, Phường 6", city = "Cao Lãnh", Create = DateTime.Now, zipCode ="123212", accountID=2},
+                      new AddressModel { addressName = "13300 Lý Thường Kiệt, Phường 2", city = "Hồ Chí Minh", Create= DateTime.Now, zipCode = "566546", accountID = 2 },
+                      new AddressModel { addressName = "160 Xã Mỹ Trà", city = "Cao Lãnh", Create = DateTime.Now, zipCode = "12345", accountID = 2 }
                 );
                 context.SaveChanges();
                 //bảng danh mục hoa

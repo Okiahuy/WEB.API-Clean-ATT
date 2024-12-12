@@ -38,6 +38,16 @@ namespace INFRASTRUCTURE.Services.Address
             throw new NotImplementedException();
         }
 
+        //Phương thức hiển thị giỏ hàng theo accountID
+        public async Task<List<AddressModel>> GetAddressByAccountIDAsync(int accountID)
+        {
+            var add = await _context.Addresss
+                .Where(c => c.accountID == accountID)
+                .ToListAsync();
+
+            return add;
+        }
+
         //hàm cập nhật
         public async Task<AddressModel> UpdateAddressAsync(int addressID, AddressModel address)
         {

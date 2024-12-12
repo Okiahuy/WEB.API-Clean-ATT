@@ -152,7 +152,7 @@ namespace API.Controllers
                 // Thêm mới người dùng
                 var acc = new AccountModel
                 {
-                    FullName = fullname,
+                    FullName = name,
                     UserName = name,
                     Email = email,
                     roleID = 2,

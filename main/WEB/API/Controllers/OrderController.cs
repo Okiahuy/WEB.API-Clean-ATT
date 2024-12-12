@@ -17,6 +17,8 @@ using System.Text.Json;
 using MailKit.Search;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using INFRASTRUCTURE.Services.Order;
+using Microsoft.Identity.Client;
 
 namespace API.Controllers
 {
@@ -65,7 +67,7 @@ namespace API.Controllers
             try
             {
                 var orders = await _orderService.GetAllOrders();
-                Log.Logger.Information("{@orders}");
+                //Log.Logger.Information("{@orders}");
                 return Ok(new { message = "Lấy đơn hàng thành công", data = orders });
             }
             catch (UnauthorizedAccessException)
@@ -79,6 +81,32 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new { message = "Có lỗi xảy ra khi lấy đơn hàng.", error = ex.Message });
+            }
+        }
+
+        //lấy tất cả đơn hàng để thực hiện in
+        [HttpGet("getOrderDetailPrint/{orderID}")]
+        [Authorize(Policy = "Admin")]
+        public async Task<IActionResult> GetOrderDetails(int orderID)
+        {
+            try
+            {
+                var orderDetails = await _orderService.GetOrderDetailsByOrderIDPrintInvoice(orderID);
+
+                return Ok(new
+                {
+                    success = true,
+                    message = "Lấy thông tin đơn hàng thành công",
+                    data = orderDetails
+                });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { success = false, message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { success = false, message = $"Lỗi khi lấy thông tin: {ex.Message}" });
             }
         }
 
@@ -174,6 +202,7 @@ namespace API.Controllers
                         paymentID = orderMomo.PaymentID,
                         totalPrice = orderMomo.TotalPrice,
                         email = orderMomo.email,
+                        addressID = orderMomo.addressID,
                         orderItemRequests = orderMomoDetail.Select(detail => new OrderItemRequest
                         {
                             productID = Convert.ToInt32(detail.ProductID), // ID sản phẩm
@@ -261,7 +290,7 @@ namespace API.Controllers
             }
         }
         // Lấy đơn hàng nào theo người dùng
-        [HttpGet("GetOrdersByAccountID")]
+        [HttpGet("GetOrdersByAccountID/{accountID}")]
         public async Task<IActionResult> GetOrdersByAccountID(int accountID)
         {
             var order = await _orderService.GetOrdersByAccountID(accountID);
@@ -269,12 +298,64 @@ namespace API.Controllers
             {
                 return NotFound(new { message = "Không tìm thấy đơn hàng nào theo người dùng." });
             }
-
-            Log.Logger.Information("{@order}");
+            var result = order.Select(re => new
+            {
+                Id = re.Id,
+                code_order = re.TotalPrice,
+                order_date = re.order_date,
+                TotalPrice = re.TotalPrice,
+                Status_order = re.Status_order,
+                PaymentID = re.PaymentID,
+                addressID = re.addressID,
+                tong = "Địa chỉ "+re.Address.addressName+" Thành phố" + re.Address.city+" Mã bưu điện "+re.Address.zipCode
+            });
             return Ok(new
             {
                 message = "Tìm thấy đơn hàng nào theo người dùng.",
-                data = order,
+                data = result,
+                
+            });
+        }
+        // Lấy đơn hàng chi tiết nào theo orderID
+        [HttpGet("GetOrderDetailsByOrderID/{Id}")]
+        public async Task<IActionResult> GetOrderDetailsByOrderID(int Id)
+        {
+            var orderDetails = await _orderService.GetOrderDetailsByOrderID(Id);
+            if (orderDetails == null || !orderDetails.Any())
+            {
+                return NotFound(new { message = "Không tìm thấy đơn hàng chi tiết nào." });
+            }
+            var code = await _orderService.GetOrderById(Id);
+            if (code == null)
+            {
+                return NotFound(new { message = "Không tìm thấy đơn hàng" });
+            }
+            var order = await _orderService.GetOrdersByAccountID(code.accountID);
+            if (order == null)
+            {
+                return NotFound(new { message = "Không tìm thấy đơn hàng" });
+            }
+            var result = orderDetails.Select(detail => new
+            {
+                detail.orderdetailID, // ID của dòng chi tiết
+                ProductName = detail.Product.Name, // Tên sản phẩm
+                productID = detail.ProductID,
+                Quantity = detail.Quantity, // Số lượng
+                Price = detail.Price, // Giá từng sản phẩm
+                TotalPrice = detail.Quantity * detail.Price, // Tổng tiền cho sản phẩm này
+                Status_order = detail.Status_order,
+                OrderID = detail.orderID,
+                code = code.code_order,
+                date = code.order_date,
+                stt = code.Status_order,
+                ttprice = code.TotalPrice,
+               
+            });
+
+            return Ok(new
+            {
+                message = "Tìm thấy đơn hàng chi tiết",
+                data = result
             });
         }
         //gửi mail
@@ -293,5 +374,58 @@ namespace API.Controllers
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        //api/orders/{orderID}/update-address
+        [HttpPut("{orderID}/update-address")]
+        public async Task<IActionResult> UpdateAddress(int orderID, [FromBody] UpdateAddressRequest request)
+        {
+            if (request == null || request.addressID <= 0 || request.accountID <= 0)
+            {
+                return BadRequest(new { message = "Dữ liệu không hợp lệ." });
+            }
+
+            var result = await _orderService.UpdateOrderAddressAsync(orderID, request.accountID, request.addressID);
+
+            if (!result.Success)
+            {
+                return BadRequest(new { message = result.Message });
+            }
+
+            return Ok(new
+            {
+                message = result.Message,
+                data = result.Data
+            });
+        }
+
+        [HttpPut("{orderID}/status")]
+        public async Task<IActionResult> UpdateOrderStatus(int orderID, [FromBody] UpdateOrderStatusRequest request)
+        {
+            if (request == null || request.Status_order == 0)
+            {
+                return BadRequest("Dữ liệu yêu cầu không hợp lệ.");
+            }
+            try
+            {
+                // Kiểm tra và cập nhật trạng thái đơn hàng
+                await _orderService.UpdateOrderStatusAsync(orderID, request.Status_order);
+                var order = await _orderService.GetOrderById(orderID);
+                if (order == null)
+                {
+                    return NotFound(new { message = "Không tìm thấy đơn hàng nào!", success = false });
+                }
+                return Ok(new
+                {
+                    message = "Trạng thái đơn hàng đã được cập nhật thành công.",
+                    data = order,
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Đã xảy ra lỗi: {ex.Message}");
+            }
+        }
+
+
     }
 }

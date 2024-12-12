@@ -14,6 +14,7 @@ namespace APPLICATIONCORE.Models.ViewModel
         public int paymentID { get; set; }
         public decimal totalPrice { get; set; }
         public string email { get; set; } // Email của người dùng
+        public int addressID { get; set; }
 
         public List<OrderItemRequest> orderItemRequests { get; set; }
 

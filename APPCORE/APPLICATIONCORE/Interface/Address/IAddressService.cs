@@ -11,6 +11,7 @@ namespace APPLICATIONCORE.Interface.Address
     {
         Task<IEnumerable<AddressModel>> GetAllAddresses();
         Task<AddressModel> GetAddressById(int addressID);
+        Task<List<AddressModel>> GetAddressByAccountIDAsync(int accountID);
         Task AddAddress(AddressModel address);
         Task<AddressModel> UpdateAddressAsync(int addressID, AddressModel address);
         Task DeleteAddress(int addressID);

@@ -24,5 +24,8 @@ namespace APPLICATIONCORE.Models
         public int Status_order { get; set; }// 0 mới , 1 đang xử lý, 2 đang giao, 3 đã nhận 
 
         public int PaymentID { get; set; }//1 thanh toán khi nhận hàng, 2 thanh toán vnpay, 3 thanh toán momo
+
+        public int addressID { get; set; }
+        public AddressModel? Address { get; set; }
     }
 }

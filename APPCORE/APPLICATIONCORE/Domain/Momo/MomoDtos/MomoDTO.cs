@@ -30,5 +30,6 @@ namespace APPLICATIONCORE.Domain.Momo.MomoDtos
         public string? PaymentName { get; set; }
 
         public string? email { get; set; }
+        public int addressID { get; set; }
     }
 }
