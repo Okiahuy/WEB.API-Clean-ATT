@@ -47,7 +47,6 @@ namespace APPLICATIONCORE.Models
         public string? ImageUrl { get; set; }
 
         [NotMapped] // Để không lưu trường này vào cơ sở dữ liệu
-        [Required(ErrorMessage = "Ảnh về hoa là bắt buộc")]
         [FileExtension] //  kiểm tra loại file
         public IFormFile? ImageUpload { get; set; }
 

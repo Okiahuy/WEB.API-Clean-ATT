@@ -91,7 +91,13 @@ namespace INFRASTRUCTURE.Repository
                     },
                     new Notification
                     {
-                        description = "Hệ thống sẽ bảo trì vào lúc 22:00 tối nay, mong quý khách thông cảm.",
+                        description = "Chào mừng bạn đến với website SHOP HOA - DTHU của chúng tôi!",
+                        Create = DateTime.Now.AddDays(-1),
+                        accountID = null // Thông báo chung không dành riêng cho tài khoản nào
+                    },
+                    new Notification
+                    {
+                        description = "Hệ thống sẽ bảo trì vào lúc 22:00 hằng ngày, mong quý khách thông cảm.",
                         Create = DateTime.Now.AddDays(-1),
                         accountID = null // Thông báo chung không dành riêng cho tài khoản nào
                     },

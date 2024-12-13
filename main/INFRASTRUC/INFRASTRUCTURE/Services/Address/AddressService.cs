@@ -48,6 +48,14 @@ namespace INFRASTRUCTURE.Services.Address
             return add;
         }
 
+        public async Task<IEnumerable<OrderModel>> FindAddressById(int id)
+        {
+            // Direct equality comparison for accurate results
+            return await _context.Orders
+                .Where(p => p.addressID == id)
+                .ToListAsync();
+        }
+
         //hàm cập nhật
         public async Task<AddressModel> UpdateAddressAsync(int addressID, AddressModel address)
         {
@@ -58,7 +66,6 @@ namespace INFRASTRUCTURE.Services.Address
             }
             // Cập nhật các thuộc tính khác
             existingAddress.addressName = address.addressName;
-            existingAddress.accountID = address.accountID;
             //existingAddress.Create = DateTime.Now;
             existingAddress.city = address.city;
             existingAddress.zipCode = address.zipCode;

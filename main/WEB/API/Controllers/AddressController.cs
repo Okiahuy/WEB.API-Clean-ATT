@@ -65,7 +65,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<IActionResult> AddAddress([FromBody] AddressModel address)
         {
            
@@ -85,7 +85,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Update/{addressID}")]
         public async Task<IActionResult> UpdateAddress(int addressID, [FromBody] AddressModel address)
         {
             try
@@ -104,6 +104,12 @@ namespace API.Controllers
         {
             try
             {
+                var hasOrder = await _addressService.FindAddressById(id);
+                if (hasOrder.Any())
+                {
+                    return BadRequest(new { message = "Không thể xóa địa chỉ vì đã có đơn hàng sử dụng địa chỉ này." });
+                }
+
                 await _addressService.DeleteAddress(id);
                 return Ok(new { message = "Xóa địa chỉ thành công" });
             }

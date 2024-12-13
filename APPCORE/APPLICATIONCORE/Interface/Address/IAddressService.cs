@@ -18,5 +18,7 @@ namespace APPLICATIONCORE.Interface.Address
         Task<IEnumerable<AddressModel>> SearchAddresses(string addressName);
 
         Task<IEnumerable<AddressModel>> FindById(int addressID);
+
+        Task<IEnumerable<OrderModel>> FindAddressById(int id);
     }
 }

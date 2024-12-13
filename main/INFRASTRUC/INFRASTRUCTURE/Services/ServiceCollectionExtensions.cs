@@ -33,6 +33,8 @@ using APPLICATIONCORE.Interface.Cart;
 using INFRASTRUCTURE.Services.Cart;
 using APPLICATIONCORE.Interface.Order;
 using INFRASTRUCTURE.Services.Order;
+using APPLICATIONCORE.Interface.Account;
+using INFRASTRUCTURE.Services.Account;
 
 
 namespace INFRASTRUCTURE.Services
@@ -51,7 +53,7 @@ namespace INFRASTRUCTURE.Services
             services.AddScoped<IFavoriteService, FavoriteService>();
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IOrderService, OrderService>();
-
+            services.AddScoped<IAccountService, AccountService>();
 
             services.AddScoped<IEmailService>(provider =>
             {

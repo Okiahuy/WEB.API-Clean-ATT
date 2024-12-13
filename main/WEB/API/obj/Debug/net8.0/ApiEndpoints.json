@@ -1,8 +1,24 @@
 [
   {
-    "ContainingType": "API.Controllers.AddressController",
-    "Method": "GetAllAddresses",
-    "RelativePath": "api/Address",
+    "ContainingType": "API.Controllers.AccountController",
+    "Method": "GetAccountByID",
+    "RelativePath": "api/Account/getAccountbyID/{accountID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AccountController",
+    "Method": "GetNewpaperAsync",
+    "RelativePath": "api/Account/GetAllNewpaper",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -10,19 +26,55 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "API.Controllers.AddressController",
-    "Method": "AddAddress",
-    "RelativePath": "api/Address",
+    "ContainingType": "API.Controllers.AccountController",
+    "Method": "GetAllNoti",
+    "RelativePath": "api/Account/GetAllNoti",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AccountController",
+    "Method": "GetNotiByaccountID",
+    "RelativePath": "api/Account/GetNotiByaccountID/{accountID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AccountController",
+    "Method": "RegisterAccount",
+    "RelativePath": "api/Account/Register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "address",
-        "Type": "APPLICATIONCORE.Models.AddressModel",
+        "Name": "account",
+        "Type": "APPLICATIONCORE.Models.AccountModel",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AddressController",
+    "Method": "GetAllAddresses",
+    "RelativePath": "api/Address",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -43,32 +95,6 @@
   },
   {
     "ContainingType": "API.Controllers.AddressController",
-    "Method": "UpdateAddress",
-    "RelativePath": "api/Address/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "addressID",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "address",
-        "Type": "APPLICATIONCORE.Models.AddressModel",
-        "IsRequired": true
-      },
-      {
-        "Name": "id",
-        "Type": "",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "API.Controllers.AddressController",
     "Method": "DeleteAddress",
     "RelativePath": "api/Address/{id}",
     "HttpMethod": "DELETE",
@@ -78,6 +104,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AddressController",
+    "Method": "AddAddress",
+    "RelativePath": "api/Address/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "address",
+        "Type": "APPLICATIONCORE.Models.AddressModel",
         "IsRequired": true
       }
     ],
@@ -111,6 +153,27 @@
         "Name": "address",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AddressController",
+    "Method": "UpdateAddress",
+    "RelativePath": "api/Address/Update/{addressID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addressID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "address",
+        "Type": "APPLICATIONCORE.Models.AddressModel",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
