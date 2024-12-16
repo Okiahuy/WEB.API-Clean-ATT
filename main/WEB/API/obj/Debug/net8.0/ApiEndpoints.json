@@ -179,6 +179,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "API.Controllers.AdminController",
+    "Method": "GetStatistics",
+    "RelativePath": "api/Admin/statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "API.Controllers.ApiStatsController",
     "Method": "GetApiStats",
     "RelativePath": "api/ApiStats/{apiName}",

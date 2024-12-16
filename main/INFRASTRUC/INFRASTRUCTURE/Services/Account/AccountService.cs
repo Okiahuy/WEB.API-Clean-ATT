@@ -22,7 +22,10 @@ namespace INFRASTRUCTURE.Services.Account
         {
             _context = context;
         }
-
+        public async Task<int> GetTotalUsersAsync()
+        {
+            return await _context.Accounts.CountAsync();
+        }
         public async Task Register(AccountModel account)
         {
             var exsitingUsername = _context.Accounts.FirstOrDefault(x => x.UserName == account.UserName);
@@ -73,7 +76,7 @@ namespace INFRASTRUCTURE.Services.Account
             return acc;
         }
 
-        //Phương thức hiển thị tất cả tin nhắn
+        //Phương thức hiển thị tất cả tin tức
         public async Task<List<NewpaperModel>> GetNewpaperAsync()
         {
             var Newpapers = await _context.Newpapers

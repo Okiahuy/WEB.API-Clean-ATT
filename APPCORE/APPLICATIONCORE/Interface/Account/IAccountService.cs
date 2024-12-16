@@ -15,5 +15,7 @@ namespace APPLICATIONCORE.Interface.Account
         Task<List<NewpaperModel>> GetNewpaperAsync();
 
         Task Register(AccountModel account);
+
+        Task<int> GetTotalUsersAsync();
     }
 }

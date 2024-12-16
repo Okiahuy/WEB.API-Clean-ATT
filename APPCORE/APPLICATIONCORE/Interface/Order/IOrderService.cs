@@ -22,5 +22,7 @@ namespace APPLICATIONCORE.Interface.Order
         Task<Result> UpdateOrderAddressAsync(int orderID, int accountID, int addressID);
         Task UpdateOrderStatusAsync(int orderID, int status_order);
         Task<object> GetOrderDetailsByOrderIDPrintInvoice(int orderID);
+
+        Task<long> GetTotalPrice();
     }
 }

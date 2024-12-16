@@ -26,5 +26,9 @@ namespace APPLICATIONCORE.Interface.Product
         Task<List<ProductModel>> GetProductsByCategoryAndPriceRange(int categoryId, decimal minPrice, decimal maxPrice, string sortBy);
 
         Task<IEnumerable<ProductModel>> GetProductsByCategoryAndPriceRange(int categoryId, decimal minPrice, decimal maxPrice);
+
+        Task<long> GetTotalLikesAsync();
+        Task<int> GetTotalProductsAsync();
+
     }
 }

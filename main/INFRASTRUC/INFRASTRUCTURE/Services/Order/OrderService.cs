@@ -26,6 +26,14 @@ namespace INFRASTRUCTURE.Services.Order
             _context = context;
             _emailService = emailService;
         }
+
+        public async Task<long> GetTotalPrice()
+        {
+            return await _context.Orders
+                .Where(p => p.Status_order == 4)
+                .SumAsync(p => Convert.ToInt64(p.TotalPrice));
+        }
+
         //tạo đơn hàng 
         public async Task<string> CreateOrderAsync(OrderViewModel orderRequest)
         {

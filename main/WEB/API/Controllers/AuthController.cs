@@ -13,6 +13,8 @@ using APPLICATIONCORE.Models;
 using APPLICATIONCORE.History;
 using Microsoft.EntityFrameworkCore;
 using INFRASTRUCTURE.Repository;
+using Microsoft.Identity.Client;
+using APPLICATIONCORE.Interface.Cart;
 
 
 namespace API.Controllers
@@ -21,21 +23,24 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
+        private readonly ICartService _cartService;
+
         private readonly IConfiguration _configuration;
 
         private readonly IAuthService _authService;
 
         private readonly MyDbContext _context;
 
-        public AuthController(IConfiguration configuration, IAuthService authService, MyDbContext context)
+        public AuthController(IConfiguration configuration, IAuthService authService, MyDbContext context, ICartService cartService)
         {
             _configuration = configuration;
             _authService = authService;
             _context = context;
+            _cartService = cartService;
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginViewModel model)
+        public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
             // Sử dụng service để xác thực người dùng
             var account = _authService.Authenticate(model.Username, model.Password);
@@ -46,19 +51,28 @@ namespace API.Controllers
                 return Unauthorized("Tên đăng nhập hoặc mật khẩu không đúng.");
             }
 
+            // Chờ kết quả từ _cartService
+            var cart = await _cartService.GetCartByAccountIDAsync(account.accountID);
+
+            // Tính tổng số lượng sản phẩm trong giỏ hàng
+            var totalItems = cart.Count;
+
             // Tạo token JWT
             var token = GenerateJwtToken(model.Username, Convert.ToInt32(account.roleID));
-			// Trả về thông tin người dùng cùng với token
-			Log.Logger.Information("{@account}");
-			return Ok(new
+
+            // Trả về thông tin người dùng cùng với token và tổng số lượng sản phẩm trong giỏ hàng
+            Log.Logger.Information("{@account}");
+            return Ok(new
             {
                 FullName = account.FullName,
                 roleID = account.roleID,
                 Email = account.Email,
                 Token = token,
-                accountID = account.accountID
+                accountID = account.accountID,
+                totalItems = totalItems
             });
         }
+
 
         private string GenerateJwtToken(string username, int roleID)
         {

@@ -23,6 +23,18 @@ namespace INFRASTRUCTURE.Services.Product
             _context = context;
             _httpContextAccessor = httpContextAccessor;
         }
+
+        public async Task<long> GetTotalLikesAsync()
+        {
+            return await _context.Products.SumAsync(p => p.likecount ?? 0);
+        }
+
+
+        public async Task<int> GetTotalProductsAsync()
+        {
+            return await _context.Products.CountAsync();
+        }
+
         //lấy tất cả sp
         public async Task<IEnumerable<ProductModel>> GetAllProducts()
         {

@@ -18,5 +18,7 @@ namespace APPLICATIONCORE.Interface.Supplier
         Task<IEnumerable<SupplierModel>> FindById(int id);
 
         Task<IEnumerable<ProductModel>> FindProductById(int id);
+
+       
     }
 }
