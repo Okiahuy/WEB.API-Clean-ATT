@@ -46,6 +46,8 @@ namespace INFRASTRUCTURE.Services.Product
             return await _context.Products.FindAsync(id);
         }
 
+
+
         //lấy sp theo giá
         public async Task<IEnumerable<ProductModel>> GetProductsByPriceRange(decimal minPrice, decimal maxPrice)
         {
@@ -252,9 +254,13 @@ namespace INFRASTRUCTURE.Services.Product
         public async Task<IEnumerable<ProductModel>> FindById(int id)
         {
             return await _context.Products
+                .Include(p => p.Category)    // Load thông tin của Category
+                .Include(p => p.supplier)    // Load thông tin của Supplier
+                .Include(p => p.type)        // Load thông tin của Type
                 .Where(p => p.Id.ToString().Contains(id.ToString()))
                 .ToListAsync();
         }
+
 
     }
 
