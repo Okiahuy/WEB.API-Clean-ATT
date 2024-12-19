@@ -73,7 +73,12 @@ namespace API.Controllers
                 // cpu trung bình
                 var cpu = await _context.ApiUsageLogs.AverageAsync(p => p.CpuUsage);
                 //thười gian request trung bình
-                var requestTime = await _context.ApiUsageLogs.AverageAsync(log => log.RequestTime.TotalMilliseconds);
+                var requestTime = await _context.ApiUsageLogs
+                    .Select(log => log.RequestTime.TotalMilliseconds) // Lấy giá trị cần thiết
+                    .ToListAsync(); // Chuyển dữ liệu sang client-side
+
+                var averageRequestTime = requestTime.Average(); // Tính trung bình trên client-side
+
                 // Trả về kết quả
                 return Ok(new
                 {

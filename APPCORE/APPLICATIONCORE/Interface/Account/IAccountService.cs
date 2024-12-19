@@ -19,5 +19,9 @@ namespace APPLICATIONCORE.Interface.Account
         Task<int> GetTotalUsersAsync();
 
         Task<List<AccountModel>> GetAccountByRoleIDAsync();
+        Task<AccountModel> UpdateaccountAsync(int accountID, AccountModel account);
+
+        Task AddAnswerAsync(int accountID, int productID, string descriptionAnswer, string fullnameAnswer, string emailAnswer);
+        Task<IEnumerable<AnswerModel>> GetAnswersByProductIdAsync(int productId);
     }
 }

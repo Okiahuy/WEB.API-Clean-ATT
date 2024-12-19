@@ -149,15 +149,16 @@ namespace API.Controllers
                 // Kiểm tra xem người dùng đã tồn tại
                 var existingUser = _context.Accounts.FirstOrDefault(a => a.Email == email);
 
-                // Chờ kết quả từ _cartService
-                var cart = await _cartService.GetCartByAccountIDAsync(existingUser.accountID);
-
-                // Tính tổng số lượng sản phẩm trong giỏ hàng
-                var totalItems = cart.Count;
-
                 if (existingUser != null)
                 {
                     var token = GenerateJwtToken(existingUser.UserName, 2);
+
+                    // Chờ kết quả từ _cartService
+                    var cart = await _cartService.GetCartByAccountIDAsync(existingUser.accountID);
+
+                    // Tính tổng số lượng sản phẩm trong giỏ hàng
+                    var totalItems = cart?.Count ?? 0;
+
                     return Ok(new
                     {
                         accountID = existingUser.accountID,
@@ -166,40 +167,48 @@ namespace API.Controllers
                         existingUser.Email,
                         roleID = 2,
                         Token = token,
-                        
+                        totalItems = totalItems
+                    });
+                }
+                else
+                {
+                    // Thêm mới người dùng
+                    var acc = new AccountModel
+                    {
+                        FullName = name,
+                        UserName = name,
+                        Email = email,
+                        roleID = 2,
+                        Password = "IsGoogle",
+                        Password2 = "IsGoogle",
+                        Phone = "New Phone",
+                        isActive = 1,
+                        level_cus = 0,
+                        ImageUrl = "New Avatar",
+                    };
+
+                    _context.Accounts.Add(acc);
+                    await _context.SaveChangesAsync();
+
+                    var newToken = GenerateJwtToken(name, 2);
+                    // Chờ kết quả từ _cartService
+                    var cart = await _cartService.GetCartByAccountIDAsync(acc.accountID);
+                    // Tính tổng số lượng sản phẩm trong giỏ hàng
+                    var totalItems = cart?.Count ?? 0;
+
+                    return Ok(new
+                    {
+                        accountID = acc.accountID,
+                        FullName = name,
+                        roleID = 2,
+                        Email = email,
+                        Token = newToken,
                         totalItems = totalItems
                     });
                 }
 
-                // Thêm mới người dùng
-                var acc = new AccountModel
-                {
-                    FullName = name,
-                    UserName = name,
-                    Email = email,
-                    roleID = 2,
-                    Password = "IsGoogle",
-                    Password2 = "IsGoogle",
-                    Phone = "New Phone",
-                    isActive = 1,
-                    level_cus = 0,
-                    ImageUrl = "New Avatar",
-                };
 
-                _context.Accounts.Add(acc);
-                await _context.SaveChangesAsync();
-
-                var newToken = GenerateJwtToken(name, 2);
-
-                return Ok(new
-                {
-                    accountID = acc.accountID,
-                    FullName = name,
-                    roleID = 2,
-                    Email = email,
-                    token = newToken,
-                    totalItems = totalItems
-                });
+               
             }
             catch (Exception ex)
             {

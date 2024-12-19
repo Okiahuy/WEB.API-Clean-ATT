@@ -16,6 +16,7 @@ namespace APPLICATIONCORE.Models
 
         [Required(ErrorMessage = "Nhập bình luận của bạn, bình luận không được để trống!")]
         public string? DescriptionAnswer { get; set; }
+
         [Required(ErrorMessage = "Họ & Tên không được để trống!")]
         public string? fullnameAnswer { get; set; }
 

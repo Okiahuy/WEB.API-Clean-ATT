@@ -1,6 +1,7 @@
 ﻿using APPLICATIONCORE.Interface.Account;
 using APPLICATIONCORE.Interface.Cart;
 using APPLICATIONCORE.Models;
+using APPLICATIONCORE.Models.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,44 @@ namespace API.Controllers
         {
             _accountService = accountService;
         }
+
+        [HttpPost("add-answer")]
+        public async Task<IActionResult> AddAnswer([FromBody] AddAnswerRquest model)
+        {
+            try
+            {
+                await _accountService.AddAnswerAsync(model.accountID, model.productID, model.DescriptionAnswer, model.fullnameAnswer, model.emailAnswer);
+                return Ok(new { message = "Bình luận đã được thêm thành công.", data = model });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Đã xảy ra lỗi không mong muốn." });
+            }
+        }
+        [HttpGet("answers/{productId}")]
+        public async Task<IActionResult> GetAnswersByProductId(int productId)
+        {
+            try
+            {
+                var answers = await _accountService.GetAnswersByProductIdAsync(productId);
+
+                if (answers == null || !answers.Any())
+                {
+                    return NotFound(new { message = "Không có câu hỏi nào cho sản phẩm này." });
+                }
+
+                return Ok(new { message = "Lấy câu hỏi thành công.", data = answers });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = "Đã xảy ra lỗi không mong muốn." });
+            }
+        }
+
 
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAccount([FromBody] AccountModel account)

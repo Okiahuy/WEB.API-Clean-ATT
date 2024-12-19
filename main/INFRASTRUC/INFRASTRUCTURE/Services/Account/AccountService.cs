@@ -58,6 +58,100 @@ namespace INFRASTRUCTURE.Services.Account
             _context.Accounts.Add(acc);
             await _context.SaveChangesAsync();
         }
+        private void DeleteOldFile(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+        }
+        //hiển thị câu hỏi theo productID
+        public async Task<IEnumerable<AnswerModel>> GetAnswersByProductIdAsync(int productId)
+        {
+            return await _context.Answers
+                .Where(answer => answer.productID == productId)
+                .Include(answer => answer.Account) // Nếu cần thêm thông tin tài khoản
+                .ToListAsync();
+        }
+
+        public async Task AddAnswerAsync(int accountID, int productID, string descriptionAnswer, string fullnameAnswer, string emailAnswer)
+        {
+            // Kiểm tra dữ liệu đầu vào
+            if (string.IsNullOrWhiteSpace(descriptionAnswer))
+            {
+                throw new ArgumentException("Bình luận không được để trống.", nameof(descriptionAnswer));
+            }
+
+            if (string.IsNullOrWhiteSpace(fullnameAnswer))
+            {
+                throw new ArgumentException("Họ & Tên không được để trống.", nameof(fullnameAnswer));
+            }
+
+            if (string.IsNullOrWhiteSpace(emailAnswer))
+            {
+                throw new ArgumentException("Email không được để trống.", nameof(emailAnswer));
+            }
+
+            // Tạo mới đối tượng AnswerModel
+            var answer = new AnswerModel
+            {
+                accountID = accountID,
+                productID = productID,
+                DescriptionAnswer = descriptionAnswer,
+                fullnameAnswer = fullnameAnswer,
+                emailAnswer = emailAnswer,
+                Date = DateTime.Now
+            };
+
+            // Thêm đối tượng vào cơ sở dữ liệu
+            await _context.Answers.AddAsync(answer);
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            await _context.SaveChangesAsync();
+        }
+
+        //hàm cập nhật thông tin người dùng
+        public async Task<AccountModel> UpdateaccountAsync(int accountID, AccountModel account)
+        {
+            // Tìm người dùng theo ID
+            var existingaccount = await _context.Accounts.FindAsync(accountID);
+            if (existingaccount == null)
+            {
+                throw new KeyNotFoundException("Không tìm thấy người dùng để sửa!");
+            }
+            // Lấy đường dẫn của ảnh cũ
+            var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", Path.GetFileName(existingaccount.ImageUrl));
+            var hashedPassword = PasswordHelper.HashPassword(account.Password);
+            // Xóa ảnh cũ (nếu có)
+            DeleteOldFile(oldImagePath);
+            // Kiểm tra nếu có ảnh mới được tải lên
+            if (account.ImageUpload != null)
+            {
+                // Tạo tên file với timestamp để tránh trùng lặp
+                var timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var fileName = $"{Path.GetFileNameWithoutExtension(account.ImageUpload.FileName)}_{timeStamp}{Path.GetExtension(account.ImageUpload.FileName)}";
+                var imagePath = Path.Combine("uploads", fileName);
+
+                // Lưu file ảnh mới
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await account.ImageUpload.CopyToAsync(stream);
+                }
+                // Cập nhật đường dẫn ảnh mới vào người dùng
+                existingaccount.ImageUrl = $"/uploads/{fileName}";
+            }
+            // Cập nhật các thuộc tính khác
+            existingaccount.FullName = account.FullName;
+            existingaccount.Phone = account.Phone;
+            existingaccount.Password = hashedPassword;
+            existingaccount.Password2 = hashedPassword;
+        
+            // Lưu thay đổi vào cơ sở dữ liệu
+            await _context.SaveChangesAsync();
+
+            return existingaccount;
+        }
 
         //Phương thức hiển thị tài khoản người dùng
         public async Task<List<AccountModel>> GetAccountByRoleIDAsync()

@@ -29,7 +29,6 @@ namespace INFRASTRUCTURE.Services.Product
             return await _context.Products.SumAsync(p => p.likecount ?? 0);
         }
 
-
         public async Task<int> GetTotalProductsAsync()
         {
             return await _context.Products.CountAsync();
@@ -45,8 +44,6 @@ namespace INFRASTRUCTURE.Services.Product
         {
             return await _context.Products.FindAsync(id);
         }
-
-
 
         //lấy sp theo giá
         public async Task<IEnumerable<ProductModel>> GetProductsByPriceRange(decimal minPrice, decimal maxPrice)

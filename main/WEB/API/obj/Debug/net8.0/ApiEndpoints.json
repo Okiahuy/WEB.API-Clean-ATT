@@ -1,6 +1,38 @@
 [
   {
     "ContainingType": "API.Controllers.AccountController",
+    "Method": "AddAnswer",
+    "RelativePath": "api/Account/add-answer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "APPLICATIONCORE.Models.ViewModel.AddAnswerRquest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AccountController",
+    "Method": "GetAnswersByProductId",
+    "RelativePath": "api/Account/answers/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AccountController",
     "Method": "GetAccountByID",
     "RelativePath": "api/Account/getAccountbyID/{accountID}",
     "HttpMethod": "GET",

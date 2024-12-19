@@ -96,29 +96,29 @@ builder.Services.AddCors(options =>
 builder.Services.AddHttpClient<ApiHealthCheck>();
 builder.Services.AddHealthChecks()
 .AddCheck("SQL Database", new SqlConnectionHealthCheck(
-		builder.Configuration.GetConnectionString("MyDB")
-		?? throw new InvalidOperationException("Connection string 'MyDB' is not configured.")
-	))
+        builder.Configuration.GetConnectionString("MyDB")
+        ?? throw new InvalidOperationException("Connection string 'MyDB' is not configured.")
+    ))
 .AddCheck<ApiHealthCheck>(nameof(ApiHealthCheck))
 .AddDbContextCheck<MyDbContext>()
 .AddCheck<SystemHealthCheck>("CPU Use");
 
 builder.Host.UseSerilog((context, config) =>
 {
-	config.MinimumLevel.Information()
-	.MinimumLevel.Override("Microsoft.AspNetCore", Serilog.Events.LogEventLevel.Warning)
-	.MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
-	.WriteTo.Console()
-	.WriteTo.Debug()
-	.WriteTo.File("Logs\\log-.txt",
-	rollingInterval: RollingInterval.Day,
-	rollOnFileSizeLimit: true,
-	buffered: false,
-	restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
-	.WriteTo.MSSqlServer(
-	connectionString: builder.Configuration.GetConnectionString("MyDB"),
-	sinkOptions: new MSSqlServerSinkOptions { TableName = "Logs", AutoCreateSqlTable = true },
-	restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning);
+    config.MinimumLevel.Information()
+    .MinimumLevel.Override("Microsoft.AspNetCore", Serilog.Events.LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
+    .WriteTo.Console()
+    .WriteTo.Debug()
+    .WriteTo.File("Logs\\log-.txt",
+    rollingInterval: RollingInterval.Day,
+    rollOnFileSizeLimit: true,
+    buffered: false,
+    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
+    .WriteTo.MSSqlServer(
+    connectionString: builder.Configuration.GetConnectionString("MyDB"),
+    sinkOptions: new MSSqlServerSinkOptions { TableName = "Logs", AutoCreateSqlTable = true },
+    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning);
 });
 builder.Host.UseSerilog((context, config) => config.ReadFrom.Configuration(context.Configuration));
 
@@ -131,30 +131,30 @@ builder.Services.AddDistributedMemoryCache();
 
 
 var app = builder.Build();  // Sau khi dã thêm xong các dich vu, gui Build()
-app.MapHealthChecks("/health", new HealthCheckOptions   
+app.MapHealthChecks("/health", new HealthCheckOptions
 {
-	ResponseWriter = async (context, report) =>
-	{
-		context.Response.ContentType = "application/json";
-		var result = JsonSerializer.Serialize(new
-		{
-			status = report.Status.ToString(),
-			checks = report.Entries.Select(entry => new
-			{
-				name = entry.Key,
-				status = entry.Value.Status.ToString(),
+    ResponseWriter = async (context, report) =>
+    {
+        context.Response.ContentType = "application/json";
+        var result = JsonSerializer.Serialize(new
+        {
+            status = report.Status.ToString(),
+            checks = report.Entries.Select(entry => new
+            {
+                name = entry.Key,
+                status = entry.Value.Status.ToString(),
 
-				exception = entry.Value.Exception?.Message,
+                exception = entry.Value.Exception?.Message,
 
-				duration = entry.Value.Duration.ToString()
+                duration = entry.Value.Duration.ToString()
 
-			})
+            })
 
-		});
+        });
 
-		await context.Response.WriteAsync(result);
+        await context.Response.WriteAsync(result);
 
-	}
+    }
 
 });
 
@@ -195,6 +195,8 @@ app.UseAuthorization(); // Kích hoat Authorization Middleware
 
 app.MapControllers();
 
-
 app.Run();
+
+
+
 
