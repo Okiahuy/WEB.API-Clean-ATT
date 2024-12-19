@@ -28,6 +28,17 @@ namespace INFRASTRUCTURE.Services.Category
         }
         public async Task AddCategory(CategoryModel category)
         {
+            if (category.ImageUpload != null)
+            {
+                var timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var fileName = $"{Path.GetFileNameWithoutExtension(category.ImageUpload.FileName)}_{timeStamp}{Path.GetExtension(category.ImageUpload.FileName)}";
+                var imagePath = Path.Combine("uploads", fileName);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await category.ImageUpload.CopyToAsync(stream);
+                }
+                category.ImageUrl = $"/uploads/{fileName}"; // Gán đường dẫn vào ImageUrl
+            }
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
         }
@@ -36,7 +47,14 @@ namespace INFRASTRUCTURE.Services.Category
         {
             throw new NotImplementedException();
         }
+        private void DeleteOldFile(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
 
+        }
         //hàm cập nhật sản phẩm
         public async Task<CategoryModel> UpdateCategoryAsync(int id, CategoryModel category)
         {
@@ -45,6 +63,26 @@ namespace INFRASTRUCTURE.Services.Category
             if (existingcategory == null)
             {
                 throw new KeyNotFoundException("Không tìm thấy danh mục");
+            }
+            // Lấy đường dẫn của ảnh cũ
+            var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", Path.GetFileName(existingcategory.ImageUrl));
+            // Xóa ảnh cũ (nếu có)
+            DeleteOldFile(oldImagePath);
+            // Kiểm tra nếu có ảnh mới được tải lên
+            if (category.ImageUpload != null)
+            {
+                // Tạo tên file với timestamp để tránh trùng lặp
+                var timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var fileName = $"{Path.GetFileNameWithoutExtension(category.ImageUpload.FileName)}_{timeStamp}{Path.GetExtension(category.ImageUpload.FileName)}";
+                var imagePath = Path.Combine("uploads", fileName);
+
+                // Lưu file ảnh mới
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    await category.ImageUpload.CopyToAsync(stream);
+                }
+                // Cập nhật đường dẫn ảnh mới vào sản phẩm
+                existingcategory.ImageUrl = $"/uploads/{fileName}";
             }
             // Cập nhật các thuộc tính khác
             existingcategory.Name = category.Name;
@@ -61,7 +99,10 @@ namespace INFRASTRUCTURE.Services.Category
         {
             var category = await _context.Categories.FindAsync(id);
             if (category == null) throw new KeyNotFoundException("Không tìm thấy sản phẩm để xóa");
+            var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", Path.GetFileName(category.ImageUrl));
 
+            // Xóa ảnh cũ (nếu có)
+            DeleteOldFile(oldImagePath);
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
         }

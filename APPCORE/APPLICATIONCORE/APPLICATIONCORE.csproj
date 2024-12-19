@@ -8,9 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Interface\Customer\" />
-    <Folder Include="Interface\Admin\" />
     <Folder Include="Interface\Rating\" />
-    <Folder Include="Interface\OrderDetail\" />
     <Folder Include="Interface\Newpaper\" />
   </ItemGroup>
 

@@ -271,8 +271,8 @@ namespace INFRASTRUCTURE.Migrations
                     b.Property<int?>("RequestCount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("RequestTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("RequestTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");

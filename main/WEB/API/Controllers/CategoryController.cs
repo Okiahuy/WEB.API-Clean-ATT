@@ -47,13 +47,13 @@ namespace API.Controllers
         // Thêm sản phẩm mới
         [HttpPost]
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> AddCategory([FromBody] CategoryModel product)
+        public async Task<IActionResult> AddCategory([FromForm] CategoryModel category)
         {
             try
             {
                 // Code thêm sản phẩm ở đây
-                await _categoryService.AddCategory(product);
-                return Ok(new { message = "Thêm danh mục thành công", data = product });
+                await _categoryService.AddCategory(category);
+                return Ok(new { message = "Thêm danh mục thành công", data = category });
             }
             catch (DbUpdateException dbEx)
             {
@@ -68,7 +68,7 @@ namespace API.Controllers
         // Sửa sản phẩm
         [HttpPut("{id}")]
         [Authorize(Policy = "Admin")]
-        public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryModel category)
+        public async Task<IActionResult> UpdateCategory(int id, [FromForm] CategoryModel category)
         {
             try
             {

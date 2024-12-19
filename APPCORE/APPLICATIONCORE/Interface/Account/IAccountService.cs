@@ -17,5 +17,7 @@ namespace APPLICATIONCORE.Interface.Account
         Task Register(AccountModel account);
 
         Task<int> GetTotalUsersAsync();
+
+        Task<List<AccountModel>> GetAccountByRoleIDAsync();
     }
 }

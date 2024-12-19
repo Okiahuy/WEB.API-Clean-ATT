@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using INFRASTRUCTURE.Repository;
 using Microsoft.Identity.Client;
 using APPLICATIONCORE.Interface.Cart;
+using System.Security.Principal;
 
 
 namespace API.Controllers
@@ -148,6 +149,12 @@ namespace API.Controllers
                 // Kiểm tra xem người dùng đã tồn tại
                 var existingUser = _context.Accounts.FirstOrDefault(a => a.Email == email);
 
+                // Chờ kết quả từ _cartService
+                var cart = await _cartService.GetCartByAccountIDAsync(existingUser.accountID);
+
+                // Tính tổng số lượng sản phẩm trong giỏ hàng
+                var totalItems = cart.Count;
+
                 if (existingUser != null)
                 {
                     var token = GenerateJwtToken(existingUser.UserName, 2);
@@ -159,7 +166,8 @@ namespace API.Controllers
                         existingUser.Email,
                         roleID = 2,
                         Token = token,
-                       
+                        
+                        totalItems = totalItems
                     });
                 }
 
@@ -172,6 +180,10 @@ namespace API.Controllers
                     roleID = 2,
                     Password = "IsGoogle",
                     Password2 = "IsGoogle",
+                    Phone = "New Phone",
+                    isActive = 1,
+                    level_cus = 0,
+                    ImageUrl = "New Avatar",
                 };
 
                 _context.Accounts.Add(acc);
@@ -186,7 +198,7 @@ namespace API.Controllers
                     roleID = 2,
                     Email = email,
                     token = newToken,
-                   
+                    totalItems = totalItems
                 });
             }
             catch (Exception ex)

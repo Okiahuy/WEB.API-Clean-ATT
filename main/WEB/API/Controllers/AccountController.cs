@@ -64,6 +64,35 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("getAccountByRole")]
+        [Authorize(Policy = "Admin")]
+        public async Task<IActionResult> GetAccountByRole()
+        {
+            try
+            {
+                // Truyền trực tiếp object request vào service
+                var acc = await _accountService.GetAccountByRoleIDAsync();
+
+                if (acc == null || !acc.Any())
+                {
+                    return NotFound(new
+                    {
+                        message = "Không tìm thấy tài khoản nào",
+                    });
+                }
+
+                return Ok(new
+                {
+                    message = "Tìm thấy tài khoản =>",
+                    data = acc,
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = $"Lỗi khi lấy tài khoản: {ex.Message}", success = false });
+            }
+        }
+
         [HttpGet("GetNotiByaccountID/{accountID}")]
         public async Task<IActionResult> GetNotiByaccountID(int accountID)
         {

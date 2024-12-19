@@ -17,6 +17,16 @@
   },
   {
     "ContainingType": "API.Controllers.AccountController",
+    "Method": "GetAccountByRole",
+    "RelativePath": "api/Account/getAccountByRole",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AccountController",
     "Method": "GetNewpaperAsync",
     "RelativePath": "api/Account/GetAllNewpaper",
     "HttpMethod": "GET",
@@ -180,6 +190,16 @@
   },
   {
     "ContainingType": "API.Controllers.AdminController",
+    "Method": "GetMiddleWare",
+    "RelativePath": "api/Admin/getMiddleware",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AdminController",
     "Method": "GetStatistics",
     "RelativePath": "api/Admin/statistics",
     "HttpMethod": "GET",
@@ -334,9 +354,34 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "product",
-        "Type": "APPLICATIONCORE.Models.CategoryModel",
-        "IsRequired": true
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImageUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImageUpload",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Products",
+        "Type": "System.Collections.Generic.ICollection\u00601[[APPLICATIONCORE.Models.ProductModel, APPLICATIONCORE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -355,9 +400,34 @@
         "IsRequired": true
       },
       {
-        "Name": "category",
-        "Type": "APPLICATIONCORE.Models.CategoryModel",
-        "IsRequired": true
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImageUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImageUpload",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Products",
+        "Type": "System.Collections.Generic.ICollection\u00601[[APPLICATIONCORE.Models.ProductModel, APPLICATIONCORE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

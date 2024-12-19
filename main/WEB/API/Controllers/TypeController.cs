@@ -26,6 +26,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")] // lấy loại theo id
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> GetTypeById(int id)
         {
             var type = await _typeService.GetTypeById(id);
@@ -37,6 +38,7 @@ namespace API.Controllers
         }
 
         [HttpPost] //thêm lọi
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> AddType([FromBody] TypeModel type)
         {
             try
@@ -56,6 +58,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")] // sửa lọi
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> UpdateType(int id, [FromBody] TypeModel type)
         {
             try
@@ -69,7 +72,8 @@ namespace API.Controllers
             }
         }
 
-        [HttpDelete("{id}")] //xóa lọi
+        [HttpDelete("{id}")] //xóa lọ
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> DeleteType(int id)
         {
             try

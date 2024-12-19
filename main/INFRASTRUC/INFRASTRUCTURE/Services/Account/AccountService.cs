@@ -51,11 +51,21 @@ namespace INFRASTRUCTURE.Services.Account
                 level_cus = 0,
                 Password = hashedPassword,
                 Password2 = hashedPassword,
-                isActive = 1
+                isActive = 1,
+                ImageUrl = "New Avatar"
             };
 
             _context.Accounts.Add(acc);
             await _context.SaveChangesAsync();
+        }
+
+        //Phương thức hiển thị tài khoản người dùng
+        public async Task<List<AccountModel>> GetAccountByRoleIDAsync()
+        {
+            var acc = await _context.Accounts
+                .Where(c => c.roleID == 2)
+                .ToListAsync();
+            return acc;
         }
 
         //Phương thức hiển thị tài khoản theo accountID

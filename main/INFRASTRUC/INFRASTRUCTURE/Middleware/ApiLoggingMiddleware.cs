@@ -60,11 +60,20 @@ namespace INFRASTRUCTURE.Middleware
 			// Tìm log hoặc tạo log mới
 			var log = await dbContext.ApiUsageLogs
 				.FirstOrDefaultAsync(l => l.ApiName.ToLower() == apiName);
+            // Ghi nhận thời điểm bắt đầu request
+            var startTime = DateTime.UtcNow;
 
-			if (log != null)
+            // Logic xử lý request ở đây
+
+            // Ghi nhận thời điểm kết thúc request
+            var endTime = DateTime.UtcNow;
+
+            // Tính toán thời gian xử lý
+            var requestDuration = endTime - startTime;
+            if (log != null)
 			{
 				log.RequestCount++; // Tăng số lượng request
-				log.RequestTime = DateTime.Now; // Cập nhật thời gian request
+				log.RequestTime = requestDuration; // Cập nhật thời gian request
 			}
 			else
 			{
@@ -74,8 +83,8 @@ namespace INFRASTRUCTURE.Middleware
 					RequestCount = 1,
 					Status = status,
 					CpuUsage = cpuUsage,
-					RequestTime = DateTime.Now
-				};
+					RequestTime = requestDuration
+                };
 
 				await dbContext.ApiUsageLogs.AddAsync(log);
 			}
