@@ -18,6 +18,26 @@ namespace API.Controllers
             _accountService = accountService;
         }
 
+        // Sửa tai khoan
+        [HttpPut("updateUser/{accountID}")]
+        public async Task<IActionResult> UpdateCategory(int accountID, [FromForm] AccountModel account)
+        {
+            try
+            {
+                // Gọi service để cập nhật tai khoan
+                var updatedaccount = await _accountService.UpdateaccountAsync(accountID, account);
+                return Ok(new { message = "Cập nhật thông tin thành công", data = updatedaccount });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return StatusCode(500, new { message = "Cập nhật thông tin thất bại", ex.Message }); // Trả về lỗi nếu không tìm thấy sản phẩm
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Cập nhật thông tin thất bại", ex.Message }); // Trả về lỗi nếu có vấn đề khác
+            }
+        }
+
         [HttpPost("add-answer")]
         public async Task<IActionResult> AddAnswer([FromBody] AddAnswerRquest model)
         {
@@ -32,15 +52,16 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { error = "Đã xảy ra lỗi không mong muốn." });
+                return StatusCode(500, new { error = $"Đã xảy ra lỗi không mong muốn. {ex}" });
             }
         }
-        [HttpGet("answers/{productId}")]
-        public async Task<IActionResult> GetAnswersByProductId(int productId)
+
+        [HttpGet("answers/{productID}")]
+        public async Task<IActionResult> GetAnswersByProductId(int productID)
         {
             try
             {
-                var answers = await _accountService.GetAnswersByProductIdAsync(productId);
+                var answers = await _accountService.GetAnswersByProductIdAsync(productID);
 
                 if (answers == null || !answers.Any())
                 {
@@ -51,7 +72,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { error = "Đã xảy ra lỗi không mong muốn." });
+                return StatusCode(500, new { error = $"Đã xảy ra lỗi không mong muốn. {ex}" });
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using APPLICATIONCORE.Interface.Account;
 using APPLICATIONCORE.Interface.Order;
 using APPLICATIONCORE.Interface.Product;
+using APPLICATIONCORE.Models;
 using INFRASTRUCTURE.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -59,6 +60,29 @@ namespace API.Controllers
                 return StatusCode(500, $"Đã xảy ra lỗi khi lấy dữ liệu thống kê. {ex}");
             }
         }
+        //lấy hóa đơn
+        [HttpGet("GetInvoice")]
+        [Authorize(Policy = "Admin")]
+        public async Task<IActionResult> GetInvoice()
+        {
+            try
+            {
+                // hiên thị thông tin của hóa đơn
+                var mid = await _context.Invoices
+                                 .Include(o => o.Order)
+                                 .ToListAsync();
+                // Trả về kết quả
+                return Ok(new
+                {
+                    data = mid,
+                });
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error("Error fetching admin GetInvoice: {@Exception}", ex);
+                return StatusCode(500, $"Đã xảy ra lỗi khi lấy dữ liệu thống kê. {ex}");
+            }
+        }
 
         [HttpGet("getMiddleware")]
         [Authorize(Policy = "Admin")]
@@ -85,7 +109,7 @@ namespace API.Controllers
                     data = mid,
                     TotalAccess = Access,
                     cpuavg = cpu,
-                    requestTime = requestTime
+                    requestTime = averageRequestTime
                 });
             }
             catch (Exception ex)

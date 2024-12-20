@@ -13,6 +13,7 @@ using Serilog;
 using APPLICATIONCORE.Domain.Momo.MomoDtos;
 using MailKit.Search;
 using Microsoft.Identity.Client;
+using System.Security.Principal;
 
 namespace INFRASTRUCTURE.Services.Order
 {
@@ -222,7 +223,7 @@ namespace INFRASTRUCTURE.Services.Order
                     o.Status_order,
                     o.PaymentID,
                     AccountName = o.Account != null ? o.Account.UserName : "N/A", // Kiểm tra tránh null
-                    AddressName = o.Address != null ? o.Address.addressName : "N/A" // Kiểm tra tránh null
+                    AddressName = "Địa chỉ " + o.Address.addressName + " Thành phố" + o.Address.city + " Mã bưu điện " + o.Address.zipCode // Kiểm tra tránh null
                 })
                 .ToListAsync();
         }
@@ -267,6 +268,45 @@ namespace INFRASTRUCTURE.Services.Order
             {
                 throw new KeyNotFoundException("Không tìm thấy đơn hàng.");
             }
+            // Kiểm tra xem hóa đơn đã tồn tại chưa
+            var existingInvoice = await _context.Invoices
+                .FirstOrDefaultAsync(i => i.orderID == orderID);
+
+            if (existingInvoice != null)
+            {
+                // Nếu hóa đơn đã tồn tại, trả về thông tin hóa đơn hiện tại
+                return new
+                {
+                    OrderInfo = new
+                    {
+                        order.Id,
+                        order.code_order,
+                        order.order_date,
+                        order.TotalPrice,
+                        order.Status_order,
+                        order.PaymentMethod,
+                        order.CustomerName,
+                        order.CustomerPhone,
+                        order.CustomerAddress
+                    },
+                    OrderDetails = order.OrderDetails,
+                };
+            }
+
+            // Nếu hóa đơn chưa tồn tại, tạo mới hóa đơn và lưu vào database
+            var invoice = new InvoiceModel
+            {
+                orderID = order.Id,
+                InvoiceDate = DateTime.Now,
+                CustomerName = order.CustomerName,
+                TotalAmount = order.TotalPrice,
+                Status_order = order.Status_order,
+                PaymentMethod = order.PaymentMethod,
+                Address = order.CustomerAddress,
+            };
+
+            _context.Invoices.Add(invoice);
+            await _context.SaveChangesAsync();
 
             return new
             {
@@ -283,9 +323,10 @@ namespace INFRASTRUCTURE.Services.Order
                     order.CustomerAddress
                 },
                 OrderDetails = order.OrderDetails
+
             };
         }
-
+       
         //lấy sp theo id
         public async Task<OrderModel> GetOrderById(int Id)
         {

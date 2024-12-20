@@ -16,7 +16,7 @@ namespace INFRASTRUCTURE.Repository
             context.Database.Migrate();
             if (!context.Roles.Any() || !context.Accounts.Any() || !context.Categories.Any() ||
                 !context.Suppliers.Any() || !context.Types.Any() || !context.Products.Any() ||
-                !context.Newpapers.Any() || !context.Notis.Any() || !context.Addresss.Any() )
+                !context.Newpapers.Any() || !context.Notis.Any() || !context.Addresss.Any())
             {
                 context.Roles.AddRange(
                        new RoleModel { RoleName = "Quản Trị" },
@@ -25,14 +25,14 @@ namespace INFRASTRUCTURE.Repository
                 context.SaveChanges();
                 // Tạo dữ liệu cho bảng admin
                 context.Accounts.AddRange(
-                    new AccountModel { FullName = "Oppa Web Bán Hoa", UserName = "admin", roleID = 1, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "huydzaa12@gmail.com", Phone = "0337899123",level_cus = 0 },
-                    new AccountModel { FullName = "Nguyễn Văn A", UserName = "nguyenvana", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "nguyenvana@gmail.com", Phone = "0337899124", level_cus = 0 },
-                    new AccountModel { FullName = "Nguyễn Thị Kim Hân", UserName = "hankim", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "kimhan29072003@gmail.com", Phone = "0337899125", level_cus = 0 },
-                    new AccountModel { FullName = "Huỳnh Anh Khoa", UserName = "khoanh", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "huynhanhkhoa30042019@gmail.com", Phone = "0337899126", level_cus = 0 },
-                    new AccountModel { FullName = "Nguyễn Tấn Huy", UserName = "huynguyen", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "huynguyen@gmail.com", Phone = "0337899127", level_cus = 0 },
-                    new AccountModel { FullName = "Trần Duy Đăng", UserName = "dangtran", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "tranduydang@gmail.com", Phone = "0337899128", level_cus = 0 },
-                    new AccountModel { FullName = "Nguyễn Cẩm Châu", UserName = "camchau", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "camchau@gmail.com", Phone = "0337899129", level_cus = 0 },
-                    new AccountModel { FullName = "Trần Công Dinh", UserName = "dinhtran", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "dinhtran@gmail.com", Phone = "0337899120", level_cus = 0 }
+                    new AccountModel { FullName = "Oppa Web Bán Hoa", UserName = "admin", roleID = 1, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "huydzaa12@gmail.com", Phone = "0337899123",level_cus = 0 , ImageUrl = "New Avatar"},
+                    new AccountModel { FullName = "Nguyễn Văn A", UserName = "nguyenvana", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "nguyenvana@gmail.com", Phone = "0337899124", level_cus = 0, ImageUrl = "New Avatar" },
+                    new AccountModel { FullName = "Nguyễn Thị Kim Hân", UserName = "hankim", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "kimhan29072003@gmail.com", Phone = "0337899125", level_cus = 0, ImageUrl = "New Avatar" },
+                    new AccountModel { FullName = "Huỳnh Anh Khoa", UserName = "khoanh", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "huynhanhkhoa30042019@gmail.com", Phone = "0337899126", level_cus = 0, ImageUrl = "New Avatar" },
+                    new AccountModel { FullName = "Nguyễn Tấn Huy", UserName = "huynguyen", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "huynguyen@gmail.com", Phone = "0337899127", level_cus = 0, ImageUrl = "New Avatar" },
+                    new AccountModel { FullName = "Trần Duy Đăng", UserName = "dangtran", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "tranduydang@gmail.com", Phone = "0337899128", level_cus = 0, ImageUrl = "New Avatar" },
+                    new AccountModel { FullName = "Nguyễn Cẩm Châu", UserName = "camchau", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "camchau@gmail.com", Phone = "0337899129", level_cus = 0, ImageUrl = "New Avatar" },
+                    new AccountModel { FullName = "Trần Công Dinh", UserName = "dinhtran", roleID = 2, Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", Password2 = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", isActive = 1, Email = "dinhtran@gmail.com", Phone = "0337899120", level_cus = 0, ImageUrl = "New Avatar" }
                 );
                 context.SaveChanges();
                 //bảng địa chỉ
@@ -271,6 +271,8 @@ namespace INFRASTRUCTURE.Repository
 
                 context.Products.AddRange(products);
                 context.SaveChanges();
+
+               
             }
 
 

@@ -381,21 +381,27 @@ namespace INFRASTRUCTURE.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CustomerName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("InvoiceDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Payment")
+                    b.Property<string>("PaymentMethod")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status_order")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("accountID")
+                    b.Property<int>("orderID")
                         .HasColumnType("int");
 
                     b.HasKey("invoiceID");
 
-                    b.HasIndex("accountID");
+                    b.HasIndex("orderID");
 
                     b.ToTable("Invoices");
                 });
@@ -590,11 +596,11 @@ namespace INFRASTRUCTURE.Migrations
 
             modelBuilder.Entity("APPLICATIONCORE.Models.RatetingModel", b =>
                 {
-                    b.Property<int>("ratetingId")
+                    b.Property<int>("rateId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ratetingId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("rateId"));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -614,7 +620,7 @@ namespace INFRASTRUCTURE.Migrations
                     b.Property<int?>("startnum")
                         .HasColumnType("int");
 
-                    b.HasKey("ratetingId");
+                    b.HasKey("rateId");
 
                     b.HasIndex("ProductId");
 
@@ -754,11 +760,13 @@ namespace INFRASTRUCTURE.Migrations
 
             modelBuilder.Entity("APPLICATIONCORE.Models.InvoiceModel", b =>
                 {
-                    b.HasOne("APPLICATIONCORE.Models.AccountModel", "Account")
+                    b.HasOne("APPLICATIONCORE.Models.OrderModel", "Order")
                         .WithMany()
-                        .HasForeignKey("accountID");
+                        .HasForeignKey("orderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Account");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("APPLICATIONCORE.Models.Notification", b =>

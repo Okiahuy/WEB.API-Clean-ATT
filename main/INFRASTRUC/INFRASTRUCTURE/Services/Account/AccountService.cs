@@ -24,7 +24,7 @@ namespace INFRASTRUCTURE.Services.Account
         }
         public async Task<int> GetTotalUsersAsync()
         {
-            return await _context.Accounts.CountAsync();
+            return await _context.Accounts.Where(p => p.roleID == 2).CountAsync();
         }
         public async Task Register(AccountModel account)
         {
@@ -120,11 +120,33 @@ namespace INFRASTRUCTURE.Services.Account
             {
                 throw new KeyNotFoundException("Không tìm thấy người dùng để sửa!");
             }
+            // Cập nhật các trường khác nếu được gửi
+            if (!string.IsNullOrEmpty(account.FullName))
+            {
+                existingaccount.FullName = account.FullName;
+            }    
+            if (!string.IsNullOrEmpty(account.Phone))
+            {
+                existingaccount.Phone = account.Phone;
+            }    
+            if (!string.IsNullOrEmpty(account.Password))
+            {
+                var hashedPassword = PasswordHelper.HashPassword(account.Password);
+                existingaccount.Password = hashedPassword;
+                existingaccount.Password2 = hashedPassword;
+            }
+            if (!string.IsNullOrEmpty(account.Email))
+            {
+                existingaccount.Email = account.Email;
+            }
+            if (!string.IsNullOrEmpty(account.UserName))
+            {
+                existingaccount.UserName = existingaccount.UserName;
+            }
             // Lấy đường dẫn của ảnh cũ
             var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "uploads", Path.GetFileName(existingaccount.ImageUrl));
-            var hashedPassword = PasswordHelper.HashPassword(account.Password);
-            // Xóa ảnh cũ (nếu có)
-            DeleteOldFile(oldImagePath);
+           
+           
             // Kiểm tra nếu có ảnh mới được tải lên
             if (account.ImageUpload != null)
             {
@@ -140,13 +162,11 @@ namespace INFRASTRUCTURE.Services.Account
                 }
                 // Cập nhật đường dẫn ảnh mới vào người dùng
                 existingaccount.ImageUrl = $"/uploads/{fileName}";
+                // Xóa ảnh cũ (nếu có)
+                DeleteOldFile(oldImagePath);
             }
-            // Cập nhật các thuộc tính khác
-            existingaccount.FullName = account.FullName;
-            existingaccount.Phone = account.Phone;
-            existingaccount.Password = hashedPassword;
-            existingaccount.Password2 = hashedPassword;
-        
+           
+
             // Lưu thay đổi vào cơ sở dữ liệu
             await _context.SaveChangesAsync();
 

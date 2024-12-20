@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace APPLICATIONCORE.Models
 {
-
     public class OrderModel
     {
         [Key]
@@ -27,5 +26,6 @@ namespace APPLICATIONCORE.Models
 
         public int addressID { get; set; }
         public AddressModel? Address { get; set; }
+
     }
 }
